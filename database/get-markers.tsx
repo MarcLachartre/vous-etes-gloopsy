@@ -1,5 +1,5 @@
-import { MongoClient } from 'mongodb'
-
+// import { MongoClient } from 'mongodb'
+const MongoClient = require('mongodb').MongoClient
 // Connection URL
 const url: any = process.env.MONGO_URL
 
@@ -20,12 +20,12 @@ const main = async () => {
 }
 
 const getMarkers = async () => {
-    // const markers = await main()
-    //     .then((success) => {
-    //         return JSON.stringify(success)
-    //     })
-    //     .finally(() => client.close())
-    // return markers
+    const markers = await main()
+        .then((success) => {
+            return JSON.stringify(success)
+        })
+        .finally(() => client.close())
+    return markers
 }
 
 export default getMarkers

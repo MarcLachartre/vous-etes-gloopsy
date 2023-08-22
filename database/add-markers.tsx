@@ -1,4 +1,6 @@
-import { MongoClient } from 'mongodb'
+// import { MongoClient } from 'mongodb'
+const MongoClient = require('mongodb').MongoClient
+const ObjectId = require('mongodb').ObjectId
 
 const url: any = process.env.MONGO_URL
 
