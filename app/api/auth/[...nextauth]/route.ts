@@ -1,7 +1,6 @@
-// import NextAuth from "next-auth"
-// import { options } from "./options.ts"
+import NextAuth from "next-auth"
+import { options } from "./options.ts"
 
-// const handler = NextAuth(options)
+const handler = NextAuth(options)
 
-// export { handler as GET, handler as POST }
-export { }
+export { handler as GET, handler as POST }
