@@ -1,6 +1,4 @@
-// import { MongoClient, ObjectId } from 'mongodb'
-const MongoClient = require('mongodb').MongoClient
-const ObjectId = require('mongodb').ObjectId
+import { MongoClient, ObjectId } from 'mongodb'
 
 const url: any = String(process.env.MONGO_URL)
 const client = new MongoClient(url)
