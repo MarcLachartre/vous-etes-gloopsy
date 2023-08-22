@@ -2,6 +2,8 @@
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
+import { useSession, signIn, signOut } from 'next-auth/react'
+
 import React, { useEffect } from 'react'
 
 interface Geojson {
@@ -19,6 +21,8 @@ interface Geojson {
 }
 
 const Map = (props: any) => {
+    const { data: session } = useSession()
+    console.log(useSession())
     useEffect(() => {
         mapboxgl.accessToken =
             'pk.eyJ1IjoibWFyY2xhY2hhcnRyZSIsImEiOiJjbGxjZzRqeGMwMTI2M2NsdzA4bXJodnFqIn0.rEH7luhuGuag_BVbVvw67g'
@@ -55,7 +59,11 @@ const Map = (props: any) => {
             <div
                 id="map"
                 className="mapboxgl-map"
-                style={{ position: 'relative', width: '100%', height: '100%' }}
+                style={{
+                    position: 'relative',
+                    width: '100%',
+                    height: '100%',
+                }}
             ></div>
         </div>
     )
