@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "node": "latest",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "mapbox-gl": "^2.15.0",
