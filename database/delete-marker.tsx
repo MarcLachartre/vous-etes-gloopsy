@@ -1,7 +1,6 @@
 import { MongoClient, ObjectId } from 'mongodb'
 
-const url =
-    'mongodb+srv://marclachartre:EiLh9vDVbdYcVNSw@cluster0.jci2gqf.mongodb.net/?retryWrites=true&w=majority'
+const url: any = process.env.MONGO_URL
 const client = new MongoClient(url)
 
 // Database Name
