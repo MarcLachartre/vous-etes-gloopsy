@@ -1,0 +1,17 @@
+.button {
+    display: flex;
+    width: 100%;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: solid 1px grey;
+    cursor: pointer;
+    transition: 0.2s all ease-in-out;
+    p {
+        margin: 0px;
+    }
+}
+
+.button:hover {
+    background-color: rgba(60, 64, 67, 0.04);
+}
