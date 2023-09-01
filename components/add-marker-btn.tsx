@@ -31,7 +31,6 @@ const addMarkerBtn = () => {
     }
 
     const manualLocalisation = () => {
-        // setCoords([])
         map.on('click', function (e: any) {
             console.log(e)
             createMarker(e.lngLat.lng, e.lngLat.lat, false)

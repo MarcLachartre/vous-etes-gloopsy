@@ -29,7 +29,7 @@ const Main = (props: any) => {
     return (
         <MapContext.Provider value={map as any}>
             {[
-                <Map initialMarkers={props.initialMarkers} key={'map'} />,
+                <Map key={'map'} />,
                 <AuthLink key={'authlink'} />,
                 <AddMarkerBtn key={'AddMarkerBtn'} />,
             ]}
