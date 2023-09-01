@@ -6,24 +6,24 @@ import React, { useEffect, useState } from 'react'
 
 import { useContext } from 'react'
 import { MapContext } from '../context/map-context'
-import getMarkers from '../database/markers/get-markers'
-interface Geojson {
-    initialMarkers: {
-        features: Array<{
-            type: string
-            geometry: {
-                type: string
-                coordinates: [number, number]
-            }
-            properties: {
-                owner: string
-                description: string
-                date: string
-                time: string
-            }
-        }>
-    }
-}
+// import getMarkers from '../database/markers/get-markers'
+// interface Geojson {
+//     initialMarkers: {
+//         features: Array<{
+//             type: string
+//             geometry: {
+//                 type: string
+//                 coordinates: [number, number]
+//             }
+//             properties: {
+//                 owner: string
+//                 description: string
+//                 date: string
+//                 time: string
+//             }
+//         }>
+//     }
+// }
 
 const Map = (props: any) => {
     const map = useContext(MapContext)
@@ -33,6 +33,7 @@ const Map = (props: any) => {
             const requestMarkers = await fetch('/api/markers/get-markers', {
                 method: 'GET',
                 headers: {},
+                cache: 'no-store',
             })
             const initialMarkers = await requestMarkers.json()
             console.log(initialMarkers)
