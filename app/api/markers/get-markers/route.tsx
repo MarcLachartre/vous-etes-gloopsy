@@ -1,6 +1,7 @@
 import { MongoClient } from 'mongodb'
 import { NextResponse, NextRequest } from 'next/server'
 import GlobalConfig from '../../../../app/app.config.js'
+export const dynamic = 'force-dynamic'
 
 export async function GET() {
     const client = new MongoClient(process.env.MONGO_URL as string)
