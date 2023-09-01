@@ -36,6 +36,7 @@ const Map = (props: any) => {
                 cache: 'no-store',
             })
             const initialMarkers = await requestMarkers.json()
+
             console.log(initialMarkers)
             if (Object.keys(map).length !== 0) {
                 initialMarkers.forEach((marker: any) => {
