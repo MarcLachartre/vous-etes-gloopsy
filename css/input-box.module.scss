@@ -1,0 +1,55 @@
+.inputBoxContainer {
+    z-index: 10;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(3px);
+    transition: all 1s ease-in-out;
+}
+
+.inputBox {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--default-spacing);
+    border-radius: var(--border-radius);
+    background-color: white;
+    min-width: 200px;
+    padding: 15px;
+    box-shadow: var(--box-shadow);
+}
+
+.rowInputs {
+    width: 100%;
+    display: flex;
+    gap: var(--default-spacing);
+}
+
+.rowInputs div {
+    justify-content: center;
+}
+
+@media (min-width: 0px) {
+    .inputBox {
+        width: 250px;
+    }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .inputBox {
+        width: 300px;
+    }
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .inputBox {
+        width: 350px;
+    }
+}

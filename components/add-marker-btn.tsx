@@ -1,11 +1,12 @@
 'use client'
 import buttonStyle from '../css/button.module.scss'
 import style from '../css/add-marker.module.scss'
+import adrien from '../css/adrien.module.scss'
 
 import mapboxgl from 'mapbox-gl'
 
 import { getSession } from 'next-auth/react'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import { useContext } from 'react'
 import { MapContext } from '@/context/map-context'
@@ -18,52 +19,37 @@ const addMarkerBtn = () => {
     const [inputName, setInputName] = useState('close')
     const [coords, setCoords] = useState([] as number[])
     const [user, setUser] = useState({} as { name: string; email: string })
-    const [temporaryMarker, setTemporaryMarker] = useState({} as any)
-
-    const createMarker = (lng: number, lat: number, draggable: boolean) => {
-        const el = document.createElement('div')
-        el.className = 'marker'
-
-        const marker = new mapboxgl.Marker(el, { draggable: draggable })
-            .setLngLat([lng, lat])
-            .addTo(map as any)
-        return marker
-    }
-
-    const manualLocalisation = () => {
-        map.on('click', function (e: any) {
-            createMarker(e.lngLat.lng, e.lngLat.lat, false)
-        })
-    }
+    const [marker, setMarker] = useState({} as any)
+    const [isClickable, setIsClickable] = useState(false)
+    const isClickableRef = useRef(false)
+    isClickableRef.current = isClickable
 
     const locateMe = () => {
-        Object.keys(temporaryMarker).length !== 0
-            ? temporaryMarker.remove()
-            : false
-
-        navigator.geolocation.getCurrentPosition((position) => {
-            setInputName('add comment')
+        const success = (position: any) => {
+            setInputName('validate location')
             map.flyTo({
                 center: [position.coords.longitude, position.coords.latitude], // Fly to the selected target
-                duration: 3000, // Animate over 12 seconds
-                essential: true, // This animation is considered essential with
+                duration: 3000,
+                essential: true,
                 zoom: 17,
             })
-            const marker = createMarker(
-                position.coords.longitude,
-                position.coords.latitude,
-                true
-            )
-
-            setTemporaryMarker(marker as any)
 
             setCoords([position.coords.longitude, position.coords.latitude])
-        })
-    }
+            setIsClickable(true)
+            map.getCanvas().style.cursor = 'pointer'
+        }
 
-    const onDragEnd = () => {
-        const lngLat = temporaryMarker.getLngLat()
-        setCoords([lngLat.lng, lngLat.lat])
+        const error = () => {
+            setInputName('error')
+        }
+
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0,
+        }
+
+        navigator.geolocation.getCurrentPosition(success, error, options)
     }
 
     const handleSubmit = async (e: any) => {
@@ -84,34 +70,23 @@ const addMarkerBtn = () => {
             }),
             headers: {},
         })
-        const markerData = await response.json()
 
         if (response.status === 200) {
-            const el = document.createElement('div')
-            el.className = 'marker'
-            el.setAttribute('id', markerData._id)
+            const requestMarkers = await fetch(`/api/markers/get-markers`, {
+                method: 'GET',
+                headers: {},
+                cache: 'no-store',
+            })
+            const updatedMarkers = await requestMarkers.json()
 
-            // make a marker for each feature and add to the map
-            new mapboxgl.Marker(el)
-                .setLngLat(
-                    markerData.geoMarker.features[0].geometry.coordinates
-                )
-                .setPopup(
-                    new mapboxgl.Popup({ offset: 25 }) // add popups
-                        .setHTML(
-                            `<h3>${markerData.geoMarker.features[0].properties.owner}</h3>
-                            <p>${markerData.geoMarker.features[0].properties.date} </p>
-                            <p>${markerData.geoMarker.features[0].properties.time}</p>
-                            <p>${markerData.geoMarker.features[0].properties.description}</p>`
-                        )
-                )
-                .addTo(map as any)
+            map.getSource('vous-etes-gloopsy').setData({
+                type: 'FeatureCollection',
+                features: updatedMarkers,
+            })
             setInputName('marker added')
         } else {
             setInputName('error')
         }
-
-        await temporaryMarker.remove()
     }
 
     useEffect(() => {
@@ -119,7 +94,10 @@ const addMarkerBtn = () => {
         const checkSession = async () => {
             if ((await getSession()) !== null) {
                 const session: any = await getSession()
-                setUser({ name: session.user.name, email: session.user.email })
+                setUser({
+                    name: await session.user.name,
+                    email: await session.user.email,
+                })
                 setLoggedIn(true)
             } else {
                 setLoggedIn(false)
@@ -129,13 +107,44 @@ const addMarkerBtn = () => {
     }, [])
 
     useEffect(() => {
+        if (coords.length !== 0 && Object.keys(marker).length === 0) {
+            const el = document.createElement('div')
+            el.className = 'marker'
+
+            const marker = new mapboxgl.Marker(el)
+                .setLngLat([coords[0], coords[1]])
+                .addTo(map as any)
+
+            setMarker(marker)
+        } else if (Object.keys(marker).length !== 0) {
+            // marker.remove()
+            marker.setLngLat([coords[0], coords[1]])
+        }
+    }, [coords])
+
+    useEffect(() => {
+        if (Object.keys(map).length !== 0) {
+            map.on('load', () => {
+                map.on('click', (e: any) => {
+                    if (isClickableRef.current === true) {
+                        setCoords([e.lngLat.lng, e.lngLat.lat])
+                    }
+                })
+            })
+        }
+    }, [isClickable, map])
+
+    useEffect(() => {
         switch (inputName) {
             case 'close':
-                Object.keys(temporaryMarker).length !== 0
-                    ? temporaryMarker.remove()
+                Object.keys(marker).length !== 0 ? marker.remove() : false
+                Object.keys(marker).length !== 0 ? setMarker({}) : false
+                Object.keys(map).length !== 0
+                    ? (map.getCanvas().style.cursor = '')
                     : false
-                setInputType(<div> </div>)
-
+                setCoords([])
+                setIsClickable(false)
+                setInputType(<div></div>)
                 break
 
             case 'add marker method selector':
@@ -147,7 +156,7 @@ const addMarkerBtn = () => {
                             <img
                                 src="/adrien.png"
                                 alt="adrien"
-                                className={style.adrien}
+                                className={adrien.hiAdrien}
                             />
                         </div>
                     )
@@ -165,7 +174,6 @@ const addMarkerBtn = () => {
                             <div
                                 className={buttonStyle.button}
                                 onClick={function () {
-                                    setCoords([])
                                     setInputName('manual localisation')
                                 }}
                             >
@@ -175,6 +183,7 @@ const addMarkerBtn = () => {
                     )
                 }
                 break
+
             case 'localisation ongoing':
                 locateMe()
                 setInputType(
@@ -182,53 +191,95 @@ const addMarkerBtn = () => {
                         <img
                             src="/adrien.png"
                             alt="adrien-wait"
-                            className={style.adrien}
+                            className={adrien.loadingAdrien}
                         />
                     </div>
                 )
                 break
-            case 'add comment':
-                console.log(temporaryMarker.on('dragend', onDragEnd))
-                setInputType(
-                    <form
-                        className={style.inputTypeContainer}
-                        onSubmit={handleSubmit}
-                    >
-                        <p>
-                            Vérifie la position du pin! Il est drag and
-                            dropable. Allez, un petit commentaire et c'est tout
-                            bon 🙂
-                        </p>
-                        <textarea
-                            name="comment"
-                            placeholder="Max 300 charactères"
-                            maxLength={300}
-                        ></textarea>
 
-                        <button
-                            type="submit"
+            case 'validate location':
+                setInputType(
+                    <div className={style.inputTypeContainer}>
+                        <p>Clique pour ajuster la position si besoin!</p>
+                        <div
                             className={buttonStyle.button}
                             onClick={function () {
-                                setInputName('loading')
+                                setInputName('add comment')
+                            }}
+                        >
+                            <p>Valider position</p>
+                        </div>
+                    </div>
+                )
+                break
+
+            case 'manual localisation':
+                setIsClickable(true)
+                map.getCanvas().style.cursor = 'pointer'
+
+                setInputType(
+                    <div className={style.inputTypeContainer}>
+                        <p>Clique sur la map pour placer le pin!</p>
+                        <button
+                            className={buttonStyle.button}
+                            onClick={function () {
+                                setInputName('add comment')
                             }}
                         >
                             <p>Valider ton pin</p>
                         </button>
-                    </form>
+                    </div>
                 )
+
                 break
+
+            case 'add comment':
+                setIsClickable(false)
+                map.getCanvas().style.cursor = ''
+                if (coords.length === 0) {
+                    setInputName('manual localisation')
+                } else {
+                    setInputType(
+                        <form
+                            className={style.inputTypeContainer}
+                            onSubmit={handleSubmit}
+                        >
+                            <p>Un petit commentaire et c'est tout bon 🙂</p>
+                            <textarea
+                                name="comment"
+                                placeholder="Max 300 charactères"
+                                maxLength={300}
+                            ></textarea>
+
+                            <button
+                                type="submit"
+                                className={buttonStyle.button}
+                                onClick={function () {
+                                    setInputName('loading')
+                                }}
+                            >
+                                <p>Créer pin</p>
+                            </button>
+                        </form>
+                    )
+                }
+                break
+
             case 'loading':
                 setInputType(
                     <div className={style.inputTypeContainer}>
                         <img
                             src="/adrien.png"
                             alt="adrien-wait"
-                            className={style.adrien}
+                            className={adrien.loadingAdrien}
                         />
                     </div>
                 )
                 break
+
             case 'marker added':
+                marker.remove()
+                setMarker({})
                 setInputType(
                     <div className={style.inputTypeContainer}>
                         <p>All good!</p>
@@ -239,25 +290,13 @@ const addMarkerBtn = () => {
                     setInputName('close')
                 }, 3000)
                 break
-            case 'manual localisation':
-                manualLocalisation()
-                console.log(1)
-                setInputType(
-                    <div className={style.inputTypeContainer}>
-                        <p>Clique sur la map pour placer le pin!</p>
-                        <button
-                            className={buttonStyle.button}
-                            onClick={function () {
-                                setInputName('loading')
-                            }}
-                        >
-                            <p>Valider ton pin</p>
-                        </button>
-                    </div>
-                )
 
-                break
             case 'error':
+                Object.keys(marker).length !== 0 ? marker.remove() : false
+                Object.keys(marker).length !== 0 ? setMarker({}) : false
+                setCoords([])
+                setIsClickable(false)
+                map.getCanvas().style.cursor = ''
                 setInputType(
                     <div className={style.inputTypeContainer}>
                         <p>
@@ -270,7 +309,7 @@ const addMarkerBtn = () => {
                     setInputName('close')
                 }, 3000)
         }
-    }, [inputName, isLoggedIn, coords])
+    }, [inputName, isLoggedIn])
 
     return (
         <div className={style.addMarkerContainer}>
@@ -294,13 +333,5 @@ const addMarkerBtn = () => {
         </div>
     )
 }
-
-// map.on('click', function (e) {
-//     var coordinates = e.lngLat
-//     new mapboxgl.Popup()
-//         .setLngLat(coordinates)
-//         .setHTML('you clicked here: <br/>' + coordinates)
-//         .addTo(map)
-// })
 
 export default addMarkerBtn

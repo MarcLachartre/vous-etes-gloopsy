@@ -7,22 +7,19 @@ export async function POST(request: Request) {
     const res = await request.json()
 
     const geoMarker = {
-        features: [
-            {
-                geometry: {
-                    type: 'Point',
-                    coordinates: await res.data.coord,
-                },
-                properties: {
-                    owner: await res.data.userName,
-                    description: await res.data.comment,
-                    email: await res.data.userEmail,
-                    date: `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`,
-                    time: `${new Date().getHours()}h ${new Date().getMinutes()}min ${new Date().getSeconds()}s`,
-                },
-            },
-        ],
+        geometry: {
+            type: 'Point',
+            coordinates: await res.data.coord,
+        },
+        properties: {
+            owner: await res.data.userName,
+            description: await res.data.comment,
+            email: await res.data.userEmail,
+            date: `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`,
+            time: `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
+        },
     }
+
     const saveMarker = async () => {
         const marker = await client
             .db(GlobalConfig.dbName)
@@ -35,13 +32,13 @@ export async function POST(request: Request) {
     try {
         // request db without creating a connecting if the app is already connected to mongodb
         await saveMarker()
-
+        await client.close()
         return NextResponse.json(res)
     } catch {
         // if the upper try fails, do the same but opening a connection to mongodb
         await client.connect()
         await saveMarker()
-
+        await client.close()
         return NextResponse.json(res)
     }
 }

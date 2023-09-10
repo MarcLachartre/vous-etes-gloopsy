@@ -2,10 +2,10 @@
     position: absolute;
     display: flex;
     align-self: flex-end;
-    margin-top: 15px;
-    margin-right: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    margin-top: var(--default-spacing);
+    margin-right: var(--default-spacing);
+    border-radius: var(--border-radius);
+    box-shadow: var(--border-shadox);
     background-color: #990000;
     a {
         color: #fff;
@@ -16,8 +16,8 @@
     position: relative;
     height: 100%;
     width: 100%;
-    padding-right: 10px;
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-right: var(--default-spacing);
+    padding-left: var(--default-spacing);
+    padding-top: var(--default-spacing);
+    padding-bottom: var(--default-spacing);
 }

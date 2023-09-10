@@ -1,22 +1,22 @@
 .addMarkerContainer {
     position: absolute;
+    z-index: 4;
     display: flex;
-    width: 330px;
     flex-direction: column;
     align-self: flex-start;
-    margin-top: 15px;
-    margin-left: 15px;
-    padding-right: 15px;
-    padding-left: 15px;
+    margin-top: var(--default-spacing);
+    margin-left: var(--default-spacing);
+    padding-right: var(--default-spacing);
+    padding-left: var(--default-spacing);
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
 
 .buttonContainer {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     position: relative;
     width: 100%;
     height: 50px;
@@ -35,9 +35,9 @@
     justify-content: space-evenly;
     width: 100%;
     border-top: solid 1px grey;
-    gap: 20px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    gap: var(--default-spacing);
+    padding-top: var(--default-spacing);
+    padding-bottom: var(--default-spacing);
     h6 {
         text-align: center;
     }
@@ -58,15 +58,83 @@
         text-decoration: underline;
         cursor: pointer;
     }
-    .adrien {
-        height: 70px;
-        width: 70px;
-        animation: spin 2s linear infinite;
+}
+
+@media (min-width: 0px) {
+    .addMarkerContainer {
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        margin-top: 0px;
+        margin-left: 0px;
+        gap: var(--default-spacing);
+        padding-top: var(--default-spacing);
+        padding-bottom: var(--default-spacing);
+        box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3),
+            0 2px 6px 2px rgba(60, 64, 67, 0.15);
+    }
+
+    .buttonContainer {
+        height: auto;
+        gap: var(--default-spacing);
+        flex-direction: column;
+    }
+
+    .addMarkerImage {
+        order: -1;
+        position: relative;
+        height: 40px;
+    }
+
+    .inputTypeContainer {
+        width: 100%;
     }
 }
 
-@keyframes spin {
-    100% {
-        transform: rotate(360deg);
+@media (min-width: 576px) {
+    .addMarkerContainer {
+        position: absolute;
+        bottom: unset;
+        width: auto;
+        width: 280px;
+        gap: 0px;
+        margin-top: var(--default-spacing);
+        margin-left: var(--default-spacing);
+        box-shadow: var(--box-shadow);
+    }
+
+    .buttonContainer {
+        height: auto;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .addMarkerImage {
+        order: -1;
+        position: relative;
+        height: 40px;
+    }
+
+    .inputTypeContainer {
+        margin-top: var(--default-spacing);
+        padding-bottom: 0px;
+        width: 100%;
+    }
+}
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+    .buttonContainer {
+        gap: var(--default-spacing);
+    }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+    .addMarkerContainer {
+        width: 330px;
+    }
+
+    .buttonContainer {
+        gap: 0px;
     }
 }
