@@ -92,7 +92,7 @@ p {
     :root {
         --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
             0 -1px 0px rgba(0, 0, 0, 0.02);
-        --default-spacing: 10px;
+        --default-spacing: 7px;
     }
 }
 /* // Small devices (landscape phones, 576px and up) */

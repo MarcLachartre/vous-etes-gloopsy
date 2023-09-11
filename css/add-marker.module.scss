@@ -83,11 +83,11 @@
     .addMarkerImage {
         order: -1;
         position: relative;
-        height: 40px;
     }
 
     .inputTypeContainer {
         width: 100%;
+        margin-top: var(--default-spacing);
     }
 }
 
@@ -102,21 +102,16 @@
         margin-left: var(--default-spacing);
         box-shadow: var(--box-shadow);
     }
-
+    .addMarkerImage {
+        order: 3;
+    }
     .buttonContainer {
         height: auto;
         flex-direction: row;
         justify-content: space-between;
     }
 
-    .addMarkerImage {
-        order: -1;
-        position: relative;
-        height: 40px;
-    }
-
     .inputTypeContainer {
-        margin-top: var(--default-spacing);
         padding-bottom: 0px;
         width: 100%;
     }
