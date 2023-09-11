@@ -10,6 +10,7 @@
     a {
         line-height: 25px;
         color: #fff;
+        white-space: nowrap;
     }
 }
 
@@ -17,21 +18,5 @@
     position: relative;
     height: 100%;
     width: 100%;
-    padding-right: var(--default-spacing);
-    padding-left: var(--default-spacing);
-    padding-top: var(--default-spacing);
-    padding-bottom: var(--default-spacing);
-}
-
-@media (min-width: 0px) {
-}
-
-@media (min-width: 576px) {
-}
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {
-}
-
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) {
+    padding: var(--default-spacing);
 }

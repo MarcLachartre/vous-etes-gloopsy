@@ -7,6 +7,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import Map from '../components/map'
 import AuthLink from '../components/auth/auth-link'
 import AddMarkerBtn from '../components/add-marker-btn'
+import PrivacyPolicyLink from '../components/privacy-policy-link'
 import { getSession } from 'next-auth/react'
 
 import { MapContext } from '@/context/map-context'
@@ -18,11 +19,8 @@ const Main = (props: any) => {
 
     const [map, setMap] = useState({} as any)
     const [user, setUser] = useState({})
-    const [loggedIn, setLoggedIn] = useState({})
 
     useEffect(() => {
-        console.log(`${new Date().getSeconds()}`)
-        new Date(2013, 0, 32)
         const getUser = async () => {
             const user: any = await getSession()
             setUser(user)
@@ -48,6 +46,7 @@ const Main = (props: any) => {
                     <Map key={'map'} user={user} />,
                     <AuthLink key={'authlink'} />,
                     <AddMarkerBtn key={'AddMarkerBtn'} />,
+                    <PrivacyPolicyLink key={'PrivacyPolicyLink'} />,
                 ]}
             </MapContext.Provider>
         </InitialMarkersContext.Provider>

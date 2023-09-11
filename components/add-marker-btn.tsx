@@ -117,7 +117,6 @@ const addMarkerBtn = () => {
 
             setMarker(marker)
         } else if (Object.keys(marker).length !== 0) {
-            // marker.remove()
             marker.setLngLat([coords[0], coords[1]])
         }
     }, [coords])

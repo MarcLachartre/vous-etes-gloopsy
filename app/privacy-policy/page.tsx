@@ -5,10 +5,10 @@ export default async function PrivacyPolicy() {
 
             <p>
                 At vous-etes-gloopsy, accessible from
-                https://www.vous-etes-gloopsy.herokuapp.com, one of our main
-                priorities is the privacy of our visitors. This Privacy Policy
-                document contains types of information that is collected and
-                recorded by vous-etes-gloopsy and how we use it.
+                https://www.https://vous-etes-gloopsy-6e09e17d7d15.herokuapp.com/,
+                one of our main priorities is the privacy of our visitors. This
+                Privacy Policy document contains types of information that is
+                collected and recorded by vous-etes-gloopsy and how we use it.
             </p>
 
             <p>
@@ -249,7 +249,8 @@ export default async function PrivacyPolicy() {
 
             <p>
                 If you have any questions or suggestions about our Privacy
-                Policy, do not hesitate to contact us.
+                Policy, do not hesitate to contact us at
+                marc.lachartre@gmail.com.
             </p>
         </div>
     )

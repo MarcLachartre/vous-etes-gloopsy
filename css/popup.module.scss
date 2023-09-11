@@ -1,0 +1,10 @@
+.popUpContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--default-spacing);
+    overflow-wrap: break-word;
+    a {
+        font-size: 1.4rem;
+        text-decoration: underline;
+    }
+}

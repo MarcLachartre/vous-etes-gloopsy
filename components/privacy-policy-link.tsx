@@ -1,3 +1,11 @@
+import style from '../css/privacy-policy.module.scss'
+
 const PrivacyPolicyLink = () => {
-    return <a href={process.env.DOMAIN + 'privacy-policy'}>privacy policy</a>
+    return (
+        <a className={style.privacyPolicyLink} href={'./privacy-policy'}>
+            privacy policy
+        </a>
+    )
 }
+
+export default PrivacyPolicyLink

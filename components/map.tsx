@@ -1,6 +1,7 @@
 'use client'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import popupStyle from '../css/popup.module.scss'
 
 import DeleteMarker from './delete-marker'
 
@@ -159,9 +160,11 @@ const Map = (props: any) => {
                         .setLngLat(coordinates)
                         .setHTML(
                             `
-                        <div class="description-container">
+                        <div class=${popupStyle.popUpContainer}>
                             <h4>${popUpContent.owner}</h4>
-                            <p>${popUpContent.description}</p>
+                            <div class= ${popupStyle.description}>
+                                <p>${popUpContent.description}</p>
+                            </div>
                             <p class="small-text"> Posté le ${popUpContent.date} à ${popUpContent.time}</p>
                         </div>
                     `
@@ -184,20 +187,19 @@ const Map = (props: any) => {
 
     useEffect(() => {
         const defaultPopUpHTML = `
-        <div class="description-container">
+        
         <div>
             <h4>${popUpContent.owner}</h4>
             <p class="small-text"> Posté le ${popUpContent.date} à ${popUpContent.time}</p>
-        <div>
-        <p>${popUpContent.description}</p>
         </div>
+        <p>${popUpContent.description}</p>
+        
     `
 
         const displayDeleteLink = () => {
             const divElement = document.createElement('div')
-            divElement.classList.add('description-container')
+            divElement.classList.add(`${popupStyle.popUpContainer}`)
             const link = document.createElement('a')
-            link.classList.add('small-text')
             link.style.alignSelf = 'center'
             link.style.cursor = 'pointer'
 
@@ -223,12 +225,12 @@ const Map = (props: any) => {
                 popUp.setDOMContent(displayDeleteLink())
             } else {
                 popUp.setHTML(
-                    ` <div class="description-container">${defaultPopUpHTML}</div>`
+                    ` <div class="${popupStyle.popUpContainer}">${defaultPopUpHTML}</div>`
                 )
             }
         } else if (isMounted.current === true) {
             popUp.setHTML(
-                ` <div class="description-container">${defaultPopUpHTML}</div>`
+                ` <div class="${popupStyle.popUpContainer}">${defaultPopUpHTML}</div>`
             )
         }
 
