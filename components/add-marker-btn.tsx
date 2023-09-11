@@ -70,7 +70,7 @@ const addMarkerBtn = () => {
             }),
             headers: {},
         })
-        console.log(response)
+
         if (response.status === 200) {
             const requestMarkers = await fetch(`/api/markers/get-markers`, {
                 method: 'GET',

@@ -5,9 +5,10 @@
     margin-top: var(--default-spacing);
     margin-right: var(--default-spacing);
     border-radius: var(--border-radius);
-    box-shadow: var(--border-shadox);
+    box-shadow: var(--box-shadow);
     background-color: #990000;
     a {
+        line-height: 25px;
         color: #fff;
     }
 }
@@ -20,4 +21,17 @@
     padding-left: var(--default-spacing);
     padding-top: var(--default-spacing);
     padding-bottom: var(--default-spacing);
+}
+
+@media (min-width: 0px) {
+}
+
+@media (min-width: 576px) {
+}
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
 }

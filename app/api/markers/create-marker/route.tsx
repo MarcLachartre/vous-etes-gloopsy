@@ -31,13 +31,11 @@ export async function POST(request: Request) {
 
     try {
         // request db without creating a connecting if the app is already connected to mongodb
-        console.log('try')
         await saveMarker()
         await client.close()
         return NextResponse.json(res)
     } catch {
         // if the upper try fails, do the same but opening a connection to mongodb
-        console.log('catch')
         await client.connect()
         await saveMarker()
         await client.close()

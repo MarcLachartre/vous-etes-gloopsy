@@ -25,7 +25,6 @@
 
 .addMarkerImage {
     position: relative;
-    height: 30px;
 }
 
 .inputTypeContainer {
@@ -34,7 +33,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     width: 100%;
-    border-top: solid 1px grey;
+    border-top: solid 1px var(--light-grey);
     gap: var(--default-spacing);
     padding-top: var(--default-spacing);
     padding-bottom: var(--default-spacing);
@@ -81,6 +80,7 @@
     }
 
     .addMarkerImage {
+        height: 25px;
         order: -1;
         position: relative;
     }
@@ -126,7 +126,7 @@
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
     .addMarkerContainer {
-        width: 330px;
+        width: 310px;
     }
 
     .buttonContainer {
