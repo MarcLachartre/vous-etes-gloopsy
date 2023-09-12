@@ -1,6 +1,7 @@
 import type { NextAuthOptions } from 'next-auth' 
 import GoogleProvider from "next-auth/providers/google";
 import StravaProvider from "next-auth/providers/strava";
+import Auth0Provider from "next-auth/providers/auth0";
 
 export const options: NextAuthOptions = {
     providers: [ 
@@ -18,6 +19,11 @@ export const options: NextAuthOptions = {
           StravaProvider({
             clientId: process.env.STRAVA_CLIENT_ID as string,
             clientSecret: process.env.STRAVA_CLIENT_SECRET as string,
-          })
+          }),
+  Auth0Provider({
+    clientId: process.env.AUTH0_CLIENT_ID,
+    clientSecret: process.env.AUTH0_CLIENT_SECRET,
+    issuer: process.env.AUTH0_ISSUER
+  })
     ],         
 }
