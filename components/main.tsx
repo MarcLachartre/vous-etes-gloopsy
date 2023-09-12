@@ -23,7 +23,6 @@ const Main = (props: any) => {
     useEffect(() => {
         const getUser = async () => {
             const user: any = await getSession()
-            console.log(user)
             setUser(user)
         }
         getUser()

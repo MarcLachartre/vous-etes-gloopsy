@@ -65,6 +65,8 @@
         width: 100vw;
         margin-top: 0px;
         margin-left: 0px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
         gap: var(--default-spacing);
         padding-top: var(--default-spacing);
         padding-bottom: var(--default-spacing);
@@ -97,6 +99,8 @@
         width: auto;
         width: 280px;
         gap: 0px;
+        border-bottom-left-radius: var(--border-radius);
+        border-bottom-right-radius: var(--border-radius);
         margin-top: var(--default-spacing);
         margin-left: var(--default-spacing);
         box-shadow: var(--box-shadow);
