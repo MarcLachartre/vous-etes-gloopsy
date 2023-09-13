@@ -15,7 +15,9 @@ export async function POST(request: Request) {
             owner: await res.data.userName,
             description: await res.data.comment,
             email: await res.data.userEmail,
-            date: `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`,
+            date: `${new Date().getDate()}/${
+                new Date().getMonth() + 1
+            }/${new Date().getFullYear()}`,
             time: `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
         },
     }
