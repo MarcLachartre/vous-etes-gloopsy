@@ -13,7 +13,10 @@ export const options: NextAuthOptions = {
             clientId: process.env.AUTH0_CLIENT_ID as string,
             clientSecret: process.env.AUTH0_CLIENT_SECRET as string,
             issuer: process.env.AUTH0_ISSUER,
+            
         })
-    ]
+    ],
+    
+    
 }        
 

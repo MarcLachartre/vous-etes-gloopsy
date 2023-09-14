@@ -98,7 +98,10 @@ li {
 }
 
 .mapboxgl-popup-close-button {
-    padding: 7px;
+    padding-top: 3px;
+    padding-right: 3px;
+    padding-left: 3px;
+    padding-bottom: 3px;
 }
 
 @media (min-width: 0px) {

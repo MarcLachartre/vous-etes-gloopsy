@@ -66,15 +66,15 @@ const Map = (props: any) => {
                             200,
                             'white',
                         ],
-
+                        'circle-opacity': 0.5,
                         'circle-radius': [
                             'step',
                             ['get', 'point_count'],
-                            20,
+                            16,
                             50,
-                            30,
+                            20,
                             200,
-                            40,
+                            24,
                         ],
                     },
                 })
@@ -94,18 +94,18 @@ const Map = (props: any) => {
                             'icon-size': [
                                 'step',
                                 ['get', 'point_count'],
-                                0.1,
+                                0.09,
                                 50,
-                                0.1449,
+                                0.1,
                                 200,
-                                0.19,
+                                0.12,
                             ],
                             'text-field': ['get', 'point_count_abbreviated'],
                             'text-font': [
                                 'DIN Offc Pro Medium',
                                 'Arial Unicode MS Bold',
                             ],
-                            'text-size': 13,
+                            'text-size': 14,
                         },
                     })
                 })
