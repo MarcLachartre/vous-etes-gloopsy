@@ -57,9 +57,10 @@ const addMarkerBtn = (props: any) => {
 
         const formData = new FormData(e.target)
         const formJson = Object.fromEntries(formData.entries())
-
+        console.log(props.user)
         const username = () => {
-            return props.user.user.username === undefined
+            return props.user.user.username === undefined ||
+                props.user.user.username === null
                 ? props.user.user.name
                 : props.user.user.username
         }
