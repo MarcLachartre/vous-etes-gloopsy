@@ -11,14 +11,14 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useContext } from 'react'
 import { MapContext } from '@/context/map-context'
 
-const addMarkerBtn = () => {
+const addMarkerBtn = (props: any) => {
     const map = useContext(MapContext)
 
     const [isLoggedIn, setLoggedIn] = useState(false)
     const [inputType, setInputType] = useState(<div></div>)
     const [inputName, setInputName] = useState('close')
     const [coords, setCoords] = useState([] as number[])
-    const [user, setUser] = useState({} as { name: string; email: string })
+    // const [user, setUser] = useState({} as { name: string; email: string })
     const [marker, setMarker] = useState({} as any)
     const [isClickable, setIsClickable] = useState(false)
     const isClickableRef = useRef(false)
@@ -58,13 +58,21 @@ const addMarkerBtn = () => {
         const formData = new FormData(e.target)
         const formJson = Object.fromEntries(formData.entries())
 
+        const username = () => {
+            return props.user.user.username === undefined
+                ? props.user.user.name
+                : props.user.user.username
+        }
+
         const response = await fetch('/api/markers/create-marker', {
             method: 'POST',
             body: JSON.stringify({
                 data: {
                     coord: coords,
-                    userName: user.name,
-                    userEmail: user.email,
+                    userName:
+                        username().charAt(0).toUpperCase() +
+                        username().slice(1),
+                    userEmail: props.user.user.email,
                     comment: formJson.comment,
                 },
             }),
@@ -92,16 +100,9 @@ const addMarkerBtn = () => {
     useEffect(() => {
         // check is user is logged in
         const checkSession = async () => {
-            if ((await getSession()) !== null) {
-                const session: any = await getSession()
-                setUser({
-                    name: await session.user.name,
-                    email: await session.user.email,
-                })
-                setLoggedIn(true)
-            } else {
-                setLoggedIn(false)
-            }
+            ;(await getSession()) !== null
+                ? setLoggedIn(true)
+                : setLoggedIn(false)
         }
         checkSession()
     }, [])

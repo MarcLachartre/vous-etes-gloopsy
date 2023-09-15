@@ -47,7 +47,7 @@ const Main = (props: any) => {
                 {[
                     <Map key={'map'} user={user} />,
                     <AuthLink key={'authlink'} />,
-                    <AddMarkerBtn key={'AddMarkerBtn'} />,
+                    <AddMarkerBtn key={'AddMarkerBtn'} user={user} />,
                     <PrivacyPolicyLink key={'PrivacyPolicyLink'} />,
                 ]}
             </MapContext.Provider>
