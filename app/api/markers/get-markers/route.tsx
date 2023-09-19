@@ -1,5 +1,6 @@
 import { MongoClient } from 'mongodb'
 import GlobalConfig from '../../../../app/app.config.js'
+import { NextResponse } from 'next/server.js'
 export const dynamic = 'force-dynamic' // prevent caching and loading previous payload
 
 export async function GET() {
@@ -24,7 +25,7 @@ export async function GET() {
 
         await client.close()
 
-        return new Response(JSON.stringify(markers))
+        return NextResponse.json(markers)
     } catch {
         // if the upper try fails, do the same but opening a connection to mongodb
         await client.connect()
@@ -38,6 +39,6 @@ export async function GET() {
 
         await client.close()
 
-        return new Response(JSON.stringify(markers))
+        return NextResponse.json(markers)
     }
 }

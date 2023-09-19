@@ -1,16 +1,16 @@
 .addMarkerContainer {
-    position: absolute;
-    z-index: 4;
-    display: flex;
-    flex-direction: column;
     align-self: flex-start;
-    margin-top: var(--default-spacing);
-    margin-left: var(--default-spacing);
-    padding-right: var(--default-spacing);
-    padding-left: var(--default-spacing);
     background-color: #fff;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--default-spacing);
+    margin-top: var(--default-spacing);
+    padding-left: var(--default-spacing);
+    padding-right: var(--default-spacing);
+    position: absolute;
+    z-index: 4;
 }
 
 .buttonContainer {

@@ -1,0 +1,13 @@
+if user is logged in, on his comments/popup
+    => display delete button
+    => display edit button 
+
+    => edit button on click
+        => opens box 
+            => with current comment inside a text area
+            => two buttons : confirm change, cancel
+                => cancel just closes the box
+                => confirm change does fetch edit api and shows
+                    => if 200 response => display merci mec 
+                    => else smthg went wrong
+                

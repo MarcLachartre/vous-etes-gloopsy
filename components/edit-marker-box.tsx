@@ -5,70 +5,68 @@ import adrien from '../css/adrien.module.scss'
 import { useEffect, useState, useContext } from 'react'
 import { MapContext } from '@/context/map-context'
 
-const DeleteMarker = (props: any) => {
+const EditMarkerBox = (props: any) => {
     const map = useContext(MapContext)
-    const [deleteBoxType, setDeleteBoxType] = useState('default')
-    const [deleteBox, setDeleteBox] = useState(<div></div>)
+    const [editBox, setEditBox] = useState(<div></div>)
+    const [editBoxType, setEditBoxType] = useState('default')
 
-    const deleteMarker = async () => {
-        setDeleteBoxType('loading')
-        const response = await fetch('/api/markers/delete-marker', {
-            method: 'DELETE',
-            body: JSON.stringify({
-                data: {
-                    markerId: props.markerId,
-                },
-            }),
+    const editMarker = async (e: any) => {
+        e.preventDefault()
+        setEditBoxType('loading')
+        const form = e.target
+
+        const formData = new FormData(form)
+        const formJson = Object.fromEntries(formData.entries())
+
+        const response = await fetch('/api/markers/edit-marker', {
+            method: 'PATCH',
+            body: JSON.stringify({ formJson, markerId: props.markerId }),
+            headers: {},
         })
+        const res = await response.json()
 
         if (response.status === 200) {
-            const requestMarkers = await fetch(`/api/markers/get-markers`, {
-                method: 'GET',
-                headers: {},
-                cache: 'no-store',
-            })
-            const updatedMarkers = await requestMarkers.json()
-
             map.getSource('vous-etes-gloopsy').setData({
                 type: 'FeatureCollection',
-                features: updatedMarkers,
+                features: res.markers,
             })
-            setDeleteBoxType('all good')
+            setEditBoxType('all good')
         } else {
-            setDeleteBoxType('error')
-            console.log('error with delete')
+            setEditBoxType('error')
         }
     }
 
     useEffect(() => {
-        switch (deleteBoxType) {
+        switch (editBoxType) {
             case 'default':
-                setDeleteBox(
+                setEditBox(
                     <div className={styles.inputBox}>
-                        <p>Supprimer le pin?</p>
-                        <div className={styles.rowInputs}>
-                            <div
-                                className={button.button}
-                                onClick={() => {
-                                    deleteMarker()
-                                }}
-                            >
-                                <p>Oui</p>
+                        <h5>Modifie ton commentaire</h5>
+
+                        <form onSubmit={editMarker}>
+                            <textarea
+                                name="editContent"
+                                defaultValue={props.comment}
+                            />
+                            <div className={styles.rowInputs}>
+                                <button type="submit" className={button.button}>
+                                    <p>Valider</p>
+                                </button>
+                                <div
+                                    className={button.button}
+                                    onClick={() => {
+                                        props.setShowEditBox(false)
+                                    }}
+                                >
+                                    <p>Annuler</p>
+                                </div>
                             </div>
-                            <div
-                                className={button.button}
-                                onClick={() => {
-                                    props.setShowDeleteBox(false)
-                                }}
-                            >
-                                <p>Non</p>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 )
                 break
             case 'loading':
-                setDeleteBox(
+                setEditBox(
                     <div className={styles.inputBox}>
                         <img
                             src="/adrien.png"
@@ -79,15 +77,14 @@ const DeleteMarker = (props: any) => {
                 )
                 break
             case 'all good':
-                setDeleteBox(
+                setEditBox(
                     <div className={styles.inputBox}>
-                        <p>All good!</p>
-                        <p> Eh merci mec! </p>
+                        <h5> Eh merci mec! </h5>
                         <div className={styles.rowInputs}>
                             <div
                                 className={button.button}
                                 onClick={() => {
-                                    props.setShowDeleteBox(false)
+                                    props.setShowEditBox(false)
                                 }}
                             >
                                 <p>Retour à la carte</p>
@@ -98,7 +95,7 @@ const DeleteMarker = (props: any) => {
                 break
 
             case 'error':
-                setDeleteBox(
+                setEditBox(
                     <div className={styles.inputBox}>
                         <p>
                             Oups! Quelque chose ne s'est pas bien passé! Try
@@ -107,7 +104,7 @@ const DeleteMarker = (props: any) => {
                         <div
                             className={button.button}
                             onClick={() => {
-                                props.setShowDeleteBox(false)
+                                props.setShowEditBox(false)
                             }}
                         >
                             <p>Retour à la carte</p>
@@ -116,9 +113,9 @@ const DeleteMarker = (props: any) => {
                 )
                 break
         }
-    }, [deleteBoxType])
+    }, [editBoxType])
 
-    return <div className={styles.inputBoxContainer}>{deleteBox}</div>
+    return <div className={styles.inputBoxContainer}>{editBox}</div>
 }
 
-export default DeleteMarker
+export default EditMarkerBox

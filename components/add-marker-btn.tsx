@@ -283,8 +283,7 @@ const addMarkerBtn = (props: any) => {
                 setMarker({})
                 setInputType(
                     <div className={style.inputTypeContainer}>
-                        <p>All good!</p>
-                        <p> Eh merci mec! </p>
+                        <h5> Eh merci mec! </h5>
                     </div>
                 )
                 setTimeout(() => {

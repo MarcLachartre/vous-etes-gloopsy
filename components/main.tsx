@@ -24,7 +24,6 @@ const Main = (props: any) => {
         const getUser = async () => {
             const user: any = await getSession()
             setUser(user)
-            console.log(user)
         }
 
         getUser()

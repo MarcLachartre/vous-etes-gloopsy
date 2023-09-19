@@ -3,7 +3,8 @@ import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import popupStyle from '../css/popup.module.scss'
 
-import DeleteMarker from './delete-marker'
+import DeleteMarkerBox from './delete-marker-box'
+import EditMarkerBox from './edit-marker-box'
 
 import React, { useEffect, useState, useRef, useContext } from 'react'
 
@@ -17,6 +18,7 @@ const Map = (props: any) => {
     const isMounted = useRef(false)
 
     const [showDeleteBox, setShowDeleteBox] = useState(false)
+    const [showEditBox, setShowEditBox] = useState(false)
 
     const [popUp, setPopUp] = useState(
         new mapboxgl.Popup({
@@ -198,17 +200,37 @@ const Map = (props: any) => {
 
         const displayDeleteLink = () => {
             const divElement = document.createElement('div')
+            const linkContainer = document.createElement('div')
+
             divElement.classList.add(`${popupStyle.popUpContainer}`)
-            const link = document.createElement('a')
-            link.style.alignSelf = 'center'
-            link.style.cursor = 'pointer'
 
-            link.innerHTML = 'Supprimer'
+            const deleteLink = document.createElement('a')
+            const editLink = document.createElement('a')
+            const linkSeparation = document.createElement('div')
+
+            linkContainer.style.display = 'flex'
+            linkContainer.style.alignSelf = 'center'
+
+            deleteLink.style.cursor = 'pointer'
+            editLink.style.cursor = 'pointer'
+
             divElement.innerHTML = defaultPopUpHTML
-            divElement.appendChild(link)
+            deleteLink.innerHTML = 'Supprimer'
+            editLink.innerHTML = 'Editer'
+            linkSeparation.innerHTML = '&nbsp | &nbsp'
 
-            link.addEventListener('click', (e) => {
+            linkContainer.appendChild(editLink)
+            linkContainer.appendChild(linkSeparation)
+            linkContainer.appendChild(deleteLink)
+            divElement.appendChild(linkContainer)
+
+            deleteLink.addEventListener('click', (e) => {
                 setShowDeleteBox(true)
+                popUp.remove()
+            })
+
+            editLink.addEventListener('click', (e) => {
+                setShowEditBox(true)
                 popUp.remove()
             })
 
@@ -240,9 +262,17 @@ const Map = (props: any) => {
     return (
         <div style={{ height: '100vh', width: '100vw' }}>
             {showDeleteBox === true ? (
-                <DeleteMarker
+                <DeleteMarkerBox
                     markerId={popUpContent.markerId}
                     setShowDeleteBox={setShowDeleteBox}
+                />
+            ) : null}
+
+            {showEditBox === true ? (
+                <EditMarkerBox
+                    markerId={popUpContent.markerId}
+                    comment={popUpContent.description}
+                    setShowEditBox={setShowEditBox}
                 />
             ) : null}
 
