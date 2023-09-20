@@ -1,34 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a simple app which aims to track where La Gloopsy is sticking its stickers.
 
-## Getting Started
+A user can signin/out, login/out.
+=> If logged out, a user can only see the markers on the map and click on it to see the popup containing a name, date/time and comment.
+=> If logged in, a user can create a marker by using its own location coordinates or by placing it on the map. each marker is made of the following details: { id, geometry: {type, coordinate: [lng, lat]}, properties: {owner, description, email, date, time} }. A user (with the maker id) can only delete his markers, or edit its markers comment.
 
-First, run the development server:
+What is to be done now...
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-   refactor
+-   better typing with typescript
+-   rework front end design
+-   create a user db with documents wich contain fields username (and...)
+-   create a user interface with a username and account editable/ with for example number of markers, get a list of my markers...
+-   filter pins on the map according to who posted it
+-   improve db connection (not open and close db connection on each request...)
+-   add marker to fetch markers only in back end and not in client
