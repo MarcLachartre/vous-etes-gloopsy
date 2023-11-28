@@ -14,13 +14,13 @@ const AuthLink = () => {
             if (session === null) {
                 setAuthLink(
                     <Link className={style.authLink} href="/api/auth/signin">
-                        Sign in
+                        <h6>Sign in</h6>
                     </Link>
                 )
             } else {
                 setAuthLink(
                     <Link className={style.authLink} href="/api/auth/signout">
-                        Sign out
+                        <h6>Sign out</h6>
                     </Link>
                 )
             }

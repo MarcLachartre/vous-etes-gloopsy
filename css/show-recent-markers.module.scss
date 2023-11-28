@@ -1,7 +1,6 @@
 .recentMarkersContainer {
-    left: 330px;
     width: 110px;
-    padding: 10px;
+
     background-color: var(--default-red);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
@@ -9,8 +8,7 @@
     justify-content: center;
     margin-left: var(--default-spacing);
     margin-top: var(--default-spacing);
-    padding-left: var(--default-spacing);
-    padding-right: var(--default-spacing);
+    padding: var(--default-spacing);
     position: absolute;
     z-index: 4;
     cursor: pointer;
@@ -24,7 +22,7 @@
         left: 0px;
 
         h6 {
-            line-height: 25px;
+            line-height: 20px;
         }
     }
 }
@@ -39,14 +37,8 @@
     }
 }
 
-@media (min-width: 768px) {
-}
-
 @media (min-width: 992px) {
     .recentMarkersContainer {
         left: 330px;
-        h6 {
-            line-height: 25px;
-        }
     }
 }
