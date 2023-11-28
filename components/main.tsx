@@ -44,25 +44,35 @@ const Main = (props: any) => {
     }, [])
 
     useEffect(() => {
+        // console.log(1)
+
         const recentMarkers = props.initialMarkers.slice(-10)
 
         showAllMarkers
             ? setInitialMarkers(props.initialMarkers)
             : setInitialMarkers(recentMarkers)
-    }, [showAllMarkers])
+    }, [showAllMarkers, props.initialMarkers])
 
     return (
         <InitialMarkersContext.Provider value={initialMarkers}>
             <MapContext.Provider value={map}>
                 {[
-                    <Map key={'Map'} user={user} />,
+                    <Map
+                        key={'Map'}
+                        user={user}
+                        setShowAllMarkers={setShowAllMarkers}
+                    />,
                     <ShowRecentMarkers // Button that shows the last 10 markers pined on the map
                         key={'ShowRecentMarkers'}
                         showAllMarkers={showAllMarkers}
                         setShowAllMarkers={setShowAllMarkers}
                     />,
                     <AuthLink key={'Authlink'} />,
-                    <AddMarkerBtn key={'AddMarkerBtn'} user={user} />,
+                    <AddMarkerBtn
+                        key={'AddMarkerBtn'}
+                        user={user}
+                        setShowAllMarkers={setShowAllMarkers}
+                    />,
                     <PrivacyPolicyLink key={'PrivacyPolicyLink'} />,
                 ]}
             </MapContext.Provider>

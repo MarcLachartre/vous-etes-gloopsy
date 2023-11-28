@@ -275,6 +275,7 @@ const Map = (props: any) => {
                 <DeleteMarkerBox
                     markerId={popUpContent.markerId}
                     setShowDeleteBox={setShowDeleteBox}
+                    setShowAllMarkers={props.setShowAllMarkers}
                 />
             ) : null}
 

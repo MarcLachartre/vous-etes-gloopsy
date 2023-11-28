@@ -33,9 +33,11 @@ const DeleteMarkerBox = (props: any) => {
                 type: 'FeatureCollection',
                 features: updatedMarkers,
             })
+            props.setShowAllMarkers(true)
             setDeleteBoxType('all good')
         } else {
             setDeleteBoxType('error')
+            props.setShowAllMarkers(true)
             console.log('error with delete')
         }
     }
