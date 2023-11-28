@@ -37,6 +37,16 @@ const Map = (props: any) => {
 
     useEffect(() => {
         if (Object.keys(map).length !== 0) {
+            map.getSource('vous-etes-gloopsy').setData({
+                // Update map when the user modifies the marker he wants to see (for example last 10 markers)
+                type: 'FeatureCollection',
+                features: initialMarkers,
+            })
+        }
+    }, [initialMarkers])
+
+    useEffect(() => {
+        if (Object.keys(map).length !== 0) {
             map.on('load', async () => {
                 map.addSource('vous-etes-gloopsy', {
                     type: 'geojson',

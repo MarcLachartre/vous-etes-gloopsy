@@ -6,6 +6,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 
 import Map from '../components/map'
 import AuthLink from '../components/auth/auth-link'
+import ShowRecentMarkers from './show-recent-markers'
 import AddMarkerBtn from '../components/add-marker-btn'
 import PrivacyPolicyLink from '../components/privacy-policy-link'
 import { getSession } from 'next-auth/react'
@@ -19,6 +20,8 @@ const Main = (props: any) => {
 
     const [map, setMap] = useState({} as any)
     const [user, setUser] = useState({})
+    const [initialMarkers, setInitialMarkers] = useState(props.initialMarkers)
+    const [showAllMarkers, setShowAllMarkers] = useState(true)
 
     useEffect(() => {
         const getUser = async () => {
@@ -40,12 +43,25 @@ const Main = (props: any) => {
         setMap(map)
     }, [])
 
+    useEffect(() => {
+        const recentMarkers = props.initialMarkers.slice(-10)
+
+        showAllMarkers
+            ? setInitialMarkers(props.initialMarkers)
+            : setInitialMarkers(recentMarkers)
+    }, [showAllMarkers])
+
     return (
-        <InitialMarkersContext.Provider value={props.initialMarkers}>
+        <InitialMarkersContext.Provider value={initialMarkers}>
             <MapContext.Provider value={map}>
                 {[
-                    <Map key={'map'} user={user} />,
-                    <AuthLink key={'authlink'} />,
+                    <Map key={'Map'} user={user} />,
+                    <ShowRecentMarkers // Button that shows the last 10 markers pined on the map
+                        key={'ShowRecentMarkers'}
+                        showAllMarkers={showAllMarkers}
+                        setShowAllMarkers={setShowAllMarkers}
+                    />,
+                    <AuthLink key={'Authlink'} />,
                     <AddMarkerBtn key={'AddMarkerBtn'} user={user} />,
                     <PrivacyPolicyLink key={'PrivacyPolicyLink'} />,
                 ]}
