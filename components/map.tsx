@@ -211,6 +211,15 @@ const Map = (props: any) => {
                 map.on('mouseleave', 'unclustered-point', () => {
                     map.getCanvas().style.cursor = ''
                 })
+
+                map.on('mouseenter', 'clusters', () => {
+                    map.getCanvas().style.cursor = 'pointer'
+                })
+
+                // Change it back to a pointer when it leaves.
+                map.on('mouseleave', 'clusters', () => {
+                    map.getCanvas().style.cursor = ''
+                })
             })
         }
     }, [map])

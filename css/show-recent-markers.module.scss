@@ -1,7 +1,7 @@
 .recentMarkersContainer {
     width: 110px;
 
-    background-color: var(--default-red);
+    background-color: #fff;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     display: flex;
@@ -13,7 +13,7 @@
     z-index: 4;
     cursor: pointer;
     h6 {
-        color: #fff;
+        color: var(--black);
     }
 }
 
