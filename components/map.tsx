@@ -91,6 +91,24 @@ const Map = (props: any) => {
                     },
                 })
 
+                map.on('click', 'clusters', (e: any) => {
+                    const features = map.queryRenderedFeatures(e.point, {
+                        layers: ['clusters'],
+                    })
+                    const clusterId = features[0].properties.cluster_id
+                    map.getSource('vous-etes-gloopsy').getClusterExpansionZoom(
+                        clusterId,
+                        (err: any, zoom: any) => {
+                            if (err) return
+
+                            map.easeTo({
+                                center: features[0].geometry.coordinates,
+                                zoom: zoom * 1.1,
+                            })
+                        }
+                    )
+                })
+
                 map.loadImage('/image-empty.png', (error: any, image: any) => {
                     if (error) throw error
 
