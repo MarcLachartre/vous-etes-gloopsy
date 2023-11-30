@@ -18,15 +18,17 @@ const addMarkerBtn = (props: any) => {
     const [inputType, setInputType] = useState(<div></div>)
     const [inputName, setInputName] = useState('close')
     const [coords, setCoords] = useState([] as number[])
-    // const [user, setUser] = useState({} as { name: string; email: string })
     const [marker, setMarker] = useState({} as any)
     const [isClickable, setIsClickable] = useState(false)
     const isClickableRef = useRef(false)
     isClickableRef.current = isClickable
 
-    const locateMe = () => {
+    const locateMe = async () => {
+        console.log('attempt locate me')
+
         const success = (position: any) => {
             setInputName('validate location')
+
             map.flyTo({
                 center: [position.coords.longitude, position.coords.latitude], // Fly to the selected target
                 duration: 3000,
@@ -49,7 +51,9 @@ const addMarkerBtn = (props: any) => {
             maximumAge: 0,
         }
 
+        map.removeControl(props.GeolocateControl) // remove and re add geolocate control in order for the navigator.geolocation.getCurrentPosition() function to work, if not, we get an error
         navigator.geolocation.getCurrentPosition(success, error, options)
+        map.addControl(props.GeolocateControl)
     }
 
     const handleSubmit = async (e: any) => {

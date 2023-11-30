@@ -19,6 +19,17 @@ const Main = (props: any) => {
         'pk.eyJ1IjoibWFyY2xhY2hhcnRyZSIsImEiOiJjbGxjZzRqeGMwMTI2M2NsdzA4bXJodnFqIn0.rEH7luhuGuag_BVbVvw67g'
 
     const [map, setMap] = useState({} as any)
+    const [GeolocateControl, setGeolocateControl] = useState(
+        new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true,
+            },
+            // When active the map will receive updates to the device's location as it changes.
+            trackUserLocation: true,
+            // Draw an arrow next to the location dot to indicate which direction the device is heading.
+            showUserHeading: true,
+        })
+    )
     const [user, setUser] = useState({})
     const [markersDisplayed, setMarkersDisplayed] = useState(
         props.initialMarkers
@@ -86,6 +97,7 @@ const Main = (props: any) => {
                         user={user}
                         setShowAllMarkers={setShowAllMarkers}
                         resetMarkers={resetMarkers}
+                        GeolocateControl={GeolocateControl}
                     />,
                     <ShowRecentMarkers // Button that shows the last 10 markers pined on the map
                         key={'ShowRecentMarkers'}
@@ -98,6 +110,8 @@ const Main = (props: any) => {
                         user={user}
                         setShowAllMarkers={setShowAllMarkers}
                         resetMarkers={resetMarkers}
+                        GeolocateControl={GeolocateControl}
+                        setGeolocateControl={setGeolocateControl}
                     />,
                     <PrivacyPolicyLink key={'PrivacyPolicyLink'} />,
                 ]}
