@@ -12,7 +12,7 @@ import PrivacyPolicyLink from '../components/privacy-policy-link'
 import { getSession } from 'next-auth/react'
 
 import { MapContext } from '@/context/map-context'
-import { InitialMarkersContext } from '@/context/initial-markers-context'
+import { MarkersDisplayedContext } from '@/context/markers-displayed-context'
 
 const Main = (props: any) => {
     mapboxgl.accessToken =
@@ -20,8 +20,27 @@ const Main = (props: any) => {
 
     const [map, setMap] = useState({} as any)
     const [user, setUser] = useState({})
-    const [initialMarkers, setInitialMarkers] = useState(props.initialMarkers)
+    const [markersDisplayed, setMarkersDisplayed] = useState(
+        props.initialMarkers
+    )
+    const [newUpdatedMarkers, setNewUpdatedMarkers] = useState<any>()
     const [showAllMarkers, setShowAllMarkers] = useState(true)
+
+    const resetMarkers = async () => {
+        const requestMarkers = await fetch(`/api/markers/get-markers`, {
+            method: 'GET',
+            headers: {},
+            cache: 'no-store',
+        })
+        const updatedMarkers = await requestMarkers.json()
+
+        map.getSource('vous-etes-gloopsy').setData({
+            type: 'FeatureCollection',
+            features: updatedMarkers,
+        })
+
+        return setNewUpdatedMarkers(updatedMarkers)
+    }
 
     useEffect(() => {
         const getUser = async () => {
@@ -37,30 +56,36 @@ const Main = (props: any) => {
             container: 'map',
             style: 'mapbox://styles/mapbox/outdoors-v12',
             center: [0.483776, 44.850782],
-            zoom: 5,
+            zoom: 4,
         })
 
         setMap(map)
     }, [])
 
     useEffect(() => {
-        // console.log(1)
+        const recentMarkers =
+            newUpdatedMarkers !== undefined
+                ? newUpdatedMarkers.slice(-10)
+                : props.initialMarkers.slice(-10)
 
-        const recentMarkers = props.initialMarkers.slice(-10)
-
-        showAllMarkers
-            ? setInitialMarkers(props.initialMarkers)
-            : setInitialMarkers(recentMarkers)
-    }, [showAllMarkers, props.initialMarkers])
+        if (showAllMarkers) {
+            newUpdatedMarkers !== undefined
+                ? setMarkersDisplayed(newUpdatedMarkers)
+                : setMarkersDisplayed(props.initialMarkers)
+        } else {
+            setMarkersDisplayed(recentMarkers)
+        }
+    }, [showAllMarkers])
 
     return (
-        <InitialMarkersContext.Provider value={initialMarkers}>
+        <MarkersDisplayedContext.Provider value={markersDisplayed}>
             <MapContext.Provider value={map}>
                 {[
                     <Map
                         key={'Map'}
                         user={user}
                         setShowAllMarkers={setShowAllMarkers}
+                        resetMarkers={resetMarkers}
                     />,
                     <ShowRecentMarkers // Button that shows the last 10 markers pined on the map
                         key={'ShowRecentMarkers'}
@@ -72,11 +97,12 @@ const Main = (props: any) => {
                         key={'AddMarkerBtn'}
                         user={user}
                         setShowAllMarkers={setShowAllMarkers}
+                        resetMarkers={resetMarkers}
                     />,
                     <PrivacyPolicyLink key={'PrivacyPolicyLink'} />,
                 ]}
             </MapContext.Provider>
-        </InitialMarkersContext.Provider>
+        </MarkersDisplayedContext.Provider>
     )
 }
 

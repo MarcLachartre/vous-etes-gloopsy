@@ -11,6 +11,7 @@ const DeleteMarkerBox = (props: any) => {
     const [deleteBox, setDeleteBox] = useState(<div></div>)
 
     const deleteMarker = async () => {
+        props.setShowAllMarkers(true)
         setDeleteBoxType('loading')
         const response = await fetch('/api/markers/delete-marker', {
             method: 'DELETE',
@@ -22,22 +23,10 @@ const DeleteMarkerBox = (props: any) => {
         })
 
         if (response.status === 200) {
-            const requestMarkers = await fetch(`/api/markers/get-markers`, {
-                method: 'GET',
-                headers: {},
-                cache: 'no-store',
-            })
-            const updatedMarkers = await requestMarkers.json()
-
-            map.getSource('vous-etes-gloopsy').setData({
-                type: 'FeatureCollection',
-                features: updatedMarkers,
-            })
-            props.setShowAllMarkers(true)
+            await props.resetMarkers()
             setDeleteBoxType('all good')
         } else {
             setDeleteBoxType('error')
-            props.setShowAllMarkers(true)
             console.log('error with delete')
         }
     }

@@ -9,11 +9,11 @@ import EditMarkerBox from './edit-marker-box'
 import React, { useEffect, useState, useRef, useContext } from 'react'
 
 import { MapContext } from '../context/map-context'
-import { InitialMarkersContext } from '../context/initial-markers-context'
+import { MarkersDisplayedContext } from '../context/markers-displayed-context'
 
 const Map = (props: any) => {
     const map = useContext(MapContext)
-    const initialMarkers = useContext(InitialMarkersContext)
+    const markersDisplayed = useContext(MarkersDisplayedContext)
 
     const isMounted = useRef(false)
 
@@ -40,10 +40,10 @@ const Map = (props: any) => {
             map.getSource('vous-etes-gloopsy').setData({
                 // Update map when the user modifies the marker he wants to see (for example last 10 markers)
                 type: 'FeatureCollection',
-                features: initialMarkers,
+                features: markersDisplayed,
             })
         }
-    }, [initialMarkers])
+    }, [markersDisplayed])
 
     useEffect(() => {
         if (Object.keys(map).length !== 0) {
@@ -52,7 +52,7 @@ const Map = (props: any) => {
                     type: 'geojson',
                     data: {
                         type: 'FeatureCollection',
-                        features: initialMarkers,
+                        features: markersDisplayed,
                     },
                     cluster: true,
                     clusterMaxZoom: 15, // Max zoom to cluster points on
@@ -203,6 +203,18 @@ const Map = (props: any) => {
                     setPopUp(popUp)
                 })
 
+                map.addControl(
+                    new mapboxgl.GeolocateControl({
+                        positionOptions: {
+                            enableHighAccuracy: true,
+                        },
+                        // When active the map will receive updates to the device's location as it changes.
+                        trackUserLocation: true,
+                        // Draw an arrow next to the location dot to indicate which direction the device is heading.
+                        showUserHeading: true,
+                    })
+                )
+
                 map.on('mouseenter', 'unclustered-point', () => {
                     map.getCanvas().style.cursor = 'pointer'
                 })
@@ -303,6 +315,8 @@ const Map = (props: any) => {
                     markerId={popUpContent.markerId}
                     setShowDeleteBox={setShowDeleteBox}
                     setShowAllMarkers={props.setShowAllMarkers}
+                    setMarkersUpdated={props.setMarkersUpdated}
+                    resetMarkers={props.resetMarkers}
                 />
             ) : null}
 

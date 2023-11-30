@@ -81,17 +81,7 @@ const addMarkerBtn = (props: any) => {
         })
 
         if (response.status === 200) {
-            const requestMarkers = await fetch(`/api/markers/get-markers`, {
-                method: 'GET',
-                headers: {},
-                cache: 'no-store',
-            })
-            const updatedMarkers = await requestMarkers.json()
-
-            map.getSource('vous-etes-gloopsy').setData({
-                type: 'FeatureCollection',
-                features: updatedMarkers,
-            })
+            await props.resetMarkers()
             setInputName('marker added')
         } else {
             setInputName('error')
@@ -162,6 +152,7 @@ const addMarkerBtn = (props: any) => {
                         </div>
                     )
                 } else {
+                    props.setShowAllMarkers(true)
                     setInputType(
                         <div className={style.inputTypeContainer}>
                             <div
@@ -281,7 +272,7 @@ const addMarkerBtn = (props: any) => {
             case 'marker added':
                 marker.remove()
                 setMarker({})
-                props.setShowAllMarkers(true)
+
                 setInputType(
                     <div className={style.inputTypeContainer}>
                         <h5> Eh merci mec! </h5>
