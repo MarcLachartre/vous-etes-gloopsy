@@ -37,7 +37,7 @@ main {
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 40px;
+    padding: var(--default-spacing);
     gap: var(--default-spacing);
     background-color: var(--grey);
 }
@@ -162,9 +162,11 @@ li {
         --default-spacing: 7px;
         --round-icon-size: 34px;
     }
-    .page-container {
-        padding: 15px;
+
+    h1 {
+        font-size: 3rem;
     }
+
     .mapboxgl-ctrl-top-right {
         margin: 7px 7px 0 0 !important;
         left: 124px !important;
@@ -185,10 +187,6 @@ li {
         --round-icon-size: 45px;
     }
 
-    .page-container {
-        padding: 15px;
-    }
-
     .mapboxgl-ctrl-geolocate {
         height: 45px !important;
         width: 45px !important;
@@ -202,9 +200,10 @@ li {
 
 /* // Medium devices (tablets, 991px and up) */
 @media (min-width: 991px) {
-    .page-container {
-        padding: 40px;
+    h1 {
+        font-size: 3.5rem;
     }
+
     .mapboxgl-ctrl-top-right {
         left: 450px !important;
     }
