@@ -1,5 +1,3 @@
-'use client'
-
 import { createContext } from 'react'
 
 const MarkersDisplayedContext = createContext([] as any)

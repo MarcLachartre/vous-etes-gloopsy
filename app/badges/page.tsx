@@ -1,9 +1,6 @@
-import styles from './page.module.css'
-import Main from '../components/main/main'
+import BadgesPage from '@/components/badges/badges-page'
 
-export const dynamic = 'force-dynamic'
-
-export default async function Home() {
+export default async function Badges() {
     const requestMarkers = await fetch(
         `${process.env.DOMAIN}/api/markers/get-markers`,
         {
@@ -15,8 +12,8 @@ export default async function Home() {
     const initialMarkers = await requestMarkers.json()
 
     return (
-        <main className={styles.main}>
-            <Main initialMarkers={initialMarkers} />
+        <main className={'page-container'}>
+            <BadgesPage initialMarkersLength={initialMarkers.length} />
         </main>
     )
 }

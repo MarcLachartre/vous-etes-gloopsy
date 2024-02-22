@@ -1,7 +1,8 @@
 'use client'
-import buttonStyle from '../css/button.module.scss'
-import style from '../css/add-marker.module.scss'
-import adrien from '../css/adrien.module.scss'
+import { MarkersAmountStateContext } from '@/context/markers-amount-context'
+import buttonStyle from '../../css/button.module.scss'
+import style from '../../css/main-page/add-marker.module.scss'
+import adrien from '../../css/adrien.module.scss'
 
 import mapboxgl from 'mapbox-gl'
 
@@ -12,6 +13,9 @@ import { useContext } from 'react'
 import { MapContext } from '@/context/map-context'
 
 const addMarkerBtn = (props: any) => {
+    const { markersAmount, setMarkersAmount } = useContext(
+        MarkersAmountStateContext
+    )
     const map = useContext(MapContext)
 
     const [isLoggedIn, setLoggedIn] = useState(false)
@@ -86,6 +90,8 @@ const addMarkerBtn = (props: any) => {
 
         if (response.status === 200) {
             await props.resetMarkers()
+            markersAmount !== null ? setMarkersAmount(markersAmount + 1) : false
+
             setInputName('marker added')
         } else {
             setInputName('error')

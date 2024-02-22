@@ -1,0 +1,18 @@
+.closeButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    height: var(--round-icon-size);
+    width: var(--round-icon-size);
+}
+
+.closeButtonContainer:hover {
+    cursor: pointer;
+}
+
+.closeButtonContainer img {
+    position: absolute;
+    height: var(--round-icon-size);
+    width: var(--round-icon-size);
+}

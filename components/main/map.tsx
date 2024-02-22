@@ -1,15 +1,15 @@
 'use client'
-import mapboxgl, { GeolocateControl } from 'mapbox-gl'
+import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import popupStyle from '../css/popup.module.scss'
+import popupStyle from '../../css/popup.module.scss'
 
 import DeleteMarkerBox from './delete-marker-box'
 import EditMarkerBox from './edit-marker-box'
 
 import React, { useEffect, useState, useRef, useContext } from 'react'
 
-import { MapContext } from '../context/map-context'
-import { MarkersDisplayedContext } from '../context/markers-displayed-context'
+import { MapContext } from '../../context/map-context'
+import { MarkersDisplayedContext } from '../../context/markers-displayed-context'
 
 const Map = (props: any) => {
     const map = useContext(MapContext)
@@ -299,7 +299,7 @@ const Map = (props: any) => {
     }, [popUp])
 
     return (
-        <div style={{ height: '100vh', width: '100vw' }}>
+        <div style={{ height: '100%', width: '100vw', position: 'relative' }}>
             {showDeleteBox === true ? (
                 <DeleteMarkerBox
                     markerId={popUpContent.markerId}

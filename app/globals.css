@@ -3,11 +3,14 @@
     --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
     --default-spacing: 15px;
     --light-grey: #c6c6c6;
+    --grey: #f2f2f2;
     --black: #202124;
     --default-red: #990000;
+    --round-icon-size: 45px;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto:wght@500;700&display=swap');
 
 * {
     box-sizing: border-box;
@@ -18,10 +21,25 @@
 html,
 body {
     position: absolute;
-    max-width: 100vw;
-    width: 100vw;
+    width: 100%;
     display: flex;
     font-size: 62.5%;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+main {
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.page-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px;
+    gap: var(--default-spacing);
+    background-color: var(--grey);
 }
 
 h1,
@@ -46,9 +64,10 @@ a {
 }
 
 h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 4rem;
     letter-spacing: 0;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 h2 {
@@ -64,18 +83,21 @@ h3 {
 }
 
 h4 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 2.2rem;
     letter-spacing: 0;
     font-weight: 700;
 }
 
 h5 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 1.9rem;
     letter-spacing: 0;
     font-weight: 700;
 }
 
 h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 1.6rem;
     letter-spacing: 0;
     font-weight: 500;
@@ -138,8 +160,11 @@ li {
         --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
             0 -1px 0px rgba(0, 0, 0, 0.02);
         --default-spacing: 7px;
+        --round-icon-size: 34px;
     }
-
+    .page-container {
+        padding: 15px;
+    }
     .mapboxgl-ctrl-top-right {
         margin: 7px 7px 0 0 !important;
         left: 124px !important;
@@ -157,6 +182,11 @@ li {
         --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
             0 -1px 0px rgba(0, 0, 0, 0.02);
         --default-spacing: 10px;
+        --round-icon-size: 45px;
+    }
+
+    .page-container {
+        padding: 15px;
     }
 
     .mapboxgl-ctrl-geolocate {
@@ -172,6 +202,9 @@ li {
 
 /* // Medium devices (tablets, 991px and up) */
 @media (min-width: 991px) {
+    .page-container {
+        padding: 40px;
+    }
     .mapboxgl-ctrl-top-right {
         left: 450px !important;
     }

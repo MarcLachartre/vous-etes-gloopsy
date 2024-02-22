@@ -1,0 +1,59 @@
+.titleContainer {
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--default-spacing);
+}
+
+.titleContainer h3 {
+    text-align: center;
+    color: var(--default-red);
+}
+
+.titleContainer h1 {
+    text-align: center;
+    width: 80%;
+}
+
+.collectionContainer {
+    width: 100%;
+}
+
+.badgeContainer {
+    display: flex;
+    gap: var(--default-spacing);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.badgeContainer img {
+    width: 60%;
+}
+
+.badgeContainer h5 {
+    color: var(--default-red);
+}
+
+.badgeDescription {
+    display: flex;
+    gap: var(--default-spacing);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.badgeDescription p {
+    height: 80px;
+}
+
+.lockedBadge {
+    display: flex;
+    gap: var(--default-spacing);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

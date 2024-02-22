@@ -1,6 +1,6 @@
-import styles from '../css/input-box.module.scss'
-import button from '../css/button.module.scss'
-import adrien from '../css/adrien.module.scss'
+import styles from '../../css/input-box.module.scss'
+import button from '../../css/button.module.scss'
+import adrien from '../../css/adrien.module.scss'
 
 import { useEffect, useState, useContext } from 'react'
 import { MapContext } from '@/context/map-context'

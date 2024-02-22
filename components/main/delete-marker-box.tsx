@@ -1,11 +1,15 @@
-import styles from '../css/input-box.module.scss'
-import button from '../css/button.module.scss'
-import adrien from '../css/adrien.module.scss'
+import styles from '../../css/input-box.module.scss'
+import button from '../../css/button.module.scss'
+import adrien from '../../css/adrien.module.scss'
 
 import { useEffect, useState, useContext } from 'react'
 import { MapContext } from '@/context/map-context'
+import { MarkersAmountStateContext } from '@/context/markers-amount-context'
 
 const DeleteMarkerBox = (props: any) => {
+    const { markersAmount, setMarkersAmount } = useContext(
+        MarkersAmountStateContext
+    )
     const map = useContext(MapContext)
     const [deleteBoxType, setDeleteBoxType] = useState('default')
     const [deleteBox, setDeleteBox] = useState(<div></div>)
@@ -24,6 +28,7 @@ const DeleteMarkerBox = (props: any) => {
 
         if (response.status === 200) {
             await props.resetMarkers()
+            markersAmount !== null ? setMarkersAmount(markersAmount - 1) : false
             setDeleteBoxType('all good')
         } else {
             setDeleteBoxType('error')

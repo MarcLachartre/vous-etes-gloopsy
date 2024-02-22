@@ -1,0 +1,35 @@
+.menuIconContainer {
+    z-index: 20;
+    right: 0px;
+    top: 0px;
+    width: var(--round-icon-size);
+    height: var(--round-icon-size);
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--default-spacing);
+    margin-right: var(--default-spacing);
+    border-radius: 50%;
+    box-shadow: var(--box-shadow);
+    background-color: white;
+}
+
+.menuIconContainer:hover {
+    cursor: pointer;
+}
+
+.menuIconContainer img {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: var(--round-icon-size);
+    height: var(--round-icon-size);
+}
+
+.menuHeader {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

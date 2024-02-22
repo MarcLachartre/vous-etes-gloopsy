@@ -1,9 +1,8 @@
 'use client'
 
-import styles from '../css/show-recent-markers.module.scss'
-import image from '/image.png'
+import styles from '../../css/main-page/show-recent-markers.module.scss'
 
-import type { Dispatch } from 'react'
+import { type Dispatch } from 'react'
 
 const ShowRecentMarkers = ({
     showAllMarkers,
