@@ -1,4 +1,5 @@
 import BadgesPage from '@/components/badges/badges-page'
+import Head from 'next/head'
 
 export default async function Badges() {
     const requestMarkers = await fetch(
@@ -13,6 +14,11 @@ export default async function Badges() {
 
     return (
         <main className={'page-container'}>
+            <Head>
+                <meta property="og:title" content="Vous êtes Gloopsy" />
+                <meta property="og:description" content="Stick it everywhere" />
+                <meta property="og:image" content="/image.jpg" />
+            </Head>
             <BadgesPage initialMarkersLength={initialMarkers.length} />
         </main>
     )
