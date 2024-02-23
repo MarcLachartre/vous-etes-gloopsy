@@ -19,6 +19,9 @@ export const metadata: Metadata = {
         description: 'Gloopsy tracker',
         images: '/image.png',
     },
+    metadataBase: new URL(
+        'https://vous-etes-gloopsy-6e09e17d7d15.herokuapp.com/'
+    ),
 }
 
 export default function RootLayout({

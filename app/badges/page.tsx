@@ -12,14 +12,9 @@ export default async function Badges() {
     )
     const initialMarkers = await requestMarkers.json()
 
-    return [
-        <Head>
-            <meta property="og:title" content="Vous êtes Gloopsy" />
-            <meta property="og:description" content="Stick it everywhere" />
-            <meta property="og:image" content="./image.jpg" />
-        </Head>,
+    return (
         <main className={'page-container'}>
             <BadgesPage initialMarkersLength={initialMarkers.length} />
-        </main>,
-    ]
+        </main>
+    )
 }
