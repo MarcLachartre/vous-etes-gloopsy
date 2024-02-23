@@ -51,28 +51,12 @@ const Menu = () => {
                 </ListSubheader>
                 <Divider sx={{ marginBottom: 'var(--default-spacing)' }} />
                 {[
-                    ['Map', <MapIcon fontSize="large" />, '/'],
-                    [
-                        'Badges',
-                        <MilitaryTechIcon fontSize="large" />,
-                        '/badges',
-                    ],
+                    ['Map', <MapIcon />, '/'],
+                    ['Badges', <MilitaryTechIcon />, '/badges'],
                     isLoggedIn
-                        ? [
-                              'Sign out',
-                              <LogoutIcon fontSize="large" />,
-                              '/api/auth/signout',
-                          ]
-                        : [
-                              'Sign in',
-                              <LoginIcon fontSize="large" />,
-                              '/api/auth/signin',
-                          ],
-                    [
-                        'Privacy policy',
-                        <PolicyIcon fontSize="large" />,
-                        'privacy-policy',
-                    ],
+                        ? ['Sign out', <LogoutIcon />, '/api/auth/signout']
+                        : ['Sign in', <LoginIcon />, '/api/auth/signin'],
+                    ['Privacy policy', <PolicyIcon />, 'privacy-policy'],
                 ].map((item) => (
                     <ListItem key={`${item[0]}`} disablePadding>
                         <ListItemButton

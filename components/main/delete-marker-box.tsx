@@ -5,6 +5,7 @@ import adrien from '../../css/adrien.module.scss'
 import { useEffect, useState, useContext } from 'react'
 import { MapContext } from '@/context/map-context'
 import { MarkersAmountStateContext } from '@/context/markers-amount-context'
+import Button from '@mui/material/Button'
 
 const DeleteMarkerBox = (props: any) => {
     const { markersAmount, setMarkersAmount } = useContext(
@@ -43,22 +44,26 @@ const DeleteMarkerBox = (props: any) => {
                     <div className={styles.inputBox}>
                         <h5>Supprimer le pin?</h5>
                         <div className={styles.rowInputs}>
-                            <div
-                                className={button.button}
-                                onClick={() => {
+                            <Button
+                                variant="outlined"
+                                fullWidth
+                                onClick={function () {
                                     deleteMarker()
                                 }}
+                                // startIcon={<WhereToVoteIcon />}
                             >
-                                <p>Oui</p>
-                            </div>
-                            <div
-                                className={button.button}
-                                onClick={() => {
+                                oui
+                            </Button>
+                            <Button
+                                variant="outlined"
+                                fullWidth
+                                onClick={function () {
                                     props.setShowDeleteBox(false)
                                 }}
+                                // startIcon={<WhereToVoteIcon />}
                             >
-                                <p>Non</p>
-                            </div>
+                                non
+                            </Button>
                         </div>
                     </div>
                 )
@@ -79,14 +84,16 @@ const DeleteMarkerBox = (props: any) => {
                     <div className={styles.inputBox}>
                         <h5> Eh merci mec! </h5>
                         <div className={styles.rowInputs}>
-                            <div
-                                className={button.button}
-                                onClick={() => {
+                            <Button
+                                variant="outlined"
+                                fullWidth
+                                onClick={function () {
                                     props.setShowDeleteBox(false)
                                 }}
+                                // startIcon={<WhereToVoteIcon />}
                             >
-                                <p>Retour à la carte</p>
-                            </div>
+                                retour
+                            </Button>
                         </div>
                     </div>
                 )
@@ -99,14 +106,16 @@ const DeleteMarkerBox = (props: any) => {
                             Oups! Quelque chose ne s'est pas bien passé! Try
                             again!
                         </p>
-                        <div
-                            className={button.button}
-                            onClick={() => {
+                        <Button
+                            variant="outlined"
+                            fullWidth
+                            onClick={function () {
                                 props.setShowDeleteBox(false)
                             }}
+                            // startIcon={<WhereToVoteIcon />}
                         >
-                            <p>Retour à la carte</p>
-                        </div>
+                            retour
+                        </Button>
                     </div>
                 )
                 break

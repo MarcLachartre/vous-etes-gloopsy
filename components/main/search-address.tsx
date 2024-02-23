@@ -40,8 +40,6 @@ const SearchAddress = ({
             })
     }
 
-    // Example usage:
-
     const handleSubmit = (e: SyntheticEvent) => {
         e.preventDefault()
         searchAddress()
@@ -55,11 +53,8 @@ const SearchAddress = ({
         <form className={styles.searchAddressContainer} action="">
             <TextField
                 label="Addresse"
-                variant="filled"
                 fullWidth
                 value={address}
-                InputLabelProps={{ sx: { fontSize: '1.6rem' } }}
-                InputProps={{ sx: { fontSize: '1.6rem' } }}
                 onChange={handleChange}
             />
             <Button
@@ -69,7 +64,7 @@ const SearchAddress = ({
                     handleSubmit(e)
                 }}
             >
-                <SearchIcon fontSize="large" />
+                <SearchIcon />
             </Button>
         </form>
     )

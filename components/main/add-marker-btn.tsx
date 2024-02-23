@@ -1,6 +1,6 @@
 'use client'
 import { MarkersAmountStateContext } from '@/context/markers-amount-context'
-import buttonStyle from '../../css/button.module.scss'
+
 import style from '../../css/main-page/add-marker.module.scss'
 import adrien from '../../css/adrien.module.scss'
 import SearchAddress from './search-address'
@@ -11,6 +11,14 @@ import React, { useState, useEffect, useRef } from 'react'
 
 import { useContext } from 'react'
 import { MapContext } from '@/context/map-context'
+
+import Button from '@mui/material/Button'
+import MyLocationIcon from '@mui/icons-material/MyLocation'
+import PanToolAltIcon from '@mui/icons-material/PanToolAlt'
+import WhereToVoteIcon from '@mui/icons-material/WhereToVote'
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
+import TextField from '@mui/material/TextField'
+import PinDropOutlinedIcon from '@mui/icons-material/PinDropOutlined'
 
 const addMarkerBtn = (props: any) => {
     const { markersAmount, setMarkersAmount } = useContext(
@@ -165,22 +173,26 @@ const addMarkerBtn = (props: any) => {
                     props.setShowAllMarkers(true)
                     setInputType(
                         <div className={style.inputTypeContainer}>
-                            <div
-                                className={buttonStyle.button}
+                            <Button
+                                variant="outlined"
+                                fullWidth
                                 onClick={function () {
                                     setInputName('localisation ongoing')
                                 }}
+                                startIcon={<MyLocationIcon />}
                             >
-                                <p>Utiliser ma position</p>
-                            </div>
-                            <div
-                                className={buttonStyle.button}
+                                Ma position
+                            </Button>
+                            <Button
+                                variant="outlined"
+                                fullWidth
                                 onClick={function () {
                                     setInputName('manual localisation')
                                 }}
+                                startIcon={<PanToolAltIcon />}
                             >
-                                <p>Placer manuellement</p>
-                            </div>
+                                Placer manuellement
+                            </Button>
                         </div>
                     )
                 }
@@ -203,14 +215,16 @@ const addMarkerBtn = (props: any) => {
                 setInputType(
                     <div className={style.inputTypeContainer}>
                         <p>Clique pour ajuster la position si besoin!</p>
-                        <div
-                            className={buttonStyle.button}
+                        <Button
+                            variant="outlined"
+                            fullWidth
                             onClick={function () {
                                 setInputName('add comment')
                             }}
+                            startIcon={<PinDropOutlinedIcon />}
                         >
-                            <p>Valider position</p>
-                        </div>
+                            Valider position
+                        </Button>
                     </div>
                 )
                 break
@@ -221,16 +235,20 @@ const addMarkerBtn = (props: any) => {
 
                 setInputType(
                     <div className={style.inputTypeContainer}>
-                        <p>Clique sur la map pour placer le pin!</p>
+                        <p style={{ textAlign: 'center' }}>
+                            Clique sur la map pour sticker!
+                        </p>
                         <SearchAddress setCoords={setCoords} />
-                        <button
-                            className={buttonStyle.button}
+                        <Button
+                            variant="outlined"
+                            fullWidth
                             onClick={function () {
                                 setInputName('add comment')
                             }}
+                            startIcon={<PinDropOutlinedIcon />}
                         >
-                            <p>Valider ton pin</p>
-                        </button>
+                            Valider position
+                        </Button>
                     </div>
                 )
 
@@ -247,22 +265,27 @@ const addMarkerBtn = (props: any) => {
                             className={style.inputTypeContainer}
                             onSubmit={handleSubmit}
                         >
-                            <p>Un petit commentaire et c'est tout bon 🙂</p>
-                            <textarea
+                            <TextField
                                 name="comment"
-                                placeholder="Max 300 charactères"
-                                maxLength={300}
-                            ></textarea>
+                                id="outlined-multiline-static"
+                                label="Commentaire"
+                                multiline
+                                fullWidth
+                                placeholder="Un petit commentaire et c'est tout bon! 😊 (max 300 charactères)"
+                                rows={4}
+                            />
 
-                            <button
+                            <Button
                                 type="submit"
-                                className={buttonStyle.button}
+                                variant="outlined"
+                                fullWidth
                                 onClick={function () {
                                     setInputName('loading')
                                 }}
+                                startIcon={<CheckCircleOutlineIcon />}
                             >
-                                <p>Créer pin</p>
-                            </button>
+                                Enregistrer
+                            </Button>
                         </form>
                     )
                 }
@@ -324,7 +347,7 @@ const addMarkerBtn = (props: any) => {
                         : setInputName('close')
                 }}
             >
-                <h6> Ajouter nouveau pin </h6>
+                <h6> Ajouter nouveau sticker </h6>
 
                 <img
                     className={style.addMarkerImage}

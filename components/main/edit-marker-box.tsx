@@ -4,6 +4,7 @@ import adrien from '../../css/adrien.module.scss'
 
 import { useEffect, useState, useContext } from 'react'
 import { MapContext } from '@/context/map-context'
+import Button from '@mui/material/Button'
 
 const EditMarkerBox = (props: any) => {
     const map = useContext(MapContext)
@@ -49,17 +50,38 @@ const EditMarkerBox = (props: any) => {
                                 defaultValue={props.comment}
                             />
                             <div className={styles.rowInputs}>
-                                <button type="submit" className={button.button}>
+                                {/* <button type="submit" className={button.button}>
                                     <p>Valider</p>
-                                </button>
-                                <div
+                                </button> */}
+                                <Button
+                                    variant="outlined"
+                                    type="submit"
+                                    fullWidth
+                                    onClick={() => {
+                                        props.setShowEditBox(false)
+                                    }}
+                                    // startIcon={<WhereToVoteIcon />}
+                                >
+                                    valider
+                                </Button>
+                                <Button
+                                    variant="outlined"
+                                    fullWidth
+                                    onClick={() => {
+                                        props.setShowEditBox(false)
+                                    }}
+                                    // startIcon={<WhereToVoteIcon />}
+                                >
+                                    Annuler
+                                </Button>
+                                {/* <div
                                     className={button.button}
                                     onClick={() => {
                                         props.setShowEditBox(false)
                                     }}
                                 >
                                     <p>Annuler</p>
-                                </div>
+                                </div> */}
                             </div>
                         </form>
                     </div>
@@ -81,14 +103,16 @@ const EditMarkerBox = (props: any) => {
                     <div className={styles.inputBox}>
                         <h5> Eh merci mec! </h5>
                         <div className={styles.rowInputs}>
-                            <div
-                                className={button.button}
+                            <Button
+                                variant="outlined"
+                                fullWidth
                                 onClick={() => {
                                     props.setShowEditBox(false)
                                 }}
+                                // startIcon={<WhereToVoteIcon />}
                             >
-                                <p>Retour à la carte</p>
-                            </div>
+                                Retour à la carte
+                            </Button>
                         </div>
                     </div>
                 )

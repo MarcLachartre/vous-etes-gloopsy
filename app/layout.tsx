@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Menu from '@/components/layout/menu'
 const inter = Inter({ subsets: ['latin'] })
+import { ThemeProvider } from '@mui/material/styles'
+import theme from './theme.ts'
 
 export const metadata: Metadata = {
     title: 'Gloopsy tracker',
@@ -32,8 +34,10 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <Menu />
-                {children}
+                <ThemeProvider theme={theme}>
+                    <Menu />
+                    {children}
+                </ThemeProvider>
             </body>
         </html>
     )
