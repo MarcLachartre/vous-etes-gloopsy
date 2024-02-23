@@ -17,11 +17,6 @@ export default async function Home() {
 
     return (
         <main className={styles.main}>
-            <Head>
-                <meta property="og:title" content="Vous êtes Gloopsy" />
-                <meta property="og:description" content="Stick it everywhere" />
-                <meta property="og:image" content="/image.png" />
-            </Head>
             <Main initialMarkers={initialMarkers} />
         </main>
     )
