@@ -14,6 +14,11 @@ export const metadata: Metadata = {
         width: 'device-width',
         initialScale: 1.0,
     },
+    openGraph: {
+        title: 'Vous êtes Gloopsy',
+        description: 'Gloopsy tracker',
+        images: '/image.png',
+    },
 }
 
 export default function RootLayout({

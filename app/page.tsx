@@ -20,7 +20,7 @@ export default async function Home() {
             <Head>
                 <meta property="og:title" content="Vous êtes Gloopsy" />
                 <meta property="og:description" content="Stick it everywhere" />
-                <meta property="og:image" content="/image.jpg" />
+                <meta property="og:image" content="/image.png" />
             </Head>
             <Main initialMarkers={initialMarkers} />
         </main>
