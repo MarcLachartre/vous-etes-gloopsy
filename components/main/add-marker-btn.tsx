@@ -179,9 +179,13 @@ const addMarkerBtn = (props: any) => {
                                 onClick={function () {
                                     setInputName('localisation ongoing')
                                 }}
-                                startIcon={<MyLocationIcon />}
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                }}
                             >
-                                Ma position
+                                <div>Ma position</div>
+                                <MyLocationIcon fontSize="small" />
                             </Button>
                             <Button
                                 variant="outlined"
@@ -189,9 +193,13 @@ const addMarkerBtn = (props: any) => {
                                 onClick={function () {
                                     setInputName('manual localisation')
                                 }}
-                                startIcon={<PanToolAltIcon />}
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                }}
                             >
-                                Placer manuellement
+                                <div>Placer manuellement</div>{' '}
+                                <PanToolAltIcon fontSize="small" />
                             </Button>
                         </div>
                     )
@@ -221,9 +229,13 @@ const addMarkerBtn = (props: any) => {
                             onClick={function () {
                                 setInputName('add comment')
                             }}
-                            startIcon={<PinDropOutlinedIcon />}
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                            }}
                         >
-                            Valider position
+                            <div>Valider position</div>
+                            <PinDropOutlinedIcon fontSize="small" />
                         </Button>
                     </div>
                 )
@@ -245,9 +257,12 @@ const addMarkerBtn = (props: any) => {
                             onClick={function () {
                                 setInputName('add comment')
                             }}
-                            startIcon={<PinDropOutlinedIcon />}
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                            }}
                         >
-                            Valider position
+                            <div>Valider position</div> <PinDropOutlinedIcon />
                         </Button>
                     </div>
                 )
@@ -282,9 +297,13 @@ const addMarkerBtn = (props: any) => {
                                 onClick={function () {
                                     setInputName('loading')
                                 }}
-                                startIcon={<CheckCircleOutlineIcon />}
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                }}
                             >
-                                Enregistrer
+                                <div>Enregistrer</div>{' '}
+                                <CheckCircleOutlineIcon />
                             </Button>
                         </form>
                     )
