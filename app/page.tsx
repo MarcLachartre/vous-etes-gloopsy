@@ -1,8 +1,5 @@
 import styles from './page.module.css'
 import Main from '../components/main/main'
-import { Metadata } from 'next/types'
-import { withRouter } from 'next/router'
-import { useEffect } from 'react'
 
 export const dynamic = 'force-dynamic'
 

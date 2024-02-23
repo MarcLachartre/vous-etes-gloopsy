@@ -6,7 +6,6 @@ const CloseButton = () => {
         <div className={styles.closeButtonContainer}>
             <img src="/image-empty.png" alt="close" />
             <CloseIcon
-                // fontSize="large"
                 sx={{
                     color: 'var(--default-red)',
                     fontSize: 'calc(var(--round-icon-size) / 2)',

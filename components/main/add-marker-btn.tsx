@@ -3,7 +3,7 @@ import { MarkersAmountStateContext } from '@/context/markers-amount-context'
 import buttonStyle from '../../css/button.module.scss'
 import style from '../../css/main-page/add-marker.module.scss'
 import adrien from '../../css/adrien.module.scss'
-
+import SearchAddress from './search-address'
 import mapboxgl from 'mapbox-gl'
 
 import { getSession } from 'next-auth/react'
@@ -21,7 +21,7 @@ const addMarkerBtn = (props: any) => {
     const [isLoggedIn, setLoggedIn] = useState(false)
     const [inputType, setInputType] = useState(<div></div>)
     const [inputName, setInputName] = useState('close')
-    const [coords, setCoords] = useState([] as number[])
+    const [coords, setCoords] = useState<number[]>([])
     const [marker, setMarker] = useState({} as any)
     const [isClickable, setIsClickable] = useState(false)
     const isClickableRef = useRef(false)
@@ -222,6 +222,7 @@ const addMarkerBtn = (props: any) => {
                 setInputType(
                     <div className={style.inputTypeContainer}>
                         <p>Clique sur la map pour placer le pin!</p>
+                        <SearchAddress setCoords={setCoords} />
                         <button
                             className={buttonStyle.button}
                             onClick={function () {

@@ -2,7 +2,7 @@
 
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Map from './map'
 import ShowRecentMarkers from './show-recent-markers'

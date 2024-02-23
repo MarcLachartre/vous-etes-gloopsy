@@ -1,5 +1,4 @@
 import BadgesPage from '@/components/badges/badges-page'
-import Head from 'next/head'
 
 export default async function Badges() {
     const requestMarkers = await fetch(
