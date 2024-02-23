@@ -61,12 +61,12 @@ const Menu = () => {
                         ? [
                               'Sign out',
                               <LogoutIcon fontSize="large" />,
-                              '/api/auth/signin',
+                              '/api/auth/signout',
                           ]
                         : [
                               'Sign in',
                               <LoginIcon fontSize="large" />,
-                              '/api/auth/signout',
+                              '/api/auth/signin',
                           ],
                     [
                         'Privacy policy',
