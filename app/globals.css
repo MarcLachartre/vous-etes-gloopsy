@@ -141,6 +141,7 @@ li {
 }
 
 .mapboxgl-ctrl-group {
+    position: fixed;
     border-radius: var(--border-radius) !important;
     margin: 0px 0px 0px 0px !important;
 }
