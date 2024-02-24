@@ -59,6 +59,12 @@
     }
 }
 
+.localisationChoiceContainer {
+    width: 100%;
+    display: flex;
+    gap: var(--default-spacing);
+}
+
 @media (min-width: 0px) {
     .addMarkerContainer {
         position: fixed;
@@ -90,6 +96,10 @@
     .inputTypeContainer {
         width: 100%;
         margin-top: var(--default-spacing);
+    }
+
+    .localisationChoiceContainer {
+        flex-direction: row;
     }
 }
 
@@ -124,6 +134,9 @@
 @media (min-width: 768px) {
     .buttonContainer {
         gap: var(--default-spacing);
+    }
+    .localisationChoiceContainer {
+        flex-direction: column;
     }
 }
 

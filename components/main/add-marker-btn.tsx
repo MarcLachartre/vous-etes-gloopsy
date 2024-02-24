@@ -15,7 +15,6 @@ import { MapContext } from '@/context/map-context'
 import Button from '@mui/material/Button'
 import MyLocationIcon from '@mui/icons-material/MyLocation'
 import PanToolAltIcon from '@mui/icons-material/PanToolAlt'
-import WhereToVoteIcon from '@mui/icons-material/WhereToVote'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import TextField from '@mui/material/TextField'
 import PinDropOutlinedIcon from '@mui/icons-material/PinDropOutlined'
@@ -173,34 +172,36 @@ const addMarkerBtn = (props: any) => {
                     props.setShowAllMarkers(true)
                     setInputType(
                         <div className={style.inputTypeContainer}>
-                            <Button
-                                variant="outlined"
-                                fullWidth
-                                onClick={function () {
-                                    setInputName('localisation ongoing')
-                                }}
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                }}
-                            >
-                                <div>Ma position</div>
-                                <MyLocationIcon fontSize="small" />
-                            </Button>
-                            <Button
-                                variant="outlined"
-                                fullWidth
-                                onClick={function () {
-                                    setInputName('manual localisation')
-                                }}
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                }}
-                            >
-                                <div>Placer manuellement</div>{' '}
-                                <PanToolAltIcon fontSize="small" />
-                            </Button>
+                            <div className={style.localisationChoiceContainer}>
+                                <Button
+                                    variant="outlined"
+                                    fullWidth
+                                    onClick={function () {
+                                        setInputName('localisation ongoing')
+                                    }}
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                    }}
+                                >
+                                    <div>Ma position</div>
+                                    <MyLocationIcon fontSize="small" />
+                                </Button>
+                                <Button
+                                    variant="outlined"
+                                    fullWidth
+                                    onClick={function () {
+                                        setInputName('manual localisation')
+                                    }}
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                    }}
+                                >
+                                    <div>Entrer adresse</div>{' '}
+                                    <PanToolAltIcon fontSize="small" />
+                                </Button>
+                            </div>
                         </div>
                     )
                 }

@@ -1,5 +1,4 @@
 import styles from '../../css/input-box.module.scss'
-import button from '../../css/button.module.scss'
 import adrien from '../../css/adrien.module.scss'
 
 import { useEffect, useState, useContext } from 'react'
@@ -50,9 +49,6 @@ const EditMarkerBox = (props: any) => {
                                 defaultValue={props.comment}
                             />
                             <div className={styles.rowInputs}>
-                                {/* <button type="submit" className={button.button}>
-                                    <p>Valider</p>
-                                </button> */}
                                 <Button
                                     variant="outlined"
                                     type="submit"
@@ -60,7 +56,6 @@ const EditMarkerBox = (props: any) => {
                                     onClick={() => {
                                         props.setShowEditBox(false)
                                     }}
-                                    // startIcon={<WhereToVoteIcon />}
                                 >
                                     valider
                                 </Button>
@@ -70,18 +65,9 @@ const EditMarkerBox = (props: any) => {
                                     onClick={() => {
                                         props.setShowEditBox(false)
                                     }}
-                                    // startIcon={<WhereToVoteIcon />}
                                 >
                                     Annuler
                                 </Button>
-                                {/* <div
-                                    className={button.button}
-                                    onClick={() => {
-                                        props.setShowEditBox(false)
-                                    }}
-                                >
-                                    <p>Annuler</p>
-                                </div> */}
                             </div>
                         </form>
                     </div>
@@ -109,7 +95,6 @@ const EditMarkerBox = (props: any) => {
                                 onClick={() => {
                                     props.setShowEditBox(false)
                                 }}
-                                // startIcon={<WhereToVoteIcon />}
                             >
                                 Retour à la carte
                             </Button>
@@ -125,14 +110,16 @@ const EditMarkerBox = (props: any) => {
                             Oups! Quelque chose ne s'est pas bien passé! Try
                             again!
                         </p>
-                        <div
-                            className={button.button}
+                        <Button
+                            variant="outlined"
+                            fullWidth
                             onClick={() => {
                                 props.setShowEditBox(false)
                             }}
+                            // startIcon={<WhereToVoteIcon />}
                         >
-                            <p>Retour à la carte</p>
-                        </div>
+                            Retour à la carte
+                        </Button>
                     </div>
                 )
                 break
