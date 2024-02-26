@@ -1,6 +1,7 @@
 'use server'
 import { MongoClient } from 'mongodb'
 import GlobalConfig from '../app/app.config.js'
+
 let cachedClient: any = null
 
 async function connectToDatabase() {

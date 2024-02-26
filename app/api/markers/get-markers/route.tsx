@@ -1,6 +1,6 @@
 'use server'
 import { NextResponse } from 'next/server.js'
-export const dynamic = 'force-dynamic' // prevent caching and loading previous payload
+// export  const dynamic = 'force-dynamic' // prevent caching and loading previous payload
 import { getDatabase } from '/Users/marclachartre/Code/MarcLachartre/mini apps/vous-etes-gloopsy/lib/mongodb.ts'
 
 export async function GET() {
