@@ -1,9 +1,8 @@
-import { MongoClient } from 'mongodb'
 import { NextResponse } from 'next/server'
-import GlobalConfig from '../../../../app/app.config.js'
+import { getDatabase } from '@/lib/mongodb.ts'
 
 export async function POST(request: Request) {
-    const client = new MongoClient(process.env.MONGO_URL as string)
+    const db = await getDatabase()
     const res = await request.json()
 
     const geoMarker = {
@@ -23,24 +22,12 @@ export async function POST(request: Request) {
     }
 
     const saveMarker = async () => {
-        const marker = await client
-            .db(GlobalConfig.dbName)
-            .collection('location')
-            .insertOne(geoMarker)
+        const marker = await db.collection('location').insertOne(geoMarker)
         res._id = String(marker.insertedId)
         res.geoMarker = geoMarker
     }
 
-    try {
-        // request db without creating a connecting if the app is already connected to mongodb
-        await saveMarker()
-        await client.close()
-        return NextResponse.json(res)
-    } catch {
-        // if the upper try fails, do the same but opening a connection to mongodb
-        await client.connect()
-        await saveMarker()
-        await client.close()
-        return NextResponse.json(res)
-    }
+    await saveMarker()
+
+    return NextResponse.json(res)
 }

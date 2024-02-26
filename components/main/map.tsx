@@ -26,6 +26,7 @@ const Map = (props: any) => {
             closeOnMove: true,
         })
     )
+
     const [popUpContent, setPopUpContent] = useState({
         owner: '',
         description: '',

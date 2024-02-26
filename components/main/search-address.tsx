@@ -7,6 +7,7 @@ import {
     SetStateAction,
     SyntheticEvent,
     useContext,
+    useEffect,
     useState,
 } from 'react'
 import { MapContext } from '@/context/map-context'

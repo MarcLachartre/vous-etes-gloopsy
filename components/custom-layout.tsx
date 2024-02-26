@@ -1,5 +1,6 @@
 'use client'
 import { MarkersAmountStateContext } from '@/context/markers-amount-context'
+
 import { ReactNode, useEffect, useState } from 'react'
 
 const CustomLayout = ({

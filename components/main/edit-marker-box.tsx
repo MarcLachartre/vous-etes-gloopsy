@@ -11,7 +11,9 @@ const EditMarkerBox = (props: any) => {
     const [editBoxType, setEditBoxType] = useState('default')
 
     const editMarker = async (e: any) => {
+        console.log(e)
         e.preventDefault()
+
         setEditBoxType('loading')
         const form = e.target
 
@@ -53,9 +55,6 @@ const EditMarkerBox = (props: any) => {
                                     variant="outlined"
                                     type="submit"
                                     fullWidth
-                                    onClick={() => {
-                                        props.setShowEditBox(false)
-                                    }}
                                 >
                                     valider
                                 </Button>
