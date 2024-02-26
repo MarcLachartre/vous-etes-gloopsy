@@ -1,4 +1,3 @@
-'use server'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 
