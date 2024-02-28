@@ -1,3 +1,4 @@
+
 module.exports = {
-    dbName: 'gloopsy'
+    dbName: 'gloopsy',
 }
