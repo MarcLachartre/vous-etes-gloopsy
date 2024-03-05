@@ -1,4 +1,6 @@
 
-module.exports = {
+const GlobalConfig = {
     dbName: 'gloopsy',
 }
+
+export default GlobalConfig

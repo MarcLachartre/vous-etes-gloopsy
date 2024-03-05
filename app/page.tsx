@@ -1,6 +1,5 @@
 import styles from './page.module.css'
 import Main from '../components/main/main'
-import { connectToDatabase } from '@/lib/mongodb'
 
 export const dynamic = 'force-dynamic'
 

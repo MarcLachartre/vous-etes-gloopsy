@@ -106,7 +106,7 @@ const addMarkerBtn = (props: any) => {
     }
 
     useEffect(() => {
-        // check is user is logged in
+        // check if user is logged in
         const checkSession = async () => {
             ;(await getSession()) !== null
                 ? setLoggedIn(true)

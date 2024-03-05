@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server.js'
 export const dynamic = 'force-dynamic' // prevent caching and loading previous payload
-import { connectToDatabase, getDatabase } from '@/lib/mongodb.ts'
+import { getDatabase } from '@/lib/mongo-connection'
 
 export async function GET() {
     const getMarkers = async () => {

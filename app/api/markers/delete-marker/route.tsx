@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 
-import { getDatabase } from '@/lib/mongodb.ts'
+import { getDatabase } from '@/lib/mongo-connection'
 
 export async function DELETE(request: Request) {
     const db = await getDatabase()

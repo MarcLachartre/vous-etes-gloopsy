@@ -44,7 +44,7 @@ const Main = (props: any) => {
             features: updatedMarkers,
         })
 
-        return setNewUpdatedMarkers(updatedMarkers)
+        return setNewUpdatedMarkers(await updatedMarkers)
     }
 
     useEffect(() => {

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getDatabase } from '@/lib/mongodb.ts'
+import { getDatabase } from '@/lib/mongo-connection'
 
 export async function POST(request: Request) {
     const db = await getDatabase()

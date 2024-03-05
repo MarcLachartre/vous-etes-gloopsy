@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
-import { getDatabase } from '@/lib/mongodb.ts'
+import { getDatabase } from '@/lib/mongo-connection'
 
 export const PATCH = async (request: Request) => {
     const req = await request.json()
