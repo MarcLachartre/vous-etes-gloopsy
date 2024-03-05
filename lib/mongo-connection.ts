@@ -31,7 +31,7 @@ export const connectToDatabase = async () => {
 
     // Each time a user needs to connect or use the db, it stops the precedent timer and creates a new.
     clearTimeout(global.timer)
-    connectionTimeout(10000)
+    connectionTimeout(180000)
 }
 
 export const connectionTimeout = (duration: number) => {
