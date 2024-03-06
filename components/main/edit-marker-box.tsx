@@ -13,7 +13,7 @@ const EditMarkerBox = (props: any) => {
     const editMarker = async (e: any) => {
         console.log(e)
         e.preventDefault()
-
+        props.setShowAllMarkers(true)
         setEditBoxType('loading')
         const form = e.target
 

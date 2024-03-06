@@ -1,6 +1,5 @@
 'use server'
 import { MongoClient as MongoClientObj } from 'mongodb'
-
 import { logColor } from './log-colors'
 import GlobalConfig from '../app/app.config.js'
 

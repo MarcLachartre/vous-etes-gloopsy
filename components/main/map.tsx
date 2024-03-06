@@ -315,6 +315,7 @@ const Map = (props: any) => {
                 <EditMarkerBox
                     markerId={popUpContent.markerId}
                     comment={popUpContent.description}
+                    setShowAllMarkers={props.setShowAllMarkers}
                     setShowEditBox={setShowEditBox}
                 />
             ) : null}
