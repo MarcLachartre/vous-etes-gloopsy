@@ -54,7 +54,7 @@ export default function Collection() {
             message:
                 markersAmount >= (i + 1) * 50 ? (
                     <div className={styles.badgeDescription}>
-                        <h5>{(i + 1) * 50} markers 🎉</h5>
+                        <h5>{(i + 1) * 50} stickers 🎉</h5>
                         <p>{messages[i]}</p>
                     </div>
                 ) : (
