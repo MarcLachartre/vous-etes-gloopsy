@@ -326,7 +326,7 @@ const addMarkerBtn = (props: any) => {
             case 'marker added':
                 marker.remove()
                 setMarker({})
-
+                props.setShowAllMarkers(true)
                 setInputType(
                     <div className={style.inputTypeContainer}>
                         <h5> Eh merci mec! </h5>
