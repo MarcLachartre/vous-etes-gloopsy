@@ -7,10 +7,7 @@ const nextConfig = {
         serverActions: true,
     },
     reactStrictMode: true,
-    compilerOptions: {
-        target: "ES2020",
 
-    }
 }
 
 

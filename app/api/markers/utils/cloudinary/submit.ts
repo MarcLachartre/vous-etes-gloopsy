@@ -27,7 +27,6 @@ const submitToCloudinary = async (
             ? {
                   timeout: 120000,
                   public_id: publicId,
-                  folder: 'vous-etes-gloopsy',
                   overwrite: true,
                   invalidate: true,
               }
