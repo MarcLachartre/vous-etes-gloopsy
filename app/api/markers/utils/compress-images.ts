@@ -15,8 +15,9 @@ const compressImages = async (file: File) => {
     }
 
     const compressedFile = await sharp(base64File)
-        .resize(480)
-        .png({ quality: 35, palette: true })
+        .withMetadata()
+        .resize(600)
+        .png({ quality: 25, palette: true })
         .toBuffer()
 
     console.log(logColor('blue', 'end compressing'))
