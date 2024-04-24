@@ -7,15 +7,16 @@ const compressImages = async (file: File) => {
     const arrayBuffer = await file.arrayBuffer()
     const buffer = new Uint8Array(arrayBuffer)
     const base64File = Buffer.from(buffer)
-    console.log(file)
-    if (file.size / 1000 <= 500) {
+
+    if (file.size / 1000 <= 100) {
         console.log(logColor('blue', 'no compressing needed'))
         console.log(logColor('blue', 'end compressing'))
         return { buffer: base64File, type: file.type }
     }
 
     const compressedFile = await sharp(base64File)
-        .png({ quality: 3, palette: true })
+        .resize(480)
+        .png({ quality: 35, palette: true })
         .toBuffer()
 
     console.log(logColor('blue', 'end compressing'))

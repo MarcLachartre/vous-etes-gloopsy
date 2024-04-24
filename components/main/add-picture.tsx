@@ -53,7 +53,7 @@ const AddPicture = ({
         await validation.validatePictureType()
         await validation.validatePictureSize()
 
-        console.log(file)
+        // console.log(file)
         // const compressedFile = await compressImage(file, {
         //     // 0: is maximum compression
         //     // 1: is no compression
@@ -140,13 +140,15 @@ const AddPicture = ({
     }, [pictureValidation])
 
     return [
-        editPic && !isFileSelected ? <img src={picURLToEdit} /> : null,
+        editPic && !isFileSelected ? (
+            <img src={picURLToEdit} key="image-to-edit" />
+        ) : null,
         <Button
             key={'picture-button'}
             component="label"
             fullWidth
             role={undefined}
-            disabled
+            // disabled
             variant="outlined"
             tabIndex={-1}
             style={{ display: 'flex', flexDirection: 'column' }}
@@ -176,27 +178,29 @@ const AddPicture = ({
 export default AddPicture
 
 // const compressImage = async (file: File, { quality = 1, type = file.type }) => {
-//     // Get as image data
-//     const imageBitmap = await createImageBitmap(file)
+// // Get as image data
+// const imageBitmap = await createImageBitmap(file)
 
-//     // Draw to canvas
-//     const canvas = document.createElement('canvas')
-//     canvas.width = imageBitmap.width
-//     canvas.height = imageBitmap.height
-//     const ctx = canvas.getContext('2d')
-//     ctx!.drawImage(imageBitmap, 0, 0)
+// // Draw to canvas
+// const canvas = document.createElement('canvas')
+// canvas.width = imageBitmap.width
+// canvas.height = imageBitmap.height
+// const ctx = canvas.getContext('2d')
+// ctx!.drawImage(imageBitmap, 0, 0)
 
-//     // Turn into Blob
-//     const blob: any = await new Promise((resolve) =>
-//         canvas.toBlob(resolve, type, quality)
-//     )
-//     // console.log(
-//     //     new File([blob], file.name, {
-//     //         type: blob.type,
-//     //     })
-//     // )
-//     // Turn Blob into File
-//     return new File([blob], file.name, {
+// // Turn into Blob
+// const blob: any = await new Promise((resolve) =>
+//     canvas.toBlob(resolve, type, quality)
+// )
+
+// console.log(
+//     new File([blob], file.name, {
 //         type: blob.type,
 //     })
+// )
+// Turn Blob into File
+
+// return new File([blob], file.name, {
+//     type: blob.type,
+// })
 // }
