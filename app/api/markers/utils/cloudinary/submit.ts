@@ -21,7 +21,6 @@ const submitToCloudinary = async (
 
     const timestamp = String(Date.now())
 
-    console.log('publicId = ' + typeof publicId)
     const options: UploadApiOptions =
         publicId !== undefined // if a public id is provided, the image uploaded needs to replace the image with the same id in cloudinary
             ? {
@@ -41,12 +40,12 @@ const submitToCloudinary = async (
         .upload(`data:${type};base64,${base64File.toString('base64')}`, options)
         .then((r) => {
             console.log(logColor('green', 'pic submit successfull'))
-            console.log(r)
+            // console.log(r)
             return r
         })
         .catch((e) => {
             console.log(logColor('red', 'error submitting pic'))
-            console.log(e)
+            // console.log(e)
             return e
         })
 

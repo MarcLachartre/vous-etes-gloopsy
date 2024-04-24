@@ -11,7 +11,7 @@ export async function DELETE(request: Request) {
     const id: FormDataEntryValue | null = req.get('markerId')
     const picturePublicId: FormDataEntryValue | null =
         req.get('picturePublicId')
-    console.log(picturePublicId)
+
     if (!id || !picturePublicId) {
         console.log(logColor('red', 'Incorrect ids provided'))
         return NextResponse.json(

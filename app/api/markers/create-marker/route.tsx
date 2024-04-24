@@ -81,7 +81,7 @@ export async function POST(request: Request) {
             geoMarker.properties.picturePublicId = picUploadRes?.public_id
             geoMarker.properties.pictureURL = picUploadRes?.secure_url
         }
-        console.log(geoMarker)
+
         const res: { geoMarker: GeoJson; _id: string } = {
             geoMarker: geoMarker,
             _id: 'undefined',

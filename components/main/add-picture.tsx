@@ -53,6 +53,7 @@ const AddPicture = ({
         await validation.validatePictureType()
         await validation.validatePictureSize()
 
+        console.log(file)
         // const compressedFile = await compressImage(file, {
         //     // 0: is maximum compression
         //     // 1: is no compression
@@ -145,6 +146,7 @@ const AddPicture = ({
             component="label"
             fullWidth
             role={undefined}
+            disabled
             variant="outlined"
             tabIndex={-1}
             style={{ display: 'flex', flexDirection: 'column' }}

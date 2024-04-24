@@ -74,8 +74,6 @@ export const PATCH = async (request: Request) => {
             )
         } else {
             console.log('marker contains a pic ')
-            // edit pic code
-            // replace current pic un cloudinary
             const picUploadRes =
                 imageToUpload !== null
                     ? await submitToCloudinary(
