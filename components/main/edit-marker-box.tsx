@@ -1,30 +1,45 @@
 import styles from '../../css/input-box.module.scss'
 import adrien from '../../css/adrien.module.scss'
 
-import { useEffect, useState, useContext } from 'react'
+import {
+    useEffect,
+    useState,
+    useContext,
+    Dispatch,
+    SetStateAction,
+} from 'react'
 import { MapContext } from '@/context/map-context'
 import Button from '@mui/material/Button'
+import AddPicture from './add-picture'
 
-const EditMarkerBox = (props: any) => {
+const EditMarkerBox = (props: {
+    markerId: string
+    comment: string
+    pictureURL: string
+    picturePublicId: string
+    setShowAllMarkers: Dispatch<SetStateAction<boolean>>
+    setShowEditBox: Dispatch<SetStateAction<boolean>>
+}) => {
     const map = useContext(MapContext)
     const [editBox, setEditBox] = useState(<div></div>)
     const [editBoxType, setEditBoxType] = useState('default')
 
     const editMarker = async (e: any) => {
-        console.log(e)
         e.preventDefault()
         props.setShowAllMarkers(true)
         setEditBoxType('loading')
         const form = e.target
 
         const formData = new FormData(form)
-        const formJson = Object.fromEntries(formData.entries())
+        formData.append('markerId', props.markerId)
+        formData.append('pictureURL', props.pictureURL)
+        formData.append('picturePublicId', props.picturePublicId)
 
         const response = await fetch('/api/markers/edit-marker', {
             method: 'PATCH',
-            body: JSON.stringify({ formJson, markerId: props.markerId }),
-            headers: {},
+            body: formData,
         })
+
         const res = await response.json()
 
         if (response.status === 200) {
@@ -43,12 +58,17 @@ const EditMarkerBox = (props: any) => {
             case 'default':
                 setEditBox(
                     <div className={styles.inputBox}>
-                        <h5>Modifie ton commentaire</h5>
+                        <h5>Editer</h5>
 
                         <form onSubmit={editMarker}>
                             <textarea
                                 name="editContent"
                                 defaultValue={props.comment}
+                            />
+
+                            <AddPicture
+                                editPic={!!props.pictureURL}
+                                picURLToEdit={props.pictureURL}
                             />
                             <div className={styles.rowInputs}>
                                 <Button

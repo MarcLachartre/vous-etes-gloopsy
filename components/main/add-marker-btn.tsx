@@ -4,6 +4,7 @@ import { MarkersAmountStateContext } from '@/context/markers-amount-context'
 import style from '../../css/main-page/add-marker.module.scss'
 import adrien from '../../css/adrien.module.scss'
 import SearchAddress from './search-address'
+import AddPicture from './add-picture'
 import mapboxgl from 'mapbox-gl'
 
 import { getSession } from 'next-auth/react'
@@ -71,8 +72,7 @@ const addMarkerBtn = (props: any) => {
         e.preventDefault()
 
         const formData = new FormData(e.target)
-        const formJson = Object.fromEntries(formData.entries())
-
+        // console.log(e.target)
         const username = () => {
             return props.user.user.username === undefined ||
                 props.user.user.username === null
@@ -80,18 +80,16 @@ const addMarkerBtn = (props: any) => {
                 : props.user.user.username
         }
 
+        formData.append('coord', JSON.stringify(coords))
+        formData.append(
+            'userName',
+            username().charAt(0).toUpperCase() + username().slice(1)
+        )
+        formData.append('userEmail', props.user.user.email)
+
         const response = await fetch('/api/markers/create-marker', {
             method: 'POST',
-            body: JSON.stringify({
-                data: {
-                    coord: coords,
-                    userName:
-                        username().charAt(0).toUpperCase() +
-                        username().slice(1),
-                    userEmail: props.user.user.email,
-                    comment: formJson.comment,
-                },
-            }),
+            body: formData,
             headers: {},
         })
 
@@ -198,7 +196,7 @@ const addMarkerBtn = (props: any) => {
                                         justifyContent: 'space-between',
                                     }}
                                 >
-                                    <div>Entrer adresse</div>{' '}
+                                    <div>Manuellement</div>{' '}
                                     <PanToolAltIcon fontSize="small" />
                                 </Button>
                             </div>
@@ -290,7 +288,7 @@ const addMarkerBtn = (props: any) => {
                                 placeholder="Un petit commentaire et c'est tout bon! 😊 (max 300 charactères)"
                                 rows={4}
                             />
-
+                            <AddPicture editPic={false} />
                             <Button
                                 type="submit"
                                 variant="outlined"

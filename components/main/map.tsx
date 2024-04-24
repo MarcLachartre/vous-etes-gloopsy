@@ -3,22 +3,36 @@ import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import popupStyle from '../../css/popup.module.scss'
 
-import DeleteMarkerBox from './delete-marker-box'
 import EditMarkerBox from './edit-marker-box'
 
-import React, { useEffect, useState, useRef, useContext } from 'react'
+import React, {
+    useEffect,
+    useState,
+    useRef,
+    useContext,
+    Dispatch,
+    SetStateAction,
+} from 'react'
 
 import { MapContext } from '../../context/map-context'
 import { MarkersDisplayedContext } from '../../context/markers-displayed-context'
+import DeleteMarkerBox from './delete-marker-box'
 
-const Map = (props: any) => {
+const Map = (props: {
+    // setMarkersUpdated: Dispatch<SetStateAction<boolean>>
+    key: string
+    user: any
+    setShowAllMarkers: Dispatch<SetStateAction<boolean>>
+    resetMarkers: Function
+    GeolocateControl: any
+}) => {
     const map = useContext(MapContext)
     const markersDisplayed = useContext(MarkersDisplayedContext)
 
     const isMounted = useRef(false)
 
     const [showDeleteBox, setShowDeleteBox] = useState(false)
-    const [showEditBox, setShowEditBox] = useState(false)
+    const [showEditBox, setShowEditBox] = useState<boolean>(false)
 
     const [popUp, setPopUp] = useState(
         new mapboxgl.Popup({
@@ -33,6 +47,8 @@ const Map = (props: any) => {
         date: '',
         time: '',
         email: '',
+        picturePublicId: '',
+        pictureURL: '',
         markerId: '',
     })
 
@@ -167,6 +183,9 @@ const Map = (props: any) => {
                     const description = e.features[0].properties.description
                     const date = e.features[0].properties.date
                     const time = e.features[0].properties.time
+                    const picturePublicId =
+                        e.features[0].properties.picturePublicId
+                    const pictureURL = e.features[0].properties.pictureURL
                     const markerId = e.features[0].properties.id
 
                     setPopUpContent({
@@ -175,6 +194,8 @@ const Map = (props: any) => {
                         date: date,
                         time: time,
                         email: email,
+                        picturePublicId: picturePublicId,
+                        pictureURL: pictureURL,
                         markerId: markerId,
                     })
                     // Ensure that if the map is zoomed out such that multiple
@@ -196,6 +217,7 @@ const Map = (props: any) => {
                             <div class= ${popupStyle.description}>
                                 <p>${popUpContent.description}</p>
                             </div>
+                            
                             <p class="small-text"> Posté le ${popUpContent.date} à ${popUpContent.time}</p>
                         </div>
                     `
@@ -229,12 +251,19 @@ const Map = (props: any) => {
 
     useEffect(() => {
         const defaultPopUpHTML = `
-        
         <div>
             <h4>${popUpContent.owner}</h4>
-            <p class="small-text"> Posté le ${popUpContent.date} à ${popUpContent.time}</p>
+            <p class="small-text"> Posté le ${popUpContent.date} à ${
+            popUpContent.time
+        }</p>
         </div>
         <p>${popUpContent.description}</p>
+        ${
+            popUpContent.pictureURL !== undefined
+                ? `<img src=${popUpContent.pictureURL} />`
+                : ''
+        }
+        
         
     `
 
@@ -306,7 +335,8 @@ const Map = (props: any) => {
                     markerId={popUpContent.markerId}
                     setShowDeleteBox={setShowDeleteBox}
                     setShowAllMarkers={props.setShowAllMarkers}
-                    setMarkersUpdated={props.setMarkersUpdated}
+                    // setMarkersUpdated={props.setMarkersUpdated}
+                    picturePublicId={popUpContent.picturePublicId}
                     resetMarkers={props.resetMarkers}
                 />
             ) : null}
@@ -315,6 +345,8 @@ const Map = (props: any) => {
                 <EditMarkerBox
                     markerId={popUpContent.markerId}
                     comment={popUpContent.description}
+                    pictureURL={popUpContent.pictureURL}
+                    picturePublicId={popUpContent.picturePublicId}
                     setShowAllMarkers={props.setShowAllMarkers}
                     setShowEditBox={setShowEditBox}
                 />

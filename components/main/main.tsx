@@ -15,7 +15,23 @@ import { MarkersDisplayedContext } from '@/context/markers-displayed-context'
 
 import CustomLayout from '../custom-layout'
 
-const Main = (props: any) => {
+interface GeoJson {
+    geometry: {
+        type: FormDataEntryValue | null
+        coordinates: number[]
+    }
+    properties: {
+        owner: FormDataEntryValue | null
+        description: FormDataEntryValue | null
+        email: FormDataEntryValue | null
+        date: string
+        time: string
+        picturePublicId?: string
+        pictureURL?: string
+    }
+}
+
+const Main = (props: { initialMarkers: GeoJson[] }) => {
     mapboxgl.accessToken =
         'pk.eyJ1IjoibWFyY2xhY2hhcnRyZSIsImEiOiJjbGxjZzRqeGMwMTI2M2NsdzA4bXJodnFqIn0.rEH7luhuGuag_BVbVvw67g'
 
@@ -106,6 +122,7 @@ const Main = (props: any) => {
                         setShowAllMarkers={setShowAllMarkers}
                         resetMarkers={resetMarkers}
                         GeolocateControl={GeolocateControl}
+                        // setMarkersUpdated={setMarkersUpdated}
                     />
                     <ShowRecentMarkers // Button that shows the last 10 markers pined on the map
                         key={'ShowRecentMarkers'}

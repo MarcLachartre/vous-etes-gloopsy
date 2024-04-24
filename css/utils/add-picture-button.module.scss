@@ -1,0 +1,16 @@
+.innerPicButton {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.picMessageContainer {
+    display: flex;
+    width: 100%;
+}
+.picMessage {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: lowercase;
+}

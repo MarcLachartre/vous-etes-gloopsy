@@ -6,7 +6,11 @@ const nextConfig = {
     experimental: {
         serverActions: true,
     },
-    reactStrictMode: true
+    reactStrictMode: true,
+    compilerOptions: {
+        target: "ES2020",
+
+    }
 }
 
 

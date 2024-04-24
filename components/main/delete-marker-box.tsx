@@ -1,10 +1,23 @@
 import styles from '../../css/input-box.module.scss'
 import adrien from '../../css/adrien.module.scss'
-import { useEffect, useState, useContext } from 'react'
+import {
+    useEffect,
+    useState,
+    useContext,
+    Dispatch,
+    SetStateAction,
+} from 'react'
 import { MarkersAmountStateContext } from '@/context/markers-amount-context'
 import Button from '@mui/material/Button'
 
-const DeleteMarkerBox = (props: any) => {
+const DeleteMarkerBox = (props: {
+    markerId: string
+    picturePublicId: string
+    resetMarkers: Function
+    setShowDeleteBox: Dispatch<SetStateAction<boolean>>
+    setShowAllMarkers: Dispatch<SetStateAction<boolean>>
+    // setMarkersUpdated: Dispatch<SetStateAction<boolean>>
+}) => {
     const { markersAmount, setMarkersAmount } = useContext(
         MarkersAmountStateContext
     )
@@ -15,13 +28,14 @@ const DeleteMarkerBox = (props: any) => {
     const deleteMarker = async () => {
         props.setShowAllMarkers(true)
         setDeleteBoxType('loading')
+
+        const formData = new FormData()
+        formData.append('markerId', props.markerId)
+        formData.append('picturePublicId', props.picturePublicId)
+
         const response = await fetch('/api/markers/delete-marker', {
             method: 'DELETE',
-            body: JSON.stringify({
-                data: {
-                    markerId: props.markerId,
-                },
-            }),
+            body: formData,
         })
 
         if (response.status === 200) {
@@ -47,7 +61,6 @@ const DeleteMarkerBox = (props: any) => {
                                 onClick={function () {
                                     deleteMarker()
                                 }}
-                                // startIcon={<WhereToVoteIcon />}
                             >
                                 oui
                             </Button>
@@ -57,7 +70,6 @@ const DeleteMarkerBox = (props: any) => {
                                 onClick={function () {
                                     props.setShowDeleteBox(false)
                                 }}
-                                // startIcon={<WhereToVoteIcon />}
                             >
                                 non
                             </Button>
@@ -87,7 +99,6 @@ const DeleteMarkerBox = (props: any) => {
                                 onClick={function () {
                                     props.setShowDeleteBox(false)
                                 }}
-                                // startIcon={<WhereToVoteIcon />}
                             >
                                 retour
                             </Button>
@@ -109,7 +120,6 @@ const DeleteMarkerBox = (props: any) => {
                             onClick={function () {
                                 props.setShowDeleteBox(false)
                             }}
-                            // startIcon={<WhereToVoteIcon />}
                         >
                             retour
                         </Button>

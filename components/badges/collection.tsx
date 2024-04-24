@@ -7,6 +7,13 @@ import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Unstable_Grid2'
 
+// Comment ajouter un badge:
+// Un badge doit etre:
+// - une image au format png
+// - de taille 800x800px
+// - ajoutée au dossier public/badges/
+// Il faut aussi ajouter un "message" dans le message array
+
 export default function Collection() {
     const { markersAmount } = useContext(MarkersAmountStateContext)
 
@@ -31,6 +38,7 @@ export default function Collection() {
     const messages = [
         "Regardez ce mec, il a déjà tous les badges, c'est sûr.",
         'Lourd! Un Gloops shiny en plus!',
+        "Fast'n'Youyou - Gloopsy Edition",
     ]
 
     for (let i = 0; i < 12; i++) {
@@ -40,8 +48,8 @@ export default function Collection() {
             badge:
                 markersAmount >= (i + 1) * 50 ? (
                     <img // png image has to be a 800x800 px
-                        src={`/badge${i + 1}.png`}
-                        alt={`/badge${i + 1}.png`}
+                        src={`/badges/badge${i + 1}.png`}
+                        alt={`/badges/badge${i + 1}.png`}
                     />
                 ) : (
                     <div className={styles.lockedBadge}>
