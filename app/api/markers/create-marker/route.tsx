@@ -19,6 +19,7 @@ interface GeoJson {
         email: FormDataEntryValue | null
         date: string
         time: string
+        timestamp: number
         picturePublicId?: string
         pictureURL?: string
     }
@@ -74,6 +75,7 @@ export async function POST(request: Request) {
                     new Date().getMonth() + 1
                 }/${new Date().getFullYear()}`,
                 time: `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
+                timestamp: Date.now(),
             },
         }
 
