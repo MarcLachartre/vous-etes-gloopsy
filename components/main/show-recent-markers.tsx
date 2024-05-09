@@ -20,7 +20,7 @@ const ShowRecentMarkers = ({
                     : setShowAllMarkers(true)
             }}
         >
-            {showAllMarkers ? <h6>show recent</h6> : <h6>show all</h6>}
+            {showAllMarkers ? <p>show recent</p> : <p>show all</p>}
         </div>
     )
 }

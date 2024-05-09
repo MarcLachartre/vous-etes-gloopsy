@@ -135,7 +135,6 @@ const EditMarkerBox = (props: {
                             onClick={() => {
                                 props.setShowEditBox(false)
                             }}
-                            // startIcon={<WhereToVoteIcon />}
                         >
                             Retour à la carte
                         </Button>

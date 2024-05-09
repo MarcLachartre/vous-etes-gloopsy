@@ -1,16 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 :root {
     --border-radius: 8px;
     --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
     --default-spacing: 15px;
-    --light-grey: #c6c6c6;
-    --grey: #f2f2f2;
+
+    --light-grey: #f0eff4;
+    /* --grey: #f2f2f2; */
+    --grey: #f3f3f3;
     --black: #202124;
-    --default-red: #990000;
+    --default-red: rgba(242, 102, 89, 1);
+    --default-yellow: #ebc999;
+    --default-blue: #8ca9d3;
+    --default-dark-red: #990000;
+
     --round-icon-size: 45px;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto:wght@500;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto:wght@500;700&display=swap'); */
 
 * {
     box-sizing: border-box;
@@ -24,7 +30,7 @@ body {
     width: 100%;
     display: flex;
     font-size: 62.5%;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    /* font-family: 'Plus Jakarta Sans', sans-serif; */
 }
 
 main {
@@ -35,11 +41,12 @@ main {
 
 .page-container {
     width: 100%;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     flex-direction: column;
     padding: var(--default-spacing);
-    gap: var(--default-spacing);
+    gap: 30px;
     background-color: var(--grey);
 }
 
@@ -55,13 +62,17 @@ a,
 textarea {
     color: var(--black);
     font-family: 'Roboto', sans-serif;
-    text-decoration: none;
 }
 
 a {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     letter-spacing: 0;
-    font-weight: 500;
+    font-weight: 300;
+    color: var(--default-red);
+    text-decoration: underline;
+}
+a:hover {
+    cursor: pointer;
 }
 
 h1 {
@@ -78,28 +89,25 @@ h2 {
 }
 
 h3 {
-    font-size: 2.4rem;
+    font-size: 7rem;
     letter-spacing: 0;
-    font-weight: 700;
+    font-weight: 300;
 }
 
 h4 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 2.2rem;
+    font-size: 4rem;
     letter-spacing: 0;
-    font-weight: 700;
+    font-weight: 300;
 }
 
 h5 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.9rem;
+    font-size: 2.5rem;
     letter-spacing: 0;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 h6 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.9rem;
     letter-spacing: 0;
     font-weight: 500;
 }
@@ -165,6 +173,10 @@ li {
         --round-icon-size: 34px;
     }
 
+    .page-container {
+        gap: var(--default-spacing);
+    }
+
     h1 {
         font-size: 3.2rem;
     }
@@ -204,6 +216,10 @@ li {
 @media (min-width: 991px) {
     h1 {
         font-size: 3.5rem;
+    }
+
+    .page-container {
+        gap: 35px;
     }
 
     .mapboxgl-ctrl-top-right {

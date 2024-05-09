@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getDatabase } from '@/lib/mongo-connection'
 import DataValidation from '@/lib/data-validation'
-// import sharp from 'sharp'
-// import { exec } from 'child_process'
-import { v2, UploadApiOptions } from 'cloudinary'
 import { logColor } from '@/lib/log-colors'
 import { submitToCloudinary } from '../utils/cloudinary/submit'
 import { compressImages } from '../utils/compress-images'
@@ -19,6 +16,7 @@ interface GeoJson {
         email: FormDataEntryValue | null
         date: string
         time: string
+        timestamp: number
         picturePublicId?: string
         pictureURL?: string
     }
@@ -74,6 +72,7 @@ export async function POST(request: Request) {
                     new Date().getMonth() + 1
                 }/${new Date().getFullYear()}`,
                 time: `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
+                timestamp: Date.now(),
             },
         }
 
