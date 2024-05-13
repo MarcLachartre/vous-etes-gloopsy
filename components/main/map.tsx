@@ -252,7 +252,7 @@ const Map = (props: {
     useEffect(() => {
         const defaultPopUpHTML = `
         <div>
-            <h4>${popUpContent.owner}</h4>
+            <h5>${popUpContent.owner}</h5>
             <p class="small-text"> Posté le ${popUpContent.date} à ${
             popUpContent.time
         }</p>
@@ -263,8 +263,6 @@ const Map = (props: {
                 ? `<img src=${popUpContent.pictureURL} />`
                 : ''
         }
-        
-        
     `
 
         const displayDeleteLink = () => {
