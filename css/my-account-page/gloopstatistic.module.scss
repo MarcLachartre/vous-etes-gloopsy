@@ -1,13 +1,10 @@
 .statsContainer {
-    width: 80%;
     display: flex;
     flex-direction: column;
     gap: var(--default-spacing);
 }
 
 .statSelector {
-    // position: fixed;
-    // width: 78%;
     height: 70px;
     display: flex;
     justify-content: space-evenly;
@@ -16,7 +13,7 @@
 
 .dataGridContainer {
     display: grid;
-    height: 250px;
+
     gap: var(--default-spacing);
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr 1fr;
@@ -34,7 +31,12 @@
 }
 
 .dataValue {
+    display: flex;
+    justify-content: center;
     align-self: center;
+    width: 80%;
+    height: 100%;
+    text-align: center;
 }
 
 .dataValue h2 {
@@ -53,4 +55,42 @@
     gap: var(--default-spacing);
     height: 450px;
     background-color: white;
+}
+
+@media (min-width: 0px) {
+    .dataGridContainer {
+        height: unset;
+        grid-template-columns: 1fr;
+        grid-template-rows: 200px 200px 200px;
+        grid-template-areas:
+            'data1'
+            'data2'
+            'data3';
+    }
+    .chartContainer {
+        height: 250px;
+    }
+}
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .dataGridContainer {
+        height: 250px;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: 'data1 data2 data3';
+    }
+    .chartContainer {
+        height: 350px;
+    }
+}
+
+/* // Medium devices (tablets, 991px and up) */
+@media (min-width: 991px) {
+    .statsContainer {
+        width: 90%;
+    }
+    .chartContainer {
+        height: 450px;
+    }
 }

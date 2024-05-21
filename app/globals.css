@@ -132,6 +132,8 @@ li {
 
 .small-text {
     font-size: 1.2rem;
+    line-height: 1.6rem;
+    margin-top: 3px;
 }
 
 .mapboxgl-popup-close-button {

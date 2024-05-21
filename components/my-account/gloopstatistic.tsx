@@ -1,25 +1,45 @@
 'use client'
-import styles from 'css/my-account-page/gloopstatistic.module.scss'
-import Box from '@mui/material/Box'
-import Divider from '@mui/material/Divider'
+import styles from '../../css/my-account-page/gloopstatistic.module.scss'
+
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-import WbSunnyIcon from '@mui/icons-material/WbSunny'
-import ModeNightIcon from '@mui/icons-material/ModeNight'
+
 import { useEffect, useState } from 'react'
-import { LineChart } from '@mui/x-charts/LineChart'
-import { StickersAmount } from './gloopstatistic/stickers-amount'
-import type { GeoJson } from '@/custom-types'
-import { StickersAverage } from './gloopstatistic/stickers-average'
+
+import { StickersCount } from './gloopstatistic/stickers-count'
+import { MonthlyCount } from './gloopstatistic/monthly-count'
+import { YearlyCount } from './gloopstatistic/yearly-count'
+import { GraphCount } from './gloopstatistic/graph-count'
 
 const Gloopstatistics = ({
-    getStickers,
+    globalData,
+    personalData,
 }: {
-    getStickers: (request?: { userEmail: string }) => Promise<number>
-    // getStickers: (arg: string) => { stickers: GeoJson[] }
+    globalData:
+        | {
+              twelveMonthsCount: number[]
+              allTimeCount: number
+              yearlyCount: number
+              monthlyCount: number
+          }
+        | undefined
+    personalData:
+        | {
+              twelveMonthsCount: number[]
+              allTimeCount: number
+              yearlyCount: number
+              monthlyCount: number
+          }
+        | undefined
 }) => {
-    const [alignment, setAlignment] = useState('La Gloopstat')
-    const [stickersCount, setStickersCount] = useState<number>()
+    const [alignment, setAlignment] = useState<string>('La Gloopstat')
+
+    const [displayedData, setDisplayedData] = useState<{
+        allTimeCount: number
+        yearlyCount: number
+        monthlyCount: number
+        twelveMonthsCount: number[]
+    }>()
 
     const handleChange = (
         event: React.MouseEvent<HTMLElement>,
@@ -29,10 +49,18 @@ const Gloopstatistics = ({
     }
 
     useEffect(() => {
-        getStickers().then((r: number) => {
-            setStickersCount(r)
-        })
-    }, [])
+        if (globalData !== undefined && alignment === 'La Gloopstat') {
+            setDisplayedData(globalData)
+        } else if (personalData !== undefined && alignment === 'Mes Stats') {
+            setDisplayedData(personalData)
+        }
+    }, [globalData, personalData])
+
+    useEffect(() => {
+        alignment === 'Mes Stats'
+            ? setDisplayedData(personalData)
+            : setDisplayedData(globalData)
+    }, [alignment])
 
     return (
         <div className={styles.statsContainer}>
@@ -51,9 +79,6 @@ const Gloopstatistics = ({
                     }}
                 >
                     <ToggleButton
-                        onClick={async () => {
-                            await getStickers({ userEmail: 'a' })
-                        }}
                         value="La Gloopstat"
                         style={{
                             width: '100%',
@@ -80,9 +105,6 @@ const Gloopstatistics = ({
                         La Gloopstat
                     </ToggleButton>
                     <ToggleButton
-                        onClick={async () => {
-                            getStickers({ userEmail: 'b' })
-                        }}
                         value="Mes Stats"
                         style={{
                             width: '100%',
@@ -111,39 +133,11 @@ const Gloopstatistics = ({
                 </ToggleButtonGroup>
             </div>
             <div className={styles.dataGridContainer}>
-                <StickersAmount amount={stickersCount} />
-                <StickersAverage />
-                <Box
-                    className={styles.dataContainer}
-                    bgcolor={'white'}
-                    sx={{
-                        borderRadius: 1,
-                    }}
-                >
-                    <p className={styles.dataTitle}>Implantation</p>
-                    <div className={styles.dataValue}>
-                        <h2>🇫🇷🇮🇹🇧🇪🇫🇷🇮🇹🇧🇪🇫🇷🇮🇹🇧🇪🇫🇷🇮🇹🇧🇪🇫🇷🇮🇹🇧🇪</h2>
-                    </div>
-                </Box>
+                <StickersCount allTimeCount={displayedData?.allTimeCount} />
+                <YearlyCount yearlyCount={displayedData?.yearlyCount} />
+                <MonthlyCount monthlyCount={displayedData?.monthlyCount} />
             </div>
-            <Box
-                className={styles.chartContainer}
-                sx={{
-                    borderRadius: 1,
-                }}
-            >
-                <h4>Nouveaux Stickers</h4>
-                <Divider style={{ width: '90%' }} />
-                <LineChart
-                    xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
-                    series={[
-                        {
-                            data: [2, 5.5, 2, 8.5, 1.5, 5],
-                        },
-                    ]}
-                    colors={['var(--default-red)']}
-                />
-            </Box>
+            <GraphCount twelveMonthsCount={displayedData?.twelveMonthsCount} />
         </div>
     )
 }

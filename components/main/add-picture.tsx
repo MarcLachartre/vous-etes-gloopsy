@@ -154,11 +154,7 @@ const AddPicture = ({
             style={{ display: 'flex', flexDirection: 'column' }}
         >
             <div className={styles.innerPicButton}>
-                <div>
-                    {editPic
-                        ? 'Changer photo (ALPHA)'
-                        : 'Ajouter photo (ALPHA)'}
-                </div>
+                <div>{editPic ? 'Changer photo' : 'Ajouter photo'}</div>
                 <VisuallyHiddenInput
                     type="file"
                     name="picture"

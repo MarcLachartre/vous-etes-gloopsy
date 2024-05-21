@@ -10,11 +10,11 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import Snackbar from '@mui/material/Snackbar'
 import TextField from '@mui/material/TextField'
-import styles from 'css/my-account-page/user-details.module.scss'
+import styles from '../../css/my-account-page/user-details.module.scss'
 import { useState } from 'react'
 import { OverridableStringUnion } from '@mui/types'
 import { usernameValidation } from '../../lib/username-validation'
-import adrien from 'css/adrien.module.scss'
+import adrien from '../../css/adrien.module.scss'
 
 const UserDetails = ({
     userName,
