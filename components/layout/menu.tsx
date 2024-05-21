@@ -18,6 +18,7 @@ import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from '@mui/icons-material/Logout'
 import PolicyIcon from '@mui/icons-material/Policy'
 import ListSubheader from '@mui/material/ListSubheader'
+import PersonIcon from '@mui/icons-material/Person'
 
 const Menu = () => {
     const [open, setOpen] = useState(false)
@@ -45,7 +46,7 @@ const Menu = () => {
             <List>
                 <ListSubheader component="h1">
                     <div className={styles.menuHeader}>
-                        <h4>Menu</h4>
+                        <h5>Menu</h5>
                         <CloseButton />
                     </div>
                 </ListSubheader>
@@ -54,21 +55,28 @@ const Menu = () => {
                     ['Map', <MapIcon />, '/'],
                     ['Badges', <MilitaryTechIcon />, '/badges'],
                     isLoggedIn
+                        ? ['Mon compte', <PersonIcon />, '/my-account']
+                        : [],
+                    isLoggedIn
                         ? ['Sign out', <LogoutIcon />, '/api/auth/signout']
                         : ['Sign in', <LoginIcon />, '/api/auth/signin'],
                     ['Privacy policy', <PolicyIcon />, 'privacy-policy'],
-                ].map((item) => (
-                    <ListItem key={`${item[0]}`} disablePadding>
-                        <ListItemButton
-                            component="a"
-                            href={`${item[2]}`}
-                            sx={{ marginBottom: 'var(--default-spacing)' }}
-                        >
-                            <ListItemIcon>{item[1]}</ListItemIcon>
-                            <p>{item[0]}</p>
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                ].map((item) =>
+                    item.length !== 0 ? (
+                        <ListItem key={`${item[0]}`} disablePadding>
+                            <ListItemButton
+                                component="a"
+                                href={`${item[2]}`}
+                                sx={{ marginBottom: 'var(--default-spacing)' }}
+                            >
+                                <ListItemIcon>{item[1]}</ListItemIcon>
+                                <p>{item[0]}</p>
+                            </ListItemButton>
+                        </ListItem>
+                    ) : (
+                        false
+                    )
+                )}
             </List>
         </Box>
     )

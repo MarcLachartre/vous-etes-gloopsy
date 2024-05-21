@@ -14,22 +14,7 @@ import { MapContext } from '@/context/map-context'
 import { MarkersDisplayedContext } from '@/context/markers-displayed-context'
 
 import CustomLayout from '../custom-layout'
-
-interface GeoJson {
-    geometry: {
-        type: FormDataEntryValue | null
-        coordinates: number[]
-    }
-    properties: {
-        owner: FormDataEntryValue | null
-        description: FormDataEntryValue | null
-        email: FormDataEntryValue | null
-        date: string
-        time: string
-        picturePublicId?: string
-        pictureURL?: string
-    }
-}
+import type { GeoJson } from '@/custom-types'
 
 const Main = (props: { initialMarkers: GeoJson[] }) => {
     mapboxgl.accessToken =

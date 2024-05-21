@@ -47,6 +47,7 @@ const Map = (props: {
         date: '',
         time: '',
         email: '',
+        timestamp: '',
         picturePublicId: '',
         pictureURL: '',
         markerId: '',
@@ -126,7 +127,7 @@ const Map = (props: {
                     )
                 })
 
-                map.loadImage('/image-empty.png', (error: any, image: any) => {
+                map.loadImage('/menu-icon.png', (error: any, image: any) => {
                     if (error) throw error
 
                     map.addImage('image-empty', image as any)
@@ -157,22 +158,25 @@ const Map = (props: {
                     })
                 })
 
-                map.loadImage('/image.png', (error: any, image: any) => {
-                    if (error) throw error
-                    // Add the loaded image to the style's sprite with the ID 'kitten'.
-                    map.addImage('image', image as any)
+                map.loadImage(
+                    '/marker-no-border.png',
+                    (error: any, image: any) => {
+                        if (error) throw error
+                        // Add the loaded image to the style's sprite with the ID 'kitten'.
+                        map.addImage('image', image as any)
 
-                    map.addLayer({
-                        id: 'unclustered-point',
-                        type: 'symbol',
-                        source: 'vous-etes-gloopsy',
-                        filter: ['!', ['has', 'point_count']],
-                        layout: {
-                            'icon-image': 'image', // reference the image
-                            'icon-size': 0.07,
-                        },
-                    })
-                })
+                        map.addLayer({
+                            id: 'unclustered-point',
+                            type: 'symbol',
+                            source: 'vous-etes-gloopsy',
+                            filter: ['!', ['has', 'point_count']],
+                            layout: {
+                                'icon-image': 'image', // reference the image
+                                'icon-size': 0.07,
+                            },
+                        })
+                    }
+                )
 
                 map.on('click', 'unclustered-point', (e: any) => {
                     const coordinates =
@@ -183,6 +187,7 @@ const Map = (props: {
                     const description = e.features[0].properties.description
                     const date = e.features[0].properties.date
                     const time = e.features[0].properties.time
+                    const timestamp = e.features[0].properties.timestamp
                     const picturePublicId =
                         e.features[0].properties.picturePublicId
                     const pictureURL = e.features[0].properties.pictureURL
@@ -195,6 +200,7 @@ const Map = (props: {
                         time: time,
                         email: email,
                         picturePublicId: picturePublicId,
+                        timestamp: timestamp,
                         pictureURL: pictureURL,
                         markerId: markerId,
                     })
@@ -252,10 +258,20 @@ const Map = (props: {
     useEffect(() => {
         const defaultPopUpHTML = `
         <div>
-            <h4>${popUpContent.owner}</h4>
-            <p class="small-text"> Posté le ${popUpContent.date} à ${
-            popUpContent.time
-        }</p>
+            <h5>${popUpContent.owner}</h5>   
+            <p class="small-text"> Posté le ${new Date(
+                popUpContent.timestamp
+            ).toLocaleString('fr-FR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+            })} à ${new Date(popUpContent.timestamp).toLocaleTimeString(
+            'fr-FR',
+            { timeZoneName: 'short' }
+        )}
+            
+            </p>   
         </div>
         <p>${popUpContent.description}</p>
         ${
@@ -263,8 +279,6 @@ const Map = (props: {
                 ? `<img src=${popUpContent.pictureURL} />`
                 : ''
         }
-        
-        
     `
 
         const displayDeleteLink = () => {

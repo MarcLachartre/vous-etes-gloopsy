@@ -105,7 +105,9 @@ const addMarkerBtn = (props: any) => {
 
     useEffect(() => {
         // check if user is logged in
+
         const checkSession = async () => {
+            // console.log(await getSession())
             ;(await getSession()) !== null
                 ? setLoggedIn(true)
                 : setLoggedIn(false)
@@ -157,7 +159,7 @@ const addMarkerBtn = (props: any) => {
                 if (isLoggedIn === false) {
                     setInputType(
                         <div className={style.inputTypeContainer}>
-                            <h6>Connecte toi pour ajouter un pin</h6>
+                            <p>Connecte toi pour ajouter un pin</p>
                             <a href="/api/auth/signin">Sign in</a>
                             <img
                                 src="/adrien.png"
@@ -365,7 +367,7 @@ const addMarkerBtn = (props: any) => {
                         : setInputName('close')
                 }}
             >
-                <h6> Ajouter nouveau sticker </h6>
+                <p> Ajouter nouveau sticker </p>
 
                 <img
                     className={style.addMarkerImage}

@@ -1,0 +1,96 @@
+.statsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--default-spacing);
+}
+
+.statSelector {
+    height: 70px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.dataGridContainer {
+    display: grid;
+
+    gap: var(--default-spacing);
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    grid-template-areas: 'data1 data2 data3';
+}
+
+.dataContainer {
+    display: grid;
+    grid-template-rows: 35% 40%;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    padding: var(--default-spacing);
+}
+
+.dataValue {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width: 80%;
+    height: 100%;
+    text-align: center;
+}
+
+.dataValue h2 {
+    text-align: center;
+}
+
+.dataTitle {
+    align-self: end;
+}
+
+.chartContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--default-spacing);
+    gap: var(--default-spacing);
+    height: 450px;
+    background-color: white;
+}
+
+@media (min-width: 0px) {
+    .dataGridContainer {
+        height: unset;
+        grid-template-columns: 1fr;
+        grid-template-rows: 200px 200px 200px;
+        grid-template-areas:
+            'data1'
+            'data2'
+            'data3';
+    }
+    .chartContainer {
+        height: 250px;
+    }
+}
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .dataGridContainer {
+        height: 250px;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: 'data1 data2 data3';
+    }
+    .chartContainer {
+        height: 350px;
+    }
+}
+
+/* // Medium devices (tablets, 991px and up) */
+@media (min-width: 991px) {
+    .statsContainer {
+        width: 90%;
+    }
+    .chartContainer {
+        height: 450px;
+    }
+}
