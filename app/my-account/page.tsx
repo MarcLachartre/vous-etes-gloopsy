@@ -6,7 +6,6 @@ import { Gloopstatistics } from '@/components/my-account/gloopstatistic'
 import { Session } from 'next-auth'
 import { getDatabase } from '@/lib/mongo-connection'
 import { usernameValidation } from '@/lib/username-validation'
-import { GeoJson } from '@/custom-types'
 
 const getSession: () => Promise<
     (Session & { user: { username: string } }) | null
@@ -154,7 +153,7 @@ const getData = async (
     ) {
         return { ok: false, status: 500, statusText: 'Internal Server Error' }
     }
-    console.log({ allTimeCount, yearlyCount, monthlyCount, twelveMonthsCount })
+
     return {
         ok: true,
         status: 200,
@@ -172,9 +171,6 @@ const myAccount = async () => {
         getData(true, session),
     ])
 
-    console.log(globalData)
-    console.log(personalData)
-
     return (
         <div className="page-container">
             <UserDetails userName={username} updateUsername={updateUsername} />
@@ -187,20 +183,3 @@ const myAccount = async () => {
 }
 
 export default myAccount
-
-// const getLastYearStickersCount = async (request?: { userEmail: string }) => {
-//     'use server'
-//     console.log('getStickers')
-//     const db = await getDatabase()
-
-//     const timestampLastYear = new Date(
-//         new Date().setFullYear(new Date().getFullYear() - 1)
-//     ).getTime()
-
-//     const res = await db
-//         .collection('location')
-//         .find({ 'properties.timestamp': { $gt: timestampLastYear } })
-//         .count()
-
-//     return res
-// }

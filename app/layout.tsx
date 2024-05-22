@@ -6,9 +6,6 @@ const inter = Inter({ subsets: ['latin'] })
 import { ThemeProvider } from '@mui/material/styles'
 import theme from './theme.ts'
 
-import { SessionProvider } from 'next-auth/react'
-import { Session } from 'next-auth'
-
 export const metadata: Metadata = {
     title: 'Gloopsy tracker',
     description: 'Vous êtes gloopsy',
@@ -31,19 +28,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
     children,
-}: // pageProps: { session, ...pageProps },
-{
+}: {
     children: React.ReactNode
-    // pageProps: { session: Session; pageProps: any }
 }) {
     return (
         <html lang="en">
             <body className={inter.className}>
                 <ThemeProvider theme={theme}>
-                    {/* <SessionProvider session={session} refetchInterval={5 * 60}> */}
                     <Menu />
                     {children}
-                    {/* </SessionProvider> */}
                 </ThemeProvider>
             </body>
         </html>

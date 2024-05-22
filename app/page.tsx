@@ -12,6 +12,7 @@ export default async function Home() {
             cache: 'no-store',
         }
     )
+
     const initialMarkers = await requestMarkers.json()
 
     return (

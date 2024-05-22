@@ -27,7 +27,7 @@ const Main = (props: { initialMarkers: GeoJson[] }) => {
     const [markersDisplayed, setMarkersDisplayed] = useState(
         props.initialMarkers
     )
-    const [newUpdatedMarkers, setNewUpdatedMarkers] = useState<Array<any>>(
+    const [newUpdatedMarkers, setNewUpdatedMarkers] = useState(
         props.initialMarkers
     )
     const [showAllMarkers, setShowAllMarkers] = useState(true)
@@ -107,7 +107,6 @@ const Main = (props: { initialMarkers: GeoJson[] }) => {
                         setShowAllMarkers={setShowAllMarkers}
                         resetMarkers={resetMarkers}
                         GeolocateControl={GeolocateControl}
-                        // setMarkersUpdated={setMarkersUpdated}
                     />
                     <ShowRecentMarkers // Button that shows the last 10 markers pined on the map
                         key={'ShowRecentMarkers'}

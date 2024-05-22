@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, createContext } from 'react'
+import { createContext } from 'react'
 
 interface MarkersAmountStateContext {
     markersAmount: number

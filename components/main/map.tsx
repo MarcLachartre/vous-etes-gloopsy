@@ -28,7 +28,6 @@ const Map = (props: {
 }) => {
     const map = useContext(MapContext)
     const markersDisplayed = useContext(MarkersDisplayedContext)
-
     const isMounted = useRef(false)
 
     const [showDeleteBox, setShowDeleteBox] = useState(false)
@@ -182,7 +181,8 @@ const Map = (props: {
                     const coordinates =
                         e.features[0].geometry.coordinates.slice()
 
-                    const owner = e.features[0].properties.owner
+                    const owner = JSON.parse(e.features[0].properties.user)[0]
+                        .username
                     const email = e.features[0].properties.email
                     const description = e.features[0].properties.description
                     const date = e.features[0].properties.date
