@@ -62,7 +62,8 @@ export default function Collection() {
             message:
                 markersAmount >= (i + 1) * 50 ? (
                     <div className={styles.badgeDescription}>
-                        <h5>{(i + 1) * 50} stickers 🎉</h5>
+                        <h5>{(i + 1) * 50} stickers </h5>
+
                         <p>{messages[i]}</p>
                     </div>
                 ) : (
@@ -75,9 +76,10 @@ export default function Collection() {
         <div>
             <Grid
                 container
-                spacing={{ xs: 2, md: 6 }}
+                spacing={'var(--default-spacing)'}
                 columns={{ xs: 4, sm: 12, md: 12 }}
                 margin={0}
+                // style={{ gap: 'var(--default-spacing)' }}
             >
                 {imagesArray.map((image) => (
                     <Grid
@@ -89,6 +91,7 @@ export default function Collection() {
                         display="flex"
                         justifyContent="center"
                         alignItems="center"
+                        style={{ padding: 'calc(var(--default-spacing) / 2)' }}
                     >
                         <Item>
                             <div className={styles.badgeContainer}>

@@ -1,6 +1,7 @@
 .titleContainer {
     display: flex;
     width: 100%;
+    // background-color: white;
     height: auto;
     flex-direction: column;
     justify-content: center;
@@ -28,6 +29,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    // width: 100%;
 }
 
 .badgeContainer img {

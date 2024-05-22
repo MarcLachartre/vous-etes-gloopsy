@@ -30,6 +30,7 @@ body {
     width: 100%;
     display: flex;
     font-size: 62.5%;
+    background-color: var(--grey);
     /* font-family: 'Plus Jakarta Sans', sans-serif; */
 }
 
@@ -42,12 +43,13 @@ main {
 .page-container {
     width: 100%;
     min-height: 100vh;
+    margin-left: 3%;
+    margin-right: 3%;
     display: flex;
     align-items: center;
     flex-direction: column;
     padding: var(--default-spacing);
     gap: 30px;
-    background-color: var(--grey);
 }
 
 h1,
@@ -101,7 +103,7 @@ h4 {
 }
 
 h5 {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     letter-spacing: 0;
     font-weight: 500;
 }

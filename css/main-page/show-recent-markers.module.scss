@@ -11,7 +11,7 @@
     position: fixed;
     z-index: 4;
     cursor: pointer;
-    h6 {
+    p {
         color: var(--black);
     }
 }
@@ -20,7 +20,7 @@
     .recentMarkersContainer {
         left: 0px;
 
-        h6 {
+        p {
             line-height: 20px;
         }
     }
@@ -30,7 +30,7 @@
     .recentMarkersContainer {
         left: 290px;
 
-        h6 {
+        p {
             line-height: 25px;
         }
     }
