@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--default-spacing);
+    width: 100%;
 }
 
 .statSelector {
@@ -10,6 +11,7 @@
     justify-content: space-evenly;
     align-items: center;
     box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
 }
 
 .dataGridContainer {
@@ -28,6 +30,7 @@
     justify-items: center;
     align-items: center;
     padding: var(--default-spacing);
+    border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
 }
 
@@ -57,13 +60,10 @@
     height: 450px;
     background-color: white;
     box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
 }
 
 @media (min-width: 0px) {
-    .statsContainer {
-        width: 100%;
-    }
-
     .dataGridContainer {
         height: unset;
         grid-template-columns: 1fr;
@@ -93,9 +93,6 @@
 
 /* // Medium devices (tablets, 991px and up) */
 @media (min-width: 991px) {
-    .statsContainer {
-        width: 90%;
-    }
     .chartContainer {
         height: 450px;
     }

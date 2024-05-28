@@ -1,35 +1,47 @@
 .titleContainer {
     display: flex;
     width: 100%;
-    // background-color: white;
+    background-color: white;
+
     height: auto;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: var(--default-spacing);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
 }
 
-.titleContainer h3 {
+.titleContainer h5 {
     text-align: center;
     color: var(--default-red);
-}
 
-.titleContainer h1 {
-    text-align: center;
-    width: 80%;
+    width: 100%;
 }
 
 .collectionContainer {
     width: 100%;
 }
 
+.collectionGrid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: var(--default-spacing);
+}
+
 .badgeContainer {
+    width: 100%;
+    min-height: 350px;
     display: flex;
+    background-color: white;
     gap: var(--default-spacing);
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    // width: 100%;
+    text-align: center;
+    padding: var(--default-spacing);
+    border-radius: var(--border-radius);
 }
 
 .badgeContainer img {
@@ -52,10 +64,22 @@
     height: 80px;
 }
 
-.lockedBadge {
-    display: flex;
-    gap: var(--default-spacing);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+@media (min-width: 0px) {
+    .collectionGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .collectionGrid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+/* // Medium devices (tablets, 991px and up) */
+@media (min-width: 991px) {
+    .collectionGrid {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 }

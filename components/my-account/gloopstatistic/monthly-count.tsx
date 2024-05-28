@@ -9,13 +9,7 @@ export const MonthlyCount = ({
     monthlyCount: number | undefined
 }) => {
     return (
-        <Box
-            className={styles.dataContainer}
-            bgcolor={'white'}
-            sx={{
-                borderRadius: 1,
-            }}
-        >
+        <Box className={styles.dataContainer} bgcolor={'white'}>
             <p className={styles.dataTitle}>Ce mois-ci</p>
             <div className={styles.dataValue}>
                 {!monthlyCount ? (

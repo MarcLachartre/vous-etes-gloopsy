@@ -1,0 +1,52 @@
+.filtersIcon {
+    background-color: #fff;
+    width: 45px;
+    height: 45px;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: calc(var(--default-spacing) + 310px);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-left: var(--default-spacing);
+    margin-top: var(--default-spacing);
+    cursor: pointer;
+}
+
+.filtersList {
+    padding: var(--default-spacing);
+}
+
+.filtersHeader {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (min-width: 0px) {
+    .filtersIcon {
+        left: 0px;
+        width: 35px;
+        height: 35px;
+        p {
+            line-height: 20px;
+        }
+    }
+}
+
+@media (min-width: 576px) {
+    .filtersIcon {
+        width: 45px;
+        height: 45px;
+        left: calc(280px + var(--default-spacing));
+    }
+}
+
+@media (min-width: 992px) {
+    .filtersIcon {
+        left: calc(310px + var(--default-spacing));
+    }
+}

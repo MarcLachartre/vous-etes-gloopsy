@@ -5,7 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import React, { useEffect, useState } from 'react'
 
 import Map from './map'
-import ShowRecentMarkers from './show-recent-markers'
+import Filters from './filters'
 import AddMarkerBtn from './add-marker-btn'
 import PrivacyPolicyLink from '../privacy-policy-link'
 import { getSession } from 'next-auth/react'
@@ -108,7 +108,7 @@ const Main = (props: { initialMarkers: GeoJson[] }) => {
                         resetMarkers={resetMarkers}
                         GeolocateControl={GeolocateControl}
                     />
-                    <ShowRecentMarkers // Button that shows the last 10 markers pined on the map
+                    <Filters // Button that shows the last 10 markers pined on the map
                         key={'ShowRecentMarkers'}
                         showAllMarkers={showAllMarkers}
                         setShowAllMarkers={setShowAllMarkers}

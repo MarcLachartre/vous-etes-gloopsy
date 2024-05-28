@@ -1,6 +1,7 @@
 import styles from '../../css/badges-page/badges.module.scss'
 import Collection from './collection'
 import CustomLayout from '../custom-layout'
+import Box from '@mui/material/Box'
 
 export default async function Page({
     initialMarkersLength,
@@ -10,8 +11,11 @@ export default async function Page({
     return (
         <CustomLayout count={initialMarkersLength}>
             <div className={styles.titleContainer}>
-                <h1>Nos Badges Gloopsy</h1>
+                <Box component="section" sx={{ p: 2, width: '100%' }}>
+                    <h5>Nos Badges Gloopsy</h5>
+                </Box>
             </div>
+
             <Collection />
         </CustomLayout>
     )

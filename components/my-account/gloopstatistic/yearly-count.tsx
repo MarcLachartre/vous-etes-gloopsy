@@ -8,13 +8,7 @@ export const YearlyCount = ({
     yearlyCount: number | undefined
 }) => {
     return (
-        <Box
-            className={styles.dataContainer}
-            bgcolor={'white'}
-            sx={{
-                borderRadius: 1,
-            }}
-        >
+        <Box className={styles.dataContainer} bgcolor={'white'}>
             <p className={styles.dataTitle}>Cette année</p>
             <div className={styles.dataValue}>
                 {!yearlyCount ? (

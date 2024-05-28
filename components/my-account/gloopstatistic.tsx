@@ -73,6 +73,7 @@ const Gloopstatistics = ({
                     onChange={handleChange}
                     aria-label="Platform"
                     style={{
+                        borderRadius: 'var(--border-radius)',
                         backgroundColor: 'white',
                         width: '100%',
                         height: '100%',
@@ -81,6 +82,8 @@ const Gloopstatistics = ({
                     <ToggleButton
                         value="La Gloopstat"
                         style={{
+                            borderBottomLeftRadius: 'var(--border-radius)',
+                            borderTopLeftRadius: 'var(--border-radius)',
                             width: '100%',
                             border: 'none',
                         }}
@@ -107,6 +110,8 @@ const Gloopstatistics = ({
                     <ToggleButton
                         value="Mes Stats"
                         style={{
+                            borderBottomRightRadius: 'var(--border-radius)',
+                            borderTopRightRadius: 'var(--border-radius)',
                             width: '100%',
                             border: 'none',
                         }}

@@ -65,12 +65,7 @@ export const GraphCount = ({
     }
 
     return (
-        <Box
-            className={styles.chartContainer}
-            sx={{
-                borderRadius: 1,
-            }}
-        >
+        <Box className={styles.chartContainer}>
             <LineChart
                 xAxis={[
                     {

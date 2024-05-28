@@ -6,6 +6,7 @@ import { ReactElement, useContext } from 'react'
 import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Unstable_Grid2'
+import Box from '@mui/material/Box'
 
 // Comment ajouter un badge:
 // Un badge doit etre:
@@ -18,9 +19,8 @@ export default function Collection() {
     const { markersAmount } = useContext(MarkersAmountStateContext)
 
     const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
         ...theme.typography.body2,
-        padding: 'calc(var(--default-spacing) + 3px)',
         textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',
@@ -73,35 +73,19 @@ export default function Collection() {
     }
 
     return (
-        <div>
-            <Grid
-                container
-                spacing={'var(--default-spacing)'}
-                columns={{ xs: 4, sm: 12, md: 12 }}
-                margin={0}
-                // style={{ gap: 'var(--default-spacing)' }}
-            >
-                {imagesArray.map((image) => (
-                    <Grid
-                        minHeight={320}
-                        xs={2}
-                        sm={4}
-                        md={3}
-                        key={`badge${image.displayValue}`}
-                        display="flex"
-                        justifyContent="center"
-                        alignItems="center"
-                        style={{ padding: 'calc(var(--default-spacing) / 2)' }}
-                    >
-                        <Item>
-                            <div className={styles.badgeContainer}>
-                                <div>{image.badge}</div>
-                                {image.message}
-                            </div>
-                        </Item>
-                    </Grid>
-                ))}
-            </Grid>
+        <div className={styles.collectionGrid}>
+            {imagesArray.map((image) => (
+                <Box
+                    className={styles.badgeContainer}
+                    key={`badge${image.displayValue}`}
+                    boxShadow={'var(--box-shadow)'}
+                >
+                    {/* <div> */}
+                    {image.badge}
+                    {image.message}
+                    {/* </div> */}
+                </Box>
+            ))}
         </div>
     )
 }

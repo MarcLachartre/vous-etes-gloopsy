@@ -1,18 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 :root {
-    --border-radius: 8px;
+    --border-radius: 4px;
     --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
-    --default-spacing: 15px;
-
+    --default-spacing: 16px;
     --light-grey: #f0eff4;
     /* --grey: #f2f2f2; */
     --grey: #f3f3f3;
     --black: #202124;
     --default-red: rgba(242, 102, 89, 1);
+    --light-red: rgba(242, 102, 89, 0.2);
     --default-yellow: #ebc999;
     --default-blue: #8ca9d3;
     --default-dark-red: #990000;
-
     --round-icon-size: 45px;
 }
 
@@ -31,7 +30,6 @@ body {
     display: flex;
     font-size: 62.5%;
     background-color: var(--grey);
-    /* font-family: 'Plus Jakarta Sans', sans-serif; */
 }
 
 main {
@@ -43,12 +41,9 @@ main {
 .page-container {
     width: 100%;
     min-height: 100vh;
-    margin-left: 3%;
-    margin-right: 3%;
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: var(--default-spacing);
     gap: 30px;
 }
 
@@ -173,11 +168,12 @@ li {
     :root {
         --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
             0 -1px 0px rgba(0, 0, 0, 0.02);
-        --default-spacing: 7px;
+        --default-spacing: 12px;
         --round-icon-size: 34px;
     }
 
     .page-container {
+        padding: calc(var(--default-spacing) * 2);
         gap: var(--default-spacing);
     }
 
@@ -186,13 +182,13 @@ li {
     }
 
     .mapboxgl-ctrl-top-right {
-        margin: 7px 7px 0 0 !important;
-        left: 124px !important;
+        margin: var(--default-spacing) var(--default-spacing) 0 0 !important;
+        left: calc(35px + 2 * var(--default-spacing)) !important;
     }
 
     .mapboxgl-ctrl-geolocate {
-        height: 34px !important;
-        width: 34px !important;
+        height: 35px !important;
+        width: 35px !important;
     }
 }
 
@@ -201,7 +197,7 @@ li {
     :root {
         --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
             0 -1px 0px rgba(0, 0, 0, 0.02);
-        --default-spacing: 10px;
+        --default-spacing: 16px;
         --round-icon-size: 45px;
     }
 
@@ -211,8 +207,8 @@ li {
     }
 
     .mapboxgl-ctrl-top-right {
-        margin: 10px 10px 0 0 !important;
-        left: 420px !important;
+        margin: var(--default-spacing) var(--default-spacing) 0 0 !important;
+        left: calc(3 * var(--default-spacing) + 280px + 45px) !important;
     }
 }
 
@@ -224,9 +220,11 @@ li {
 
     .page-container {
         gap: 35px;
+        padding-left: 7%;
+        padding-right: 7%;
     }
 
     .mapboxgl-ctrl-top-right {
-        left: 450px !important;
+        left: calc(3 * var(--default-spacing) + 310px + 45px) !important;
     }
 }
