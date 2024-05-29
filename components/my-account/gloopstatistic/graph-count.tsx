@@ -11,32 +11,34 @@ export const GraphCount = ({
     twelveMonthsCount: number[] | undefined
 }) => {
     const [data, setData] = useState<number[]>([])
-
+    const months = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+    ]
     const xValues = () => {
-        const months = [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec',
-        ]
-
         const currentTimestamp = Date.now()
         const currentMonth = new Date(currentTimestamp).getMonth()
 
         const xValues = []
         for (let i = 0; i <= 11; i++) {
+            // console.log(i)
             const month = new Date(
-                new Date(currentTimestamp).setMonth(currentMonth - i)
+                new Date(currentTimestamp / 1000).setMonth(currentMonth - i)
             ).getMonth()
-
+            console.log(
+                Date.now()
+                // new Date(new Date(Date.now()).setMonth(currentMonth)).getMonth()
+            )
             xValues[11 - i] = months[month]
         }
 
@@ -44,6 +46,7 @@ export const GraphCount = ({
     }
 
     useEffect(() => {
+        xValues()
         twelveMonthsCount ? setData(twelveMonthsCount) : false
     }, [twelveMonthsCount])
 
@@ -65,7 +68,12 @@ export const GraphCount = ({
     }
 
     return (
-        <Box className={styles.chartContainer}>
+        <Box
+            className={styles.chartContainer}
+            sx={{
+                borderRadius: 1,
+            }}
+        >
             <LineChart
                 xAxis={[
                     {
@@ -78,7 +86,7 @@ export const GraphCount = ({
                     {
                         curve: 'linear',
                         data: data,
-                        label: 'Nombre de Stickers Posés',
+                        label: 'Stickers Posés',
                     },
                 ]}
                 colors={['var(--default-red)']}
