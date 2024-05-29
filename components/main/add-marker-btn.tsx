@@ -19,6 +19,8 @@ import PanToolAltIcon from '@mui/icons-material/PanToolAlt'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import TextField from '@mui/material/TextField'
 import PinDropOutlinedIcon from '@mui/icons-material/PinDropOutlined'
+import AddRoundedIcon from '@mui/icons-material/AddRounded'
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 
 const addMarkerBtn = (props: any) => {
     const { markersAmount, setMarkersAmount } = useContext(
@@ -32,6 +34,7 @@ const addMarkerBtn = (props: any) => {
     const [coords, setCoords] = useState<number[]>([])
     const [marker, setMarker] = useState({} as any)
     const [isClickable, setIsClickable] = useState(false)
+    const [crossDisplay, setCrossDisplay] = useState<string>('none')
     const isClickableRef = useRef(false)
     isClickableRef.current = isClickable
 
@@ -152,13 +155,15 @@ const addMarkerBtn = (props: any) => {
                     : false
                 setCoords([])
                 setIsClickable(false)
+                setCrossDisplay('none')
                 setInputType(<div></div>)
                 break
 
             case 'add marker method selector':
+                setCrossDisplay('flex')
                 if (isLoggedIn === false) {
                     setInputType(
-                        <div className={style.inputTypeContainer}>
+                        <div className={style.inputType}>
                             <p>Connecte toi pour ajouter un pin</p>
                             <a href="/api/auth/signin">Sign in</a>
                             <img
@@ -171,7 +176,8 @@ const addMarkerBtn = (props: any) => {
                 } else {
                     props.setShowAllMarkers(true)
                     setInputType(
-                        <div className={style.inputTypeContainer}>
+                        <div className={style.inputType}>
+                            <p>Comment souhaites-tu sticker?</p>
                             <div className={style.localisationChoiceContainer}>
                                 <Button
                                     variant="outlined"
@@ -184,7 +190,7 @@ const addMarkerBtn = (props: any) => {
                                         justifyContent: 'space-between',
                                     }}
                                 >
-                                    <div>Ma position</div>
+                                    <div>Me localiser</div>
                                     <MyLocationIcon fontSize="small" />
                                 </Button>
                                 <Button
@@ -209,8 +215,9 @@ const addMarkerBtn = (props: any) => {
 
             case 'localisation ongoing':
                 locateMe()
+                setCrossDisplay('none')
                 setInputType(
-                    <div className={style.inputTypeContainer}>
+                    <div className={style.inputType}>
                         <img
                             src="/adrien.png"
                             alt="adrien-wait"
@@ -221,8 +228,9 @@ const addMarkerBtn = (props: any) => {
                 break
 
             case 'validate location':
+                setCrossDisplay('flex')
                 setInputType(
-                    <div className={style.inputTypeContainer}>
+                    <div className={style.inputType}>
                         <p>Clique pour ajuster la position si besoin!</p>
                         <Button
                             variant="outlined"
@@ -243,11 +251,12 @@ const addMarkerBtn = (props: any) => {
                 break
 
             case 'manual localisation':
+                setCrossDisplay('flex')
                 setIsClickable(true)
                 map.getCanvas().style.cursor = 'pointer'
 
                 setInputType(
-                    <div className={style.inputTypeContainer}>
+                    <div className={style.inputType}>
                         <p style={{ textAlign: 'center' }}>
                             Clique sur la map pour sticker!
                         </p>
@@ -271,6 +280,7 @@ const addMarkerBtn = (props: any) => {
                 break
 
             case 'add comment':
+                setCrossDisplay('flex')
                 setIsClickable(false)
                 map.getCanvas().style.cursor = ''
                 if (coords.length === 0) {
@@ -278,9 +288,10 @@ const addMarkerBtn = (props: any) => {
                 } else {
                     setInputType(
                         <form
-                            className={style.inputTypeContainer}
                             onSubmit={handleSubmit}
+                            className={style.inputType}
                         >
+                            <p>Ajoute un commentaire et/ou une photo</p>
                             <TextField
                                 name="comment"
                                 id="outlined-multiline-static"
@@ -312,8 +323,9 @@ const addMarkerBtn = (props: any) => {
                 break
 
             case 'loading':
+                setCrossDisplay('none')
                 setInputType(
-                    <div className={style.inputTypeContainer}>
+                    <div className={style.inputType}>
                         <img
                             src="/adrien.png"
                             alt="adrien-wait"
@@ -324,14 +336,16 @@ const addMarkerBtn = (props: any) => {
                 break
 
             case 'marker added':
+                setCrossDisplay('flex')
                 marker.remove()
                 setMarker({})
                 props.setShowAllMarkers(true)
                 setInputType(
-                    <div className={style.inputTypeContainer}>
+                    <div className={style.inputType}>
                         <h5> Eh merci mec! </h5>
                     </div>
                 )
+
                 setTimeout(() => {
                     setInputName('close')
                 }, 3000)
@@ -344,7 +358,7 @@ const addMarkerBtn = (props: any) => {
                 setIsClickable(false)
                 map.getCanvas().style.cursor = ''
                 setInputType(
-                    <div className={style.inputTypeContainer}>
+                    <div className={style.inputType}>
                         <p>
                             Oups! Quelque chose ne s'est pas bien passé! Try
                             again!
@@ -358,25 +372,57 @@ const addMarkerBtn = (props: any) => {
     }, [inputName, isLoggedIn])
 
     return (
-        <div className={style.addMarkerContainer}>
-            <div
-                className={style.buttonContainer}
-                onClick={() => {
-                    inputName === 'close'
-                        ? setInputName('add marker method selector')
-                        : setInputName('close')
-                }}
-            >
-                <p> Ajouter nouveau sticker </p>
+        <>
+            <div className={style.addMarkerContainer}>
+                <div
+                    className={style.mobileAddMarkerButton}
+                    onClick={() => {
+                        setCrossDisplay('flex')
+                        inputName === 'close'
+                            ? setInputName('add marker method selector')
+                            : setInputName('close')
+                    }}
+                >
+                    <AddRoundedIcon
+                        style={{
+                            color: 'var(--default-red)',
+                        }}
+                        sx={{ fontSize: '34px' }}
+                    />
+                </div>
+                <div
+                    className={style.buttonContainer}
+                    onClick={() => {
+                        inputName === 'close'
+                            ? setInputName('add marker method selector')
+                            : setInputName('close')
+                    }}
+                >
+                    <p> Ajouter nouveau sticker </p>
 
-                <img
-                    className={style.addMarkerImage}
-                    src="/image.png"
-                    alt="vous-etes-gloopsy-logo"
-                />
+                    <img
+                        className={style.addMarkerImage}
+                        src="/image.png"
+                        alt="vous-etes-gloopsy-logo"
+                    />
+                </div>
+                <div className={style.inputTypeContainer}>
+                    <div
+                        className={style.closeInputContainer}
+                        style={{ display: crossDisplay }}
+                    >
+                        <CloseRoundedIcon
+                            onClick={() => {
+                                setInputName('close')
+                                setCrossDisplay('none')
+                            }}
+                            sx={{ fontSize: '16px' }}
+                        />
+                    </div>
+                    {inputType}
+                </div>
             </div>
-            {inputType}
-        </div>
+        </>
     )
 }
 

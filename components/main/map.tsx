@@ -95,7 +95,7 @@ const Map = (props: {
                             200,
                             'white',
                         ],
-                        'circle-opacity': 0.5,
+                        'circle-opacity': 0.4,
                         'circle-radius': [
                             'step',
                             ['get', 'point_count'],
@@ -126,36 +126,42 @@ const Map = (props: {
                     )
                 })
 
-                map.loadImage('/menu-icon.png', (error: any, image: any) => {
-                    if (error) throw error
+                map.loadImage(
+                    '/empty-image-no-border.png',
+                    (error: any, image: any) => {
+                        if (error) throw error
 
-                    map.addImage('image-empty', image as any)
+                        map.addImage('image-empty', image as any)
 
-                    map.addLayer({
-                        id: 'cluster-count',
-                        type: 'symbol',
-                        source: 'vous-etes-gloopsy',
-                        filter: ['has', 'point_count'],
-                        layout: {
-                            'icon-image': 'image-empty',
-                            'icon-size': [
-                                'step',
-                                ['get', 'point_count'],
-                                0.09,
-                                50,
-                                0.1,
-                                200,
-                                0.12,
-                            ],
-                            'text-field': ['get', 'point_count_abbreviated'],
-                            'text-font': [
-                                'DIN Offc Pro Medium',
-                                'Arial Unicode MS Bold',
-                            ],
-                            'text-size': 14,
-                        },
-                    })
-                })
+                        map.addLayer({
+                            id: 'cluster-count',
+                            type: 'symbol',
+                            source: 'vous-etes-gloopsy',
+                            filter: ['has', 'point_count'],
+                            layout: {
+                                'icon-image': 'image-empty',
+                                'icon-size': [
+                                    'step',
+                                    ['get', 'point_count'],
+                                    0.09,
+                                    50,
+                                    0.1,
+                                    200,
+                                    0.12,
+                                ],
+                                'text-field': [
+                                    'get',
+                                    'point_count_abbreviated',
+                                ],
+                                'text-font': [
+                                    'DIN Offc Pro Medium',
+                                    'Arial Unicode MS Bold',
+                                ],
+                                'text-size': 14,
+                            },
+                        })
+                    }
+                )
 
                 map.loadImage(
                     '/marker-no-border.png',

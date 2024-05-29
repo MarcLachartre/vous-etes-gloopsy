@@ -32,7 +32,6 @@ const Filters = ({
     }
 
     useEffect(() => {
-        console.log('cul')
         switch (filterValue) {
             case 'Tous les stickers':
                 setShowAllMarkers(true)

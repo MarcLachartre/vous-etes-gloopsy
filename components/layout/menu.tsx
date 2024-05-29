@@ -88,7 +88,7 @@ const Menu = () => {
                 setOpen(!open)
             }}
         >
-            <img src="/menu-icon.png" alt="menu-image-empty" />
+            <img src="/empty-image-no-border.png" alt="menu-image-empty" />
             <MenuRoundedIcon
                 sx={{
                     color: 'var(--default-red)',

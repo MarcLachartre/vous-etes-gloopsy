@@ -7,7 +7,6 @@ import React, { useEffect, useState } from 'react'
 import Map from './map'
 import Filters from './filters'
 import AddMarkerBtn from './add-marker-btn'
-import PrivacyPolicyLink from '../privacy-policy-link'
 import { getSession } from 'next-auth/react'
 
 import { MapContext } from '@/context/map-context'
@@ -121,7 +120,6 @@ const Main = (props: { initialMarkers: GeoJson[] }) => {
                         GeolocateControl={GeolocateControl}
                         setGeolocateControl={setGeolocateControl}
                     />
-                    <PrivacyPolicyLink key={'PrivacyPolicyLink'} />
                 </CustomLayout>
             </MapContext.Provider>
         </MarkersDisplayedContext.Provider>

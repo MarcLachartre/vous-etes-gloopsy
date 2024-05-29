@@ -4,10 +4,11 @@
     --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
     --default-spacing: 16px;
     --light-grey: #f0eff4;
-    /* --grey: #f2f2f2; */
     --grey: #f3f3f3;
     --black: #202124;
     --default-red: rgba(242, 102, 89, 1);
+    --aggressive-red: #ff0000;
+    --default-light-red: #fac9c5;
     --light-red: rgba(242, 102, 89, 0.2);
     --default-yellow: #ebc999;
     --default-blue: #8ca9d3;

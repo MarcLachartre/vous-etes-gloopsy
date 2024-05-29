@@ -6,11 +6,15 @@
     box-shadow: var(--box-shadow);
     display: flex;
     flex-direction: column;
-    min-height: 45px;
+    align-items: center;
+    border-radius: var(--border-radius);
     padding-left: var(--default-spacing);
     padding-right: var(--default-spacing);
     position: absolute;
     z-index: 4;
+    h5 {
+        text-align: center;
+    }
 }
 
 .buttonContainer {
@@ -27,19 +31,19 @@
     position: relative;
 }
 
-.inputTypeContainer {
+.inputType {
     display: flex;
     align-items: center;
+    background-color: #fff;
     flex-direction: column;
     justify-content: space-evenly;
     width: 100%;
-    border-top: solid 1px var(--light-grey);
     gap: var(--default-spacing);
-    padding-top: var(--default-spacing);
     padding-bottom: var(--default-spacing);
     h6 {
         text-align: center;
     }
+
     p {
         text-align: justify;
     }
@@ -56,6 +60,9 @@
         text-decoration: underline;
         cursor: pointer;
     }
+    img {
+        margin: var(--default-spacing);
+    }
 }
 
 .localisationChoiceContainer {
@@ -67,25 +74,48 @@
 @media (min-width: 0px) {
     .addMarkerContainer {
         position: fixed;
+        background-color: transparent;
         bottom: 0;
+        min-height: 0px;
         width: 100vw;
-        padding-top: var(--default-spacing);
         margin-top: 0px;
         margin-left: 0px;
+        padding: 0px;
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
         gap: var(--default-spacing);
-        box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3),
-            0 2px 6px 2px rgba(60, 64, 67, 0.15);
     }
 
     .buttonContainer {
-        min-height: 45px;
-        // gap: var(--default-spacing);
+        display: none;
         flex-direction: column;
     }
 
+    .mobileAddMarkerButton {
+        position: absolute;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 0 -1px 0px rgba(0, 0, 0, 0.04);
+        border: solid 1px #d3d3d3;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        margin-bottom: var(--default-spacing);
+        z-index: -1;
+        cursor: pointer;
+    }
+
+    .mobileAddMarkerButton img {
+        position: absolute;
+        width: 45px;
+        height: 45px;
+    }
+
     .addMarkerImage {
+        display: none;
         height: 25px;
         order: -1;
         position: relative;
@@ -93,38 +123,68 @@
 
     .inputTypeContainer {
         width: 100%;
-        // margin-top: var(--default-spacing);
+        background-color: white;
+        border-top-right-radius: var(--border-radius);
+        border-top-left-radius: var(--border-radius);
+        padding-right: var(--default-spacing);
+        padding-left: var(--default-spacing);
+    }
+
+    .closeInputContainer {
+        display: flex;
+        color: var(--default-red);
+        height: 18px;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+
+    .closeInputContainer svg {
+        cursor: pointer;
     }
 }
 
 @media (min-width: 576px) {
     .addMarkerContainer {
         position: absolute;
+        background-color: white;
         bottom: unset;
-        min-height: 45px;
+        min-height: 0px;
         width: 280px;
         gap: 0px;
-        padding-top: 0px;
-        border-bottom-left-radius: var(--border-radius);
+
+        border-radius: var(--border-radius);
         border-bottom-right-radius: var(--border-radius);
         margin-top: var(--default-spacing);
         margin-left: var(--default-spacing);
         box-shadow: var(--box-shadow);
     }
+
     .addMarkerImage {
+        display: flex;
         order: 3;
     }
+
     .buttonContainer {
+        display: flex;
         min-height: 45px;
+        padding-right: var(--default-spacing);
+        padding-left: var(--default-spacing);
         flex-direction: row;
         justify-content: space-between;
     }
+
     .localisationChoiceContainer {
         flex-direction: column;
     }
 
+    .mobileAddMarkerButton {
+        display: none;
+    }
+
     .inputTypeContainer {
-        padding-bottom: var(--default-spacing);
+        // padding-bottom: var(--default-spacing);
+        border-bottom-right-radius: var(--border-radius);
+        border-bottom-left-radius: var(--border-radius);
         width: 100%;
     }
 }
@@ -133,8 +193,13 @@
     .buttonContainer {
         gap: var(--default-spacing);
     }
+
     .localisationChoiceContainer {
         flex-direction: column;
+    }
+
+    .closeInputContainer {
+        display: none !important;
     }
 }
 
