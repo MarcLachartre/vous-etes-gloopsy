@@ -151,9 +151,7 @@
         min-height: 0px;
         width: 280px;
         gap: 0px;
-
         border-radius: var(--border-radius);
-        border-bottom-right-radius: var(--border-radius);
         margin-top: var(--default-spacing);
         margin-left: var(--default-spacing);
         box-shadow: var(--box-shadow);
@@ -182,10 +180,19 @@
     }
 
     .inputTypeContainer {
-        // padding-bottom: var(--default-spacing);
         border-bottom-right-radius: var(--border-radius);
         border-bottom-left-radius: var(--border-radius);
         width: 100%;
+    }
+
+    .inputType {
+        padding-top: calc(var(--default-spacing) / 2);
+        margin-top: calc(var(--default-spacing) / 2);
+        border-top: solid 1px #dedede;
+    }
+
+    .closeInputContainer {
+        display: none !important;
     }
 }
 // Medium devices (tablets, 768px and up)
@@ -196,10 +203,7 @@
 
     .localisationChoiceContainer {
         flex-direction: column;
-    }
-
-    .closeInputContainer {
-        display: none !important;
+        gap: calc(var(--default-spacing) / 2);
     }
 }
 

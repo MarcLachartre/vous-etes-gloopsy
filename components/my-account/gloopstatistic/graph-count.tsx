@@ -31,14 +31,10 @@ export const GraphCount = ({
 
         const xValues = []
         for (let i = 0; i <= 11; i++) {
-            // console.log(i)
             const month = new Date(
                 new Date(currentTimestamp / 1000).setMonth(currentMonth - i)
             ).getMonth()
-            console.log(
-                Date.now()
-                // new Date(new Date(Date.now()).setMonth(currentMonth)).getMonth()
-            )
+
             xValues[11 - i] = months[month]
         }
 
@@ -46,7 +42,6 @@ export const GraphCount = ({
     }
 
     useEffect(() => {
-        xValues()
         twelveMonthsCount ? setData(twelveMonthsCount) : false
     }, [twelveMonthsCount])
 

@@ -62,25 +62,26 @@ const updateUsername = async (username?: string) => {
 
 const getTwelveMonthsCount = async (collection: Collection, req?: any) => {
     const currentTimestamp = Date.now()
-    const currentMonth = new Date(currentTimestamp).getMonth()
+    const currentMonth = new Date().getMonth()
 
     const timestamps: number[] = []
     for (let i = 0; i <= 11; i++) {
         const t = new Date(
             new Date(
-                new Date(
-                    new Date(currentTimestamp).setMonth(currentMonth - i)
-                ).setUTCDate(1)
-            ).setUTCHours(0)
+                new Date(new Date().setDate(1)).setMonth(currentMonth - i)
+            ).setHours(0)
         ).getTime()
-
+        // console.log(new Date(t).getMonth())
+        // req !== 'marc.lachartre@gmail.com'
+        //     ? console.log(new Date(t).getMonth())
+        //     : false
         timestamps[11 - i] = t
     }
     timestamps.push(Date.now())
 
     const twelveMonthsCount = []
 
-    for (let i = 0; i < timestamps.length - 1; i++) {
+    for (let i = 0; i <= 11; i++) {
         const count = await collection.countDocuments(
             {
                 'properties.timestamp': {
@@ -91,6 +92,9 @@ const getTwelveMonthsCount = async (collection: Collection, req?: any) => {
             },
             { hint: '_id_' }
         )
+        // console.log('--------------')
+        // req !== 'marc.lachartre@gmail.com' ? console.log(await count) : false
+
         twelveMonthsCount.push(count)
     }
 

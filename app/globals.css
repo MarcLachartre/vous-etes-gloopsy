@@ -169,7 +169,7 @@ li {
     :root {
         --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
             0 -1px 0px rgba(0, 0, 0, 0.02);
-        --default-spacing: 12px;
+        --default-spacing: 10px;
         --round-icon-size: 34px;
     }
 
@@ -195,13 +195,6 @@ li {
 
 /* // Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-    :root {
-        --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
-            0 -1px 0px rgba(0, 0, 0, 0.02);
-        --default-spacing: 16px;
-        --round-icon-size: 45px;
-    }
-
     .mapboxgl-ctrl-geolocate {
         height: 45px !important;
         width: 45px !important;
@@ -215,6 +208,12 @@ li {
 
 /* // Medium devices (tablets, 991px and up) */
 @media (min-width: 991px) {
+    :root {
+        --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
+            0 -1px 0px rgba(0, 0, 0, 0.02);
+        --default-spacing: 14px;
+        --round-icon-size: 45px;
+    }
     h1 {
         font-size: 3.5rem;
     }
