@@ -20,7 +20,9 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import TextField from '@mui/material/TextField'
 import PinDropOutlinedIcon from '@mui/icons-material/PinDropOutlined'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
+import AddLocationRoundedIcon from '@mui/icons-material/AddLocationRounded'
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
+import AddLocationAltRoundedIcon from '@mui/icons-material/AddLocationAltRounded'
 
 const addMarkerBtn = (props: any) => {
     const { markersAmount, setMarkersAmount } = useContext(
@@ -374,7 +376,32 @@ const addMarkerBtn = (props: any) => {
     return (
         <>
             <div className={style.addMarkerContainer}>
-                <div
+                <Button
+                    className={style.mobileAddMarkerButton}
+                    onClick={() => {
+                        setCrossDisplay('flex')
+                        inputName === 'close'
+                            ? setInputName('add marker method selector')
+                            : setInputName('close')
+                    }}
+                    variant="contained"
+                    size="large"
+                    style={{
+                        backgroundColor: 'var(--default-red)',
+                        borderRadius: 'var(--border-radius)',
+                    }}
+                    endIcon={
+                        <AddLocationAltRoundedIcon
+                            style={{
+                                color: 'white',
+                            }}
+                            fontSize="large"
+                        />
+                    }
+                >
+                    nouveau sticker
+                </Button>
+                {/* <div
                     className={style.mobileAddMarkerButton}
                     onClick={() => {
                         setCrossDisplay('flex')
@@ -385,11 +412,11 @@ const addMarkerBtn = (props: any) => {
                 >
                     <AddRoundedIcon
                         style={{
-                            color: 'var(--default-red)',
+                            color: 'white',
                         }}
                         sx={{ fontSize: '34px' }}
                     />
-                </div>
+                </div> */}
                 <div
                     className={style.buttonContainer}
                     onClick={() => {
