@@ -5,7 +5,6 @@ import styles from '../../css/badges-page/badges.module.scss'
 import { ReactElement, useContext } from 'react'
 import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
-import Grid from '@mui/material/Unstable_Grid2'
 import Box from '@mui/material/Box'
 
 // Comment ajouter un badge:
@@ -25,7 +24,6 @@ export default function Collection() {
         justifyContent: 'center',
         alignItems: 'center',
         boxShadow: 'var(--box-shadow)',
-
         color: theme.palette.text.secondary,
     }))
 
@@ -39,6 +37,7 @@ export default function Collection() {
         "Regardez ce mec, il a déjà tous les badges, c'est sûr.",
         'Lourd! Un Gloops shiny en plus!',
         "Fast'n'Youyou - Gloopsy Edition",
+        "Wow enfin une image de l'échographie ❤️",
     ]
 
     for (let i = 0; i < 12; i++) {
