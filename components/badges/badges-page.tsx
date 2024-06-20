@@ -12,7 +12,7 @@ export default async function Page({
         <CustomLayout count={initialMarkersLength}>
             <div className={styles.titleContainer}>
                 <Box component="section" sx={{ p: 2, width: '100%' }}>
-                    <h5>Nos Badges Gloopsy</h5>
+                    <h4>Nos Badges Gloopsy</h4>
                 </Box>
             </div>
 

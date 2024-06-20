@@ -31,7 +31,7 @@ const Menu = () => {
 
     useEffect(() => {
         checkSession()
-    })
+    }, [])
 
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen)
@@ -53,7 +53,9 @@ const Menu = () => {
                 <Divider sx={{ marginBottom: 'var(--default-spacing)' }} />
                 {[
                     ['Map', <MapIcon />, '/'],
-                    ['Badges', <MilitaryTechIcon />, '/badges'],
+                    isLoggedIn
+                        ? ['Badges', <MilitaryTechIcon />, '/badges']
+                        : [],
                     isLoggedIn
                         ? ['Mon compte', <PersonIcon />, '/my-account']
                         : [],
@@ -80,6 +82,7 @@ const Menu = () => {
             </List>
         </Box>
     )
+
     return [
         <div
             key={'menu-icon'}
@@ -92,7 +95,7 @@ const Menu = () => {
             <MenuRoundedIcon
                 sx={{
                     color: 'var(--default-red)',
-                    fontSize: 'calc(var(--round-icon-size) / 2)',
+                    fontSize: 'calc(var(--round-icon-size) / 1.7)',
                 }}
             />
         </div>,

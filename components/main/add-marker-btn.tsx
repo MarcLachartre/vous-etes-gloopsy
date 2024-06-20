@@ -19,10 +19,10 @@ import PanToolAltIcon from '@mui/icons-material/PanToolAlt'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import TextField from '@mui/material/TextField'
 import PinDropOutlinedIcon from '@mui/icons-material/PinDropOutlined'
-import AddRoundedIcon from '@mui/icons-material/AddRounded'
-import AddLocationRoundedIcon from '@mui/icons-material/AddLocationRounded'
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import AddLocationAltRoundedIcon from '@mui/icons-material/AddLocationAltRounded'
+
+// import { createMarker } from './actions/create-marker'
 
 const addMarkerBtn = (props: any) => {
     const { markersAmount, setMarkersAmount } = useContext(
@@ -39,6 +39,7 @@ const addMarkerBtn = (props: any) => {
     const [crossDisplay, setCrossDisplay] = useState<string>('none')
     const isClickableRef = useRef(false)
     isClickableRef.current = isClickable
+    // const matches = useMediaQuery('(min-width:576px)')
 
     const locateMe = async () => {
         console.log('attempt locate me')
@@ -77,12 +78,12 @@ const addMarkerBtn = (props: any) => {
         e.preventDefault()
 
         const formData = new FormData(e.target)
-        // console.log(e.target)
         const username = () => {
-            return props.user.user.username === undefined ||
-                props.user.user.username === null
-                ? props.user.user.name
-                : props.user.user.username
+            console.log(props.user)
+            return props.user.username === undefined ||
+                props.user.username === null
+                ? props.user.name
+                : props.user.username
         }
 
         formData.append('coord', JSON.stringify(coords))
@@ -90,15 +91,12 @@ const addMarkerBtn = (props: any) => {
             'userName',
             username().charAt(0).toUpperCase() + username().slice(1)
         )
-        formData.append('userEmail', props.user.user.email)
+        formData.append('userEmail', props.user.email)
 
-        const response = await fetch('/api/markers/create-marker', {
-            method: 'POST',
-            body: formData,
-            headers: {},
-        })
-
-        if (response.status === 200) {
+        const response = await props.createMarker(formData)
+        const res = await response
+        console.log(res)
+        if (res.status === 200) {
             await props.resetMarkers()
             markersAmount !== null ? setMarkersAmount(markersAmount + 1) : false
 
@@ -387,6 +385,8 @@ const addMarkerBtn = (props: any) => {
                     variant="contained"
                     size="large"
                     style={{
+                        // display: matches ? 'none' : 'flex',
+                        display: 'none',
                         backgroundColor: 'var(--default-red)',
                         borderRadius: 'var(--border-radius)',
                     }}
@@ -401,22 +401,6 @@ const addMarkerBtn = (props: any) => {
                 >
                     nouveau sticker
                 </Button>
-                {/* <div
-                    className={style.mobileAddMarkerButton}
-                    onClick={() => {
-                        setCrossDisplay('flex')
-                        inputName === 'close'
-                            ? setInputName('add marker method selector')
-                            : setInputName('close')
-                    }}
-                >
-                    <AddRoundedIcon
-                        style={{
-                            color: 'white',
-                        }}
-                        sx={{ fontSize: '34px' }}
-                    />
-                </div> */}
                 <div
                     className={style.buttonContainer}
                     onClick={() => {

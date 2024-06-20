@@ -2,7 +2,6 @@
     display: flex;
     width: 100%;
     background-color: white;
-
     height: auto;
     flex-direction: column;
     justify-content: center;
@@ -12,10 +11,9 @@
     border-radius: var(--border-radius);
 }
 
-.titleContainer h5 {
+.titleContainer h4 {
     text-align: center;
-    color: var(--default-red);
-
+    color: var(--black);
     width: 100%;
 }
 

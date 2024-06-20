@@ -1,0 +1,40 @@
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = "mongodb+srv://gloopsy:CH3D925z1TPDt24N@cluster0.jci2gqf.mongodb.net/gloopsy?retryWrites=true&w=majority&appName=Cluster0"
+}
+
+type LocationGeometry {
+    coordinates Float[]
+    type        String
+}
+
+type LocationProperties {
+    date            String
+    description     String
+    email           String
+    owner           String
+    picturePublicId String?
+    pictureURL      String?
+    time            String
+    timestamp       Float
+}
+
+model location {
+    id         String             @id @default(auto()) @map("_id") @db.ObjectId
+    geometry   LocationGeometry
+    properties LocationProperties
+    users      users              @relation(fields: [usersId], references: [id])
+    usersId    String             @db.ObjectId
+}
+
+model users {
+    id       String     @id @default(auto()) @map("_id") @db.ObjectId
+    email    String
+    username String
+    location location[]
+}

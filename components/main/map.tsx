@@ -19,7 +19,6 @@ import { MarkersDisplayedContext } from '../../context/markers-displayed-context
 import DeleteMarkerBox from './delete-marker-box'
 
 const Map = (props: {
-    // setMarkersUpdated: Dispatch<SetStateAction<boolean>>
     key: string
     user: any
     setShowAllMarkers: Dispatch<SetStateAction<boolean>>
@@ -186,7 +185,6 @@ const Map = (props: {
                 map.on('click', 'unclustered-point', (e: any) => {
                     const coordinates =
                         e.features[0].geometry.coordinates.slice()
-
                     const owner = JSON.parse(e.features[0].properties.user)[0]
                         .username
                     const email = e.features[0].properties.email
@@ -329,10 +327,7 @@ const Map = (props: {
         if (isMounted.current === true && props.user !== null) {
             // Prevent the following to be executed on first render
 
-            if (
-                Object.keys(props.user).length !== 0 &&
-                props.user.user.email === popUpContent.email
-            ) {
+            if (props.user && props.user.email === popUpContent.email) {
                 popUp.setDOMContent(displayDeleteLink())
             } else {
                 popUp.setHTML(

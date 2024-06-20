@@ -5,8 +5,12 @@ import { logColor } from '@/lib/log-colors'
 import DataValidation from '@/lib/data-validation'
 import { submitToCloudinary } from '../utils/cloudinary/submit'
 import { compressImages } from '../utils/compress-images'
+import { auth } from '@/auth'
 
-export const PATCH = async (request: Request) => {
+export const PATCH = auth(async (request) => {
+    // const session = request.auth
+    // console.log(session)
+    // // if (!session || session.user)
     console.log(logColor('green', 'start PATCH req'))
     const req = await request.formData()
     const db = await getDatabase()
@@ -104,7 +108,7 @@ export const PATCH = async (request: Request) => {
     const markers = await getMarkers()
 
     return NextResponse.json({ req, markers })
-}
+})
 
 const isValidPic = async (file: File) => {
     const validation = new DataValidation(file)

@@ -4,8 +4,9 @@ import { NextResponse } from 'next/server'
 import { getDatabase } from '@/lib/mongo-connection'
 import { logColor } from '@/lib/log-colors'
 import { deleteFromCloudinary } from '../utils/cloudinary/delete'
+import { auth } from '@/auth'
 
-export async function DELETE(request: Request) {
+export const DELETE = auth(async (request: Request) => {
     const db = await getDatabase()
     const req = await request.formData()
     const id: FormDataEntryValue | null = req.get('markerId')
@@ -37,4 +38,4 @@ export async function DELETE(request: Request) {
     await db.collection('location').deleteOne({ _id: mongoId })
 
     return NextResponse.json(req)
-}
+})

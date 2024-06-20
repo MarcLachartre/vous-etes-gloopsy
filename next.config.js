@@ -3,8 +3,23 @@
 
 
 const nextConfig = {
-    reactStrictMode: false,
+    reactStrictMode: true,
+
+    async headers() {
+        return [
+            {
+                source: '/:path*',
+                headers: [
+                    {
+                        key: 'x-hello',
+                        value: 'there',
+                    },
+                ],
+            },
+        ]
+    },
 }
+
 
 
 
