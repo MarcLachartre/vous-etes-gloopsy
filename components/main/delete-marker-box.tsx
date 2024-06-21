@@ -14,9 +14,9 @@ const DeleteMarkerBox = (props: {
     markerId: string
     picturePublicId: string
     resetMarkers: Function
+    delete: (formData: FormData) => Promise<any>
     setShowDeleteBox: Dispatch<SetStateAction<boolean>>
     setShowAllMarkers: Dispatch<SetStateAction<boolean>>
-    // setMarkersUpdated: Dispatch<SetStateAction<boolean>>
 }) => {
     const { markersAmount, setMarkersAmount } = useContext(
         MarkersAmountStateContext
@@ -33,10 +33,7 @@ const DeleteMarkerBox = (props: {
         formData.append('markerId', props.markerId)
         formData.append('picturePublicId', props.picturePublicId)
 
-        const response = await fetch('/api/markers/delete-marker', {
-            method: 'DELETE',
-            body: formData,
-        })
+        const response = await props.delete(formData)
 
         if (response.status === 200) {
             await props.resetMarkers()

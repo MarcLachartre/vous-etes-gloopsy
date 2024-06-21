@@ -73,7 +73,7 @@ const UserDetails = ({
     const handleChange = async (event: {
         currentTarget: { value: string }
     }) => {
-        const validity = await usernameValidation(event.currentTarget.value)
+        const validity = usernameValidation(event.currentTarget.value)
         setUsernameValidity(validity)
     }
 

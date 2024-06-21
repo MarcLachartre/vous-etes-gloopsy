@@ -21,6 +21,8 @@ import DeleteMarkerBox from './delete-marker-box'
 const Map = (props: {
     key: string
     user: any
+    editMarker: (formData: FormData) => Promise<any>
+    deleteMarker: (formData: FormData) => Promise<any>
     setShowAllMarkers: Dispatch<SetStateAction<boolean>>
     resetMarkers: Function
     GeolocateControl: any
@@ -350,7 +352,7 @@ const Map = (props: {
                     markerId={popUpContent.markerId}
                     setShowDeleteBox={setShowDeleteBox}
                     setShowAllMarkers={props.setShowAllMarkers}
-                    // setMarkersUpdated={props.setMarkersUpdated}
+                    delete={props.deleteMarker}
                     picturePublicId={popUpContent.picturePublicId}
                     resetMarkers={props.resetMarkers}
                 />
@@ -358,6 +360,7 @@ const Map = (props: {
 
             {showEditBox === true ? (
                 <EditMarkerBox
+                    edit={props.editMarker}
                     markerId={popUpContent.markerId}
                     comment={popUpContent.description}
                     pictureURL={popUpContent.pictureURL}

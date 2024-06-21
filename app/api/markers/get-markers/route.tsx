@@ -51,7 +51,7 @@ export const GET = auth(async (req) => {
     }
 
     const markers = await getMarkers()
-    console.log(markers[0])
+
     return NextResponse.json(markers)
 })
 

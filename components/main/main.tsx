@@ -14,12 +14,12 @@ import { MarkersDisplayedContext } from '@/context/markers-displayed-context'
 import CustomLayout from '../custom-layout'
 import type { GeoJson } from '@/custom-types'
 import { useSession } from 'next-auth/react'
-import { NextResponse } from 'next/server'
-// import { createMarker } from './actions/create-marker'
 
 const Main = (props: {
     initialMarkers: GeoJson[]
     createMarker: (formData: FormData) => Promise<any>
+    editMarker: (formData: FormData) => Promise<any>
+    deleteMarker: (formData: FormData) => Promise<any>
 }) => {
     mapboxgl.accessToken =
         'pk.eyJ1IjoibWFyY2xhY2hhcnRyZSIsImEiOiJjbGxjZzRqeGMwMTI2M2NsdzA4bXJodnFqIn0.rEH7luhuGuag_BVbVvw67g'
@@ -101,6 +101,8 @@ const Main = (props: {
                         user={session?.data?.user}
                         setShowAllMarkers={setShowAllMarkers}
                         resetMarkers={resetMarkers}
+                        editMarker={props.editMarker}
+                        deleteMarker={props.deleteMarker}
                         GeolocateControl={GeolocateControl}
                     />
 

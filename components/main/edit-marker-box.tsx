@@ -17,6 +17,7 @@ const EditMarkerBox = (props: {
     comment: string
     pictureURL: string
     picturePublicId: string
+    edit: (formData: FormData) => Promise<any>
     setShowAllMarkers: Dispatch<SetStateAction<boolean>>
     setShowEditBox: Dispatch<SetStateAction<boolean>>
 }) => {
@@ -35,17 +36,14 @@ const EditMarkerBox = (props: {
         formData.append('pictureURL', props.pictureURL)
         formData.append('picturePublicId', props.picturePublicId)
 
-        const response = await fetch('/api/markers/edit-marker', {
-            method: 'PATCH',
-            body: formData,
-        })
+        const response = await props.edit(formData)
 
-        const res = await response.json()
+        const { status, markers } = await response
 
-        if (response.status === 200) {
+        if (status === 200) {
             map.getSource('vous-etes-gloopsy').setData({
                 type: 'FeatureCollection',
-                features: res.markers,
+                features: markers,
             })
             setEditBoxType('all good')
         } else {
