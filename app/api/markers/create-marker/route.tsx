@@ -1,9 +1,10 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { getDatabase } from '@/lib/mongo-connection'
 import DataValidation from '@/lib/data-validation'
 import { logColor } from '@/lib/log-colors'
 import { submitToCloudinary } from '../utils/cloudinary/submit'
 import { compressImages } from '../utils/compress-images'
+import { auth } from '@/auth'
 
 interface GeoJson {
     geometry: {
@@ -22,8 +23,17 @@ interface GeoJson {
     }
 }
 
-export async function POST(request: Request) {
+export const POST = auth(async (request) => {
+    console.log(request)
     console.log(logColor('green', 'start POST req'))
+
+    if (!request.auth) {
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 })
+    }
+    if (request.auth.user.role !== 'MEMBER') {
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 })
+    }
+
     try {
         const db = await getDatabase()
         const data = await request.formData()
@@ -98,7 +108,7 @@ export async function POST(request: Request) {
     } catch (e) {
         return NextResponse.json({ error: e }, { status: 500 })
     }
-}
+})
 
 const isValidPic = async (file: File) => {
     const validation = new DataValidation(file)

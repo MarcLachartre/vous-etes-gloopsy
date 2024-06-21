@@ -1,34 +1,25 @@
-import { getServerSession } from 'next-auth/next'
-import { options } from '../api/auth/[...nextauth]/options'
 import { Collection } from 'mongodb'
 import { UserDetails } from '@/components/my-account/user-details'
 import { Gloopstatistics } from '@/components/my-account/gloopstatistic'
 import { Session } from 'next-auth'
 import { getDatabase } from '@/lib/mongo-connection'
 import { usernameValidation } from '@/lib/username-validation'
+import { auth } from '@/auth'
 
-const getSession: () => Promise<
-    (Session & { user: { username: string } }) | null
-> = async () => {
-    return await getServerSession(options)
-}
-
-const getUserName = async (
-    session: (Session & { user: { username: string } }) | null
-) => {
+const getUserName = async (session: Session | null) => {
     'use server'
     const db = await getDatabase()
 
     const mongoUser = await db
         .collection('users')
-        .findOne({ email: session?.user.email })
-
+        .findOne({ email: session?.user?.email })
+    console.log(session?.user?.username)
     if (mongoUser.username !== undefined) {
         return mongoUser.username
-    } else if (session?.user.username !== null && session !== null) {
+    } else if (session?.user?.username !== null && session !== null) {
         return session.user.username
-    } else if (session?.user.name !== null) {
-        return session?.user.name
+    } else if (session?.user?.name !== null) {
+        return session?.user?.name
     } else {
         return ''
     }
@@ -41,15 +32,14 @@ const updateUsername = async (username?: string) => {
         return { ok: false, status: 400 }
     }
 
-    const session: (Session & { user: { username: string } }) | null =
-        await getServerSession(options)
+    const session = await auth()
 
     const db = await getDatabase()
 
     const res = await db
         .collection('users')
         .updateOne(
-            { email: session?.user.email },
+            { email: session?.user?.email },
             { $set: { username: username } }
         )
 
@@ -61,7 +51,6 @@ const updateUsername = async (username?: string) => {
 }
 
 const getTwelveMonthsCount = async (collection: Collection, req?: any) => {
-    const currentTimestamp = Date.now()
     const currentMonth = new Date().getMonth()
 
     const timestamps: number[] = []
@@ -71,10 +60,7 @@ const getTwelveMonthsCount = async (collection: Collection, req?: any) => {
                 new Date(new Date().setDate(1)).setMonth(currentMonth - i)
             ).setHours(0)
         ).getTime()
-        // console.log(new Date(t).getMonth())
-        // req !== 'marc.lachartre@gmail.com'
-        //     ? console.log(new Date(t).getMonth())
-        //     : false
+
         timestamps[11 - i] = t
     }
     timestamps.push(Date.now())
@@ -92,8 +78,6 @@ const getTwelveMonthsCount = async (collection: Collection, req?: any) => {
             },
             { hint: '_id_' }
         )
-        // console.log('--------------')
-        // req !== 'marc.lachartre@gmail.com' ? console.log(await count) : false
 
         twelveMonthsCount.push(count)
     }
@@ -167,7 +151,10 @@ const getData = async (
 }
 
 const myAccount = async () => {
-    const session = await getSession()
+    const session = await auth()
+
+    if (!session) return <h2>Not authenticated</h2>
+    if (session.user.role !== 'MEMBER') return <h2>Not authorized</h2>
     const username = await getUserName(session)
 
     const [globalData, personalData] = await Promise.all([

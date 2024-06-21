@@ -4,8 +4,9 @@
     --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 -1px 0px rgba(0, 0, 0, 0.02);
     --default-spacing: 16px;
     --light-grey: #f0eff4;
-    --grey: #f3f3f3;
-    --black: #202124;
+    --grey: #f4f4f4;
+    /* --black: #202124; */
+    --black: #1d1d1f;
     --default-red: rgba(242, 102, 89, 1);
     --aggressive-red: #ff0000;
     --default-light-red: #fac9c5;
@@ -170,7 +171,7 @@ li {
         --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3),
             0 -1px 0px rgba(0, 0, 0, 0.03);
         --default-spacing: 10px;
-        --round-icon-size: 34px;
+        --round-icon-size: 35px;
     }
 
     .page-container {
@@ -195,6 +196,10 @@ li {
 
 /* // Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
+    :root {
+        --round-icon-size: 45px;
+    }
+
     .mapboxgl-ctrl-geolocate {
         height: 45px !important;
         width: 45px !important;

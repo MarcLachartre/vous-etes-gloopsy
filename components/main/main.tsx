@@ -7,22 +7,27 @@ import React, { useEffect, useState } from 'react'
 import Map from './map'
 import Filters from './filters'
 import AddMarkerBtn from './add-marker-btn'
-import { getSession } from 'next-auth/react'
 
 import { MapContext } from '@/context/map-context'
 import { MarkersDisplayedContext } from '@/context/markers-displayed-context'
 
 import CustomLayout from '../custom-layout'
 import type { GeoJson } from '@/custom-types'
+import { useSession } from 'next-auth/react'
+import { NextResponse } from 'next/server'
+// import { createMarker } from './actions/create-marker'
 
-const Main = (props: { initialMarkers: GeoJson[] }) => {
+const Main = (props: {
+    initialMarkers: GeoJson[]
+    createMarker: (formData: FormData) => Promise<any>
+}) => {
     mapboxgl.accessToken =
         'pk.eyJ1IjoibWFyY2xhY2hhcnRyZSIsImEiOiJjbGxjZzRqeGMwMTI2M2NsdzA4bXJodnFqIn0.rEH7luhuGuag_BVbVvw67g'
 
     const [map, setMap] = useState<any>({})
     const [GeolocateControl, setGeolocateControl] = useState<any>()
 
-    const [user, setUser] = useState({})
+    const session = useSession()
     const [markersDisplayed, setMarkersDisplayed] = useState(
         props.initialMarkers
     )
@@ -62,15 +67,6 @@ const Main = (props: { initialMarkers: GeoJson[] }) => {
     }, [])
 
     useEffect(() => {
-        const getUser = async () => {
-            const user: any = await getSession()
-            setUser(user)
-        }
-
-        getUser()
-    }, [])
-
-    useEffect(() => {
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/outdoors-v12',
@@ -102,21 +98,24 @@ const Main = (props: { initialMarkers: GeoJson[] }) => {
                 <CustomLayout count={props.initialMarkers.length}>
                     <Map
                         key={'Map'}
-                        user={user}
+                        user={session?.data?.user}
                         setShowAllMarkers={setShowAllMarkers}
                         resetMarkers={resetMarkers}
                         GeolocateControl={GeolocateControl}
                     />
+
                     <Filters // Button that shows the last 10 markers pined on the map
                         key={'ShowRecentMarkers'}
                         showAllMarkers={showAllMarkers}
                         setShowAllMarkers={setShowAllMarkers}
                     />
+
                     <AddMarkerBtn
                         key={'AddMarkerBtn'}
-                        user={user}
+                        user={session?.data?.user}
                         setShowAllMarkers={setShowAllMarkers}
                         resetMarkers={resetMarkers}
+                        createMarker={props.createMarker}
                         GeolocateControl={GeolocateControl}
                         setGeolocateControl={setGeolocateControl}
                     />

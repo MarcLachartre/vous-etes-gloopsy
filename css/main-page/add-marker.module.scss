@@ -45,7 +45,7 @@
     }
 
     p {
-        text-align: justify;
+        text-align: center;
     }
     textarea {
         width: 100%;
@@ -71,6 +71,10 @@
     gap: var(--default-spacing);
 }
 
+.mobileAddMarkerButton {
+    display: none;
+}
+
 @media (min-width: 0px) {
     .addMarkerContainer {
         position: fixed;
@@ -92,27 +96,14 @@
     }
 
     .mobileAddMarkerButton {
+        display: flex !important;
         position: absolute;
         box-shadow: var(--box-shadow);
-        // border: solid 1px var(--default-red);
         bottom: 0;
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
-        // background-color: #325082;
-        // border-radius: 50%;
-        // width: 55px;
-        // height: 55px;
         margin-bottom: var(--default-spacing);
         z-index: -1;
         cursor: pointer;
     }
-
-    // .mobileAddMarkerButton img {
-    //     position: absolute;
-    //     width: 45px;
-    //     height: 45px;
-    // }
 
     .addMarkerImage {
         display: none;
@@ -176,7 +167,7 @@
     }
 
     .mobileAddMarkerButton {
-        display: none;
+        display: none !important;
     }
 
     .inputTypeContainer {
@@ -186,8 +177,8 @@
     }
 
     .inputType {
+        margin-top: 0px;
         padding-top: calc(var(--default-spacing) / 2);
-        margin-top: calc(var(--default-spacing) / 2);
         border-top: solid 1px #dedede;
     }
 
