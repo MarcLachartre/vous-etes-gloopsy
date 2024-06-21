@@ -7,7 +7,7 @@ import SearchAddress from './search-address'
 import AddPicture from './add-picture'
 import mapboxgl from 'mapbox-gl'
 
-import { getSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import React, { useState, useEffect, useRef } from 'react'
 
 import { useContext } from 'react'
@@ -22,15 +22,15 @@ import PinDropOutlinedIcon from '@mui/icons-material/PinDropOutlined'
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import AddLocationAltRoundedIcon from '@mui/icons-material/AddLocationAltRounded'
 
-// import { createMarker } from './actions/create-marker'
-
 const addMarkerBtn = (props: any) => {
+    const session = useSession()
+    const user = session.data?.user
+
     const { markersAmount, setMarkersAmount } = useContext(
         MarkersAmountStateContext
     )
     const map = useContext(MapContext)
 
-    const [isLoggedIn, setLoggedIn] = useState(false)
     const [inputType, setInputType] = useState(<div></div>)
     const [inputName, setInputName] = useState('close')
     const [coords, setCoords] = useState<number[]>([])
@@ -39,7 +39,6 @@ const addMarkerBtn = (props: any) => {
     const [crossDisplay, setCrossDisplay] = useState<string>('none')
     const isClickableRef = useRef(false)
     isClickableRef.current = isClickable
-    // const matches = useMediaQuery('(min-width:576px)')
 
     const locateMe = async () => {
         console.log('attempt locate me')
@@ -79,7 +78,6 @@ const addMarkerBtn = (props: any) => {
 
         const formData = new FormData(e.target)
         const username = () => {
-            console.log(props.user)
             return props.user.username === undefined ||
                 props.user.username === null
                 ? props.user.name
@@ -95,7 +93,7 @@ const addMarkerBtn = (props: any) => {
 
         const response = await props.createMarker(formData)
         const res = await response
-        console.log(res)
+
         if (res.status === 200) {
             await props.resetMarkers()
             markersAmount !== null ? setMarkersAmount(markersAmount + 1) : false
@@ -105,18 +103,6 @@ const addMarkerBtn = (props: any) => {
             setInputName('error')
         }
     }
-
-    useEffect(() => {
-        // check if user is logged in
-
-        const checkSession = async () => {
-            // console.log(await getSession())
-            ;(await getSession()) !== null
-                ? setLoggedIn(true)
-                : setLoggedIn(false)
-        }
-        checkSession()
-    }, [])
 
     useEffect(() => {
         if (coords.length !== 0 && Object.keys(marker).length === 0) {
@@ -161,7 +147,7 @@ const addMarkerBtn = (props: any) => {
 
             case 'add marker method selector':
                 setCrossDisplay('flex')
-                if (isLoggedIn === false) {
+                if (!user) {
                     setInputType(
                         <div className={style.inputType}>
                             <p>Connecte toi pour ajouter un pin</p>
@@ -171,6 +157,20 @@ const addMarkerBtn = (props: any) => {
                                 alt="adrien"
                                 className={adrien.hiAdrien}
                             />
+                        </div>
+                    )
+                } else if (!!user && user.role !== 'MEMBER') {
+                    setInputType(
+                        <div className={style.inputType}>
+                            <h6>Acces refusé</h6>
+                            <p>
+                                Vous n'êtes pas autorisé à réaliser cette
+                                action.{' '}
+                            </p>
+                            <p>
+                                Merci de contacter le developpeur pour en savoir
+                                plus.
+                            </p>
                         </div>
                     )
                 } else {
@@ -369,7 +369,7 @@ const addMarkerBtn = (props: any) => {
                     setInputName('close')
                 }, 3000)
         }
-    }, [inputName, isLoggedIn])
+    }, [inputName, session])
 
     return (
         <>

@@ -3,13 +3,10 @@ import { getDatabase } from './lib/mongo-connection.ts'
 import NextAuth, { type DefaultSession } from 'next-auth'
 
 declare module 'next-auth' {
-    /**
-     * Returned by `auth`, `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
-     */
     interface Session {
         user: {
-            /** The user's postal address. */
             role: string
+            username: string
             /**
              * By default, TypeScript merges new interface properties and overwrites existing ones.
              * In this case, the default session user properties will be overwritten,

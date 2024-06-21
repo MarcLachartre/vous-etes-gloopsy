@@ -5,15 +5,6 @@ import { Session } from 'next-auth'
 import { getDatabase } from '@/lib/mongo-connection'
 import { usernameValidation } from '@/lib/username-validation'
 import { auth } from '@/auth'
-import { DefaultSession } from 'next-auth'
-
-declare module 'next-auth' {
-    interface Session {
-        user: {
-            username: string
-        } & DefaultSession['user']
-    }
-}
 
 const getUserName = async (session: Session | null) => {
     'use server'
@@ -60,7 +51,6 @@ const updateUsername = async (username?: string) => {
 }
 
 const getTwelveMonthsCount = async (collection: Collection, req?: any) => {
-    const currentTimestamp = Date.now()
     const currentMonth = new Date().getMonth()
 
     const timestamps: number[] = []
@@ -164,6 +154,7 @@ const myAccount = async () => {
     const session = await auth()
 
     if (!session) return <h2>Not authenticated</h2>
+    if (session.user.role !== 'MEMBER') return <h2>Not authorized</h2>
     const username = await getUserName(session)
 
     const [globalData, personalData] = await Promise.all([

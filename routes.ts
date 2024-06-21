@@ -2,16 +2,13 @@
  * These API routes do not require authentication.
  * @type {string}
  */
-const publicApiRoutes: string[] = [
-    '/api/markers/get-markers',
-    '/api/markers/create-markers',
-]
+const publicApiRoutes: string[] = ['/api/markers/get-markers']
 
 /**   An array of page routes available to the public.
  * These API routes do not require authentication.
  * @type {string}
  */
-const publicPageRoutes: string[] = ['/']
+const publicPageRoutes: string[] = ['/', '/badges']
 
 /**   An array of routes available to the public (public api routes and public page routes).
  * These routes do not require authentication.

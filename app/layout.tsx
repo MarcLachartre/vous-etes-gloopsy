@@ -6,6 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 import { ThemeProvider } from '@mui/material/styles'
 import theme from './theme.ts'
 import { SessionProvider } from 'next-auth/react'
+import { auth } from '@/auth.ts'
 
 // export const metadata: Metadata = {
 //     title: 'Gloopsy tracker',
@@ -27,13 +28,14 @@ import { SessionProvider } from 'next-auth/react'
 //     ),
 // }
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode
 }) {
+    const session = await auth()
     return (
-        <SessionProvider>
+        <SessionProvider session={session}>
             <html lang="en">
                 <body className={inter.className}>
                     <ThemeProvider theme={theme}>

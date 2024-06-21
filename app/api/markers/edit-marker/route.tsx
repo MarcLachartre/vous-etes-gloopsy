@@ -8,9 +8,13 @@ import { compressImages } from '../utils/compress-images'
 import { auth } from '@/auth'
 
 export const PATCH = auth(async (request) => {
-    // const session = request.auth
-    // console.log(session)
-    // // if (!session || session.user)
+    if (!request.auth) {
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 })
+    }
+    if (request.auth.user.role !== 'MEMBER') {
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 })
+    }
+
     console.log(logColor('green', 'start PATCH req'))
     const req = await request.formData()
     const db = await getDatabase()

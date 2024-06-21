@@ -80,10 +80,8 @@ export default function Collection() {
                     key={`badge${image.displayValue}`}
                     boxShadow={'var(--box-shadow)'}
                 >
-                    {/* <div> */}
                     {image.badge}
                     {image.message}
-                    {/* </div> */}
                 </Box>
             ))}
         </div>

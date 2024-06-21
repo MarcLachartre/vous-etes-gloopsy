@@ -23,9 +23,17 @@ interface GeoJson {
     }
 }
 
-export const POST = auth(async (request: Request) => {
+export const POST = auth(async (request) => {
     console.log(request)
     console.log(logColor('green', 'start POST req'))
+
+    if (!request.auth) {
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 })
+    }
+    if (request.auth.user.role !== 'MEMBER') {
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 })
+    }
+
     try {
         const db = await getDatabase()
         const data = await request.formData()

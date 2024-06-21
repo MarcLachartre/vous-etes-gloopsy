@@ -3,7 +3,7 @@ import styles from '../../css/layout/menu.module.scss'
 
 import { useEffect, useState } from 'react'
 
-import { getSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 
 import CloseButton from '../util/close-button'
 
@@ -21,17 +21,10 @@ import ListSubheader from '@mui/material/ListSubheader'
 import PersonIcon from '@mui/icons-material/Person'
 
 const Menu = () => {
+    const session = useSession()
+    const user = session.data?.user
+
     const [open, setOpen] = useState(false)
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-    const checkSession = async () => {
-        const session = await getSession()
-        session !== null ? setIsLoggedIn(true) : setIsLoggedIn(false)
-    }
-
-    useEffect(() => {
-        checkSession()
-    }, [])
 
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen)
@@ -53,13 +46,13 @@ const Menu = () => {
                 <Divider sx={{ marginBottom: 'var(--default-spacing)' }} />
                 {[
                     ['Map', <MapIcon />, '/'],
-                    isLoggedIn
+                    !!user && user.role === 'MEMBER'
                         ? ['Badges', <MilitaryTechIcon />, '/badges']
                         : [],
-                    isLoggedIn
+                    !!user && user.role === 'MEMBER'
                         ? ['Mon compte', <PersonIcon />, '/my-account']
                         : [],
-                    isLoggedIn
+                    !!user
                         ? ['Sign out', <LogoutIcon />, '/api/auth/signout']
                         : ['Sign in', <LoginIcon />, '/api/auth/signin'],
                     ['Privacy policy', <PolicyIcon />, 'privacy-policy'],
