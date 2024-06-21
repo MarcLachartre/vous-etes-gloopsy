@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
     provider = "mongodb"
-    url      = "mongodb+srv://gloopsy:CH3D925z1TPDt24N@cluster0.jci2gqf.mongodb.net/gloopsy?retryWrites=true&w=majority&appName=Cluster0"
+    url      = env("DATABASE_URL") // to be defined in env file if prisma is in use
 }
 
 type LocationGeometry {
