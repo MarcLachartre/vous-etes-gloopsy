@@ -1,7 +1,7 @@
 'use client'
 import { MarkersAmountStateContext } from '@/context/markers-amount-context'
 
-import style from '../../css/main-page/add-marker.module.scss'
+import style from '../../css/map-page/add-marker.module.scss'
 import adrien from '../../css/adrien.module.scss'
 import SearchAddress from './search-address'
 import AddPicture from './add-picture'
@@ -385,7 +385,6 @@ const addMarkerBtn = (props: any) => {
                     variant="contained"
                     size="large"
                     style={{
-                        // display: matches ? 'none' : 'flex',
                         display: 'none',
                         backgroundColor: 'var(--default-red)',
                         borderRadius: 'var(--border-radius)',

@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button'
-import styles from '../../css/main-page/search-address.module.scss'
+import styles from '../../css/map-page/search-address.module.scss'
 import SearchIcon from '@mui/icons-material/Search'
 import TextField from '@mui/material/TextField'
 import {
@@ -7,7 +7,6 @@ import {
     SetStateAction,
     SyntheticEvent,
     useContext,
-    useEffect,
     useState,
 } from 'react'
 import { MapContext } from '@/context/map-context'

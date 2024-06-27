@@ -1,91 +1,23 @@
-import styles from './page.module.css'
-import Main from '../components/main/main'
-import { NextRequest } from 'next/server'
+'use server'
+import HomePage from '@/components/home/home-page'
 import { headers } from 'next/headers'
+import style from './page.module.css'
 
-export const dynamic = 'force-dynamic'
+export default async function Page() {
+    const request = `${process.env.DOMAIN}/api/users/get-usernames`
+    const options = { headers: new Headers(headers()) }
+    const res = await fetch(request, options)
+    const processedRes = await res.json()
 
-export default async function Home() {
-    const h = headers()
-
-    const getMarkers = async () => {
-        const request = new NextRequest(
-            `${process.env.DOMAIN}/api/markers/get-markers`
-        )
-
-        // const session = auth()
-        // if (!!session) return redirect(`/api/auth/signin`)
-        const requestMarkers = await fetch(request, {
-            method: 'GET',
-            headers: new Headers(h),
-
-            cache: 'no-store',
-        })
-        console.log(requestMarkers.url)
-        return await requestMarkers.json()
-    }
-
-    const createMarker = async (formData: FormData) => {
-        'use server'
-
-        const request = new NextRequest(
-            `${process.env.DOMAIN}api/markers/create-marker`
-        )
-
-        const response = await fetch(request, {
-            method: 'POST',
-            body: formData,
-            headers: new Headers(h),
-        })
-        const res = { status: response.status }
-        return res
-    }
-
-    const editMarker = async (formData: FormData) => {
-        'use server'
-
-        const request = new NextRequest(
-            `${process.env.DOMAIN}api/markers/edit-marker`
-        )
-
-        const response = await fetch(request, {
-            method: 'PATCH',
-            body: formData,
-            headers: h,
-        })
-        const markers = (await response.json()).markers
-        const res = { status: response.status, markers: markers }
-        return res
-    }
-
-    const deleteMarker = async (formData: FormData) => {
-        'use server'
-
-        const request = new NextRequest(
-            `${process.env.DOMAIN}api/markers/delete-marker`
-        )
-
-        const response = await fetch(request, {
-            method: 'DELETE',
-            body: formData,
-            headers: h,
-        })
-
-        const markers = (await response.json()).markers
-        const res = { status: response.status, markers: markers }
-        return res
-    }
-
-    const initialMarkers = await getMarkers()
+    const usernames = processedRes.map(({ username }: { username: string }) => {
+        return 'Vous êtes <br />' + username
+    })
+    usernames.splice(0, 0, 'Vous êtes <br />Gloopsy')
+    usernames.push('Vous êtes <br />Binbin')
 
     return (
-        <main className={styles.main}>
-            <Main
-                initialMarkers={initialMarkers}
-                createMarker={createMarker}
-                editMarker={editMarker}
-                deleteMarker={deleteMarker}
-            />
-        </main>
+        <div className="page-container">
+            <HomePage usernames={usernames} />
+        </div>
     )
 }
