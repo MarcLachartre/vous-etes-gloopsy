@@ -6,7 +6,7 @@
         'intro'
         'names'
         'mapLink';
-    height: 100vh;
+    height: 100%;
     width: 100vw;
 }
 
@@ -28,6 +28,7 @@
     animation: 0.01s var(--trans-ease) var(--trans-duration) fadein;
     animation-delay: 1.7s;
     animation-fill-mode: forwards;
+    font-weight: 700;
 }
 
 .mapLink {
@@ -72,7 +73,7 @@
     }
 
     .names {
-        font-size: 6.5rem;
+        font-size: 7rem;
         line-height: 10rem;
     }
 }
