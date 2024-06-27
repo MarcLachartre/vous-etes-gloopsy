@@ -88,4 +88,9 @@
     .homepageContainer {
         grid-template-rows: 25% 35% 40%;
     }
+
+    .names {
+        font-size: 11rem;
+        line-height: 13rem;
+    }
 }
