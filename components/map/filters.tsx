@@ -1,6 +1,6 @@
 'use client'
 
-import styles from '../../css/main-page/filters.module.scss'
+import styles from '../../css/map-page/filters.module.scss'
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined'
 import Divider from '@mui/material/Divider'
 import Drawer from '@mui/material/Drawer'

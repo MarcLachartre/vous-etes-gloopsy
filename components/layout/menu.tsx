@@ -1,7 +1,7 @@
 'use client'
 import styles from '../../css/layout/menu.module.scss'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { useSession } from 'next-auth/react'
 
@@ -19,6 +19,7 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import PolicyIcon from '@mui/icons-material/Policy'
 import ListSubheader from '@mui/material/ListSubheader'
 import PersonIcon from '@mui/icons-material/Person'
+import HomeIcon from '@mui/icons-material/Home'
 
 const Menu = () => {
     const session = useSession()
@@ -45,7 +46,8 @@ const Menu = () => {
                 </ListSubheader>
                 <Divider sx={{ marginBottom: 'var(--default-spacing)' }} />
                 {[
-                    ['Map', <MapIcon />, '/'],
+                    ['Home', <HomeIcon />, '/'],
+                    ['Map', <MapIcon />, '/map'],
                     !!user && user.role === 'MEMBER'
                         ? ['Badges', <MilitaryTechIcon />, '/badges']
                         : [],

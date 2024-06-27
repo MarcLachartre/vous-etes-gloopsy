@@ -5,8 +5,8 @@ export const usernameValidation = (username: string) => {
 
     if (username.length === 0) {
         errors.push('Merci de renseigner ce champs.')
-    } else if (username.length > 30) {
-        errors.push('Maximum 30 charactères autorisés.')
+    } else if (username.length > 20) {
+        errors.push('Maximum 20 charactères autorisés.')
     }
 
     const isValid: boolean = errors.length === 0 ? true : false

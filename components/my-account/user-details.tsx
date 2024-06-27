@@ -151,7 +151,7 @@ const UserDetails = ({
                                     fullWidth
                                     variant="filled"
                                     style={{ width: '200px' }}
-                                    inputProps={{ maxLength: 30 }}
+                                    inputProps={{ maxLength: 20 }}
                                     onChange={handleChange}
                                     helperText={usernameValidity.errors[0]}
                                 />

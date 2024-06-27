@@ -6,7 +6,7 @@ import { getDatabase } from '@/lib/mongo-connection'
 import { usernameValidation } from '@/lib/username-validation'
 import { auth } from '@/auth'
 
-const myAccount = async () => {
+export default async function () {
     const session = await auth()
 
     if (!session) return <h2>Not authenticated</h2>
@@ -192,5 +192,3 @@ const myAccount = async () => {
         </div>
     )
 }
-
-export default myAccount

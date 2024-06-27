@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic' // prevent caching and loading previous p
 import { getDatabase } from '@/lib/mongo-connection'
 import { auth } from '@/auth'
 
-export const GET = auth(async (req) => {
+export const GET = auth(async () => {
     const getMarkers = async () => {
         const db = await getDatabase()
         // if (req.auth?.user.role === 'MEMBER') {
