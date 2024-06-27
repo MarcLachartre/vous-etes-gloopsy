@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import { getDatabase } from '@/lib/mongo-connection'
 import { NextResponse } from 'next/server'
 
