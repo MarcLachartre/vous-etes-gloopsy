@@ -1,7 +1,7 @@
 .homepageContainer {
     display: grid;
     grid-template-columns: 100%;
-
+    overflow-y: hidden;
     grid-template-areas:
         'intro'
         'names'

@@ -38,13 +38,13 @@ body {
 
 main {
     width: 100vw;
-    min-height: 100vh;
+    min-height: 100dvh;
     overflow: hidden;
 }
 
 .page-container {
     width: 100%;
-    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     flex-direction: column;

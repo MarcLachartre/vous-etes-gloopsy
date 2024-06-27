@@ -1,7 +1,6 @@
 'use server'
 import HomePage from '@/components/home/home-page'
 import { headers } from 'next/headers'
-import style from './page.module.css'
 
 export default async function Page() {
     const request = `${process.env.DOMAIN}/api/users/get-usernames`
