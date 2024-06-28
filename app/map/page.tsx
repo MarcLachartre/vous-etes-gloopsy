@@ -13,15 +13,12 @@ export default async function Page() {
             `${process.env.DOMAIN}/api/markers/get-markers`
         )
 
-        // const session = auth()
-        // if (!!session) return redirect(`/api/auth/signin`)
         const requestMarkers = await fetch(request, {
             method: 'GET',
             headers: new Headers(h),
-
             cache: 'no-store',
         })
-        console.log(requestMarkers.url)
+
         return await requestMarkers.json()
     }
 
