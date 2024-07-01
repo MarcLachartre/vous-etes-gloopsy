@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 
 import Map from './map'
 import Filters from './filters'
-import AddMarkerInterface from './add-marker-interface'
+import AddMarkerWindow from './add-marker-window'
 
 import { MapContext } from '@/context/map-context'
 import { MarkersDisplayedContext } from '@/context/markers-displayed-context'
@@ -112,8 +112,8 @@ const Main = (props: {
                         setShowAllMarkers={setShowAllMarkers}
                     />
 
-                    <AddMarkerInterface
-                        key={'AddMarkerInterface'}
+                    <AddMarkerWindow
+                        key={'AddMarkerWindow'}
                         user={session?.data?.user}
                         setShowAllMarkers={setShowAllMarkers}
                         resetMarkers={resetMarkers}

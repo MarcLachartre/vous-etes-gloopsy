@@ -19,7 +19,7 @@ import LoadingInterface from './add-marker-interface/loading-interface'
 import AdjustLocationInterface from './add-marker-interface/adjust-location-interface'
 import ManualLocalizationInterface from './add-marker-interface/manual-localization-interface'
 import AddCommentInterface from './add-marker-interface/add-comment-interface'
-import ThanksInterface from './add-marker-interface/thank-interface'
+import ThanksInterface from './add-marker-interface/thanks-interface'
 import ErrorInterface from './add-marker-interface/error-interface'
 import SigninInterface from './add-marker-interface/signin-interface'
 
@@ -131,21 +131,9 @@ const addMarkerInterface = (props: any) => {
     }, [isClickable, map])
 
     useEffect(() => {
+        // Responsible for the add maker window, displaying the right interface.
         switch (interfaceName) {
-            case 'close':
-                Object.keys(marker).length !== 0 ? marker.remove() : false
-                Object.keys(marker).length !== 0 ? setMarker({}) : false
-                Object.keys(map).length !== 0
-                    ? (map.getCanvas().style.cursor = '')
-                    : false
-                setCoords([])
-                setIsClickable(false)
-                setCrossDisplay('none')
-                setInterfaceWindow(<div></div>)
-                break
-
             case 'add marker selector':
-                setCrossDisplay('flex')
                 if (!user) {
                     setInterfaceWindow(<SigninInterface />)
                 } else if (!!user && user.role !== 'MEMBER') {
@@ -162,21 +150,10 @@ const addMarkerInterface = (props: any) => {
 
             case 'localisation ongoing':
                 locateMe()
-                setCrossDisplay('none')
                 setInterfaceWindow(<LoadingInterface />)
                 break
 
-            case 'validate location':
-                setCrossDisplay('flex')
-                setInterfaceWindow(
-                    <AdjustLocationInterface
-                        setInterfaceName={setInterfaceName}
-                    />
-                )
-                break
-
             case 'manual localisation':
-                setCrossDisplay('flex')
                 setIsClickable(true)
                 map.getCanvas().style.cursor = 'pointer'
 
@@ -189,8 +166,15 @@ const addMarkerInterface = (props: any) => {
 
                 break
 
+            case 'validate location':
+                setInterfaceWindow(
+                    <AdjustLocationInterface
+                        setInterfaceName={setInterfaceName}
+                    />
+                )
+                break
+
             case 'add comment':
-                setCrossDisplay('flex')
                 setIsClickable(false)
                 map.getCanvas().style.cursor = ''
                 if (coords.length === 0) {
@@ -206,12 +190,10 @@ const addMarkerInterface = (props: any) => {
                 break
 
             case 'loading':
-                setCrossDisplay('none')
                 setInterfaceWindow(<LoadingInterface />)
                 break
 
             case 'marker added':
-                setCrossDisplay('flex')
                 marker.remove()
                 setMarker({})
                 props.setShowAllMarkers(true)
@@ -232,6 +214,18 @@ const addMarkerInterface = (props: any) => {
                 setTimeout(() => {
                     setInterfaceName('close')
                 }, 3000)
+
+            case 'close':
+                Object.keys(marker).length !== 0 ? marker.remove() : false
+                Object.keys(marker).length !== 0 ? setMarker({}) : false
+                Object.keys(map).length !== 0
+                    ? (map.getCanvas().style.cursor = '')
+                    : false
+                setCoords([])
+                setIsClickable(false)
+                setCrossDisplay('none')
+                setInterfaceWindow(<div></div>)
+                break
         }
     }, [interfaceName, session])
 

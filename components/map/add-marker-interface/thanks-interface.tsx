@@ -1,11 +1,11 @@
 import style from '../../../css/map-page/add-marker.module.scss'
 
-const ThankInterface = () => {
+const ThanksInterface = () => {
     return (
         <div className={style.inputType}>
-            <p>Oups! Quelque chose ne s'est pas bien passé! Try again!</p>
+            <h5> Eh merci mec! </h5>
         </div>
     )
 }
 
-export default ThankInterface
+export default ThanksInterface
