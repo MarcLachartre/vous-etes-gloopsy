@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 
 import Map from './map'
 import Filters from './filters'
-import AddMarkerBtn from './add-marker-btn'
+import AddMarkerWindow from './add-marker-window'
 
 import { MapContext } from '@/context/map-context'
 import { MarkersDisplayedContext } from '@/context/markers-displayed-context'
@@ -112,8 +112,8 @@ const Main = (props: {
                         setShowAllMarkers={setShowAllMarkers}
                     />
 
-                    <AddMarkerBtn
-                        key={'AddMarkerBtn'}
+                    <AddMarkerWindow
+                        key={'AddMarkerWindow'}
                         user={session?.data?.user}
                         setShowAllMarkers={setShowAllMarkers}
                         resetMarkers={resetMarkers}
